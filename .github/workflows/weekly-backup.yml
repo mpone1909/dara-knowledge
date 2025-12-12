@@ -1,0 +1,52 @@
+name: Weekly Backup
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'  # Sonntags 3 Uhr UTC
+  workflow_dispatch:  # Ermöglicht manuellen Trigger
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Gesamte Git-Historie
+      
+      - name: Create Timestamp
+        id: timestamp
+        run: echo "date=$(date +%Y%m%d_%H%M%S)" >> $GITHUB_OUTPUT
+      
+      - name: Create Archive
+        run: |
+          timestamp="${{ steps.timestamp.outputs.date }}"
+          zip -r "dara-knowledge-backup_${timestamp}.zip" \
+            dara-skill/ \
+            literature/ \
+            metadata/ \
+            tools/ \
+            AI_INSTRUCTIONS.md \
+            llms.txt \
+            README.md \
+            CHANGELOG.md \
+            -x "*.git*" "*.DS_Store"
+          
+          echo "📦 Archive created: dara-knowledge-backup_${timestamp}.zip"
+          ls -lh dara-knowledge-backup_*.zip
+      
+      - name: Upload Backup Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-backup-${{ steps.timestamp.outputs.date }}
+          path: dara-knowledge-backup_*.zip
+          retention-days: 90
+          compression-level: 0  # Bereits gezippt
+      
+      - name: Summary
+        run: |
+          echo "✅ Backup erfolgreich erstellt!"
+          echo "   Zeitstempel: ${{ steps.timestamp.outputs.date }}"
+          echo "   Aufbewahrung: 90 Tage"
+          echo "   Download: GitHub Actions → Artifacts"

@@ -1,0 +1,105 @@
+{
+  "version": "1.0",
+  "last_updated": "2024-12-11",
+  "description": "Thematischer Index für schnelle LLM-Navigation im DaRa Knowledge Repository",
+  
+  "core_data": {
+    "labels": {
+      "file": "dara-skill-github-repo/knowledge/class_hierarchy.md",
+      "csv": "metadata/label_catalog.csv",
+      "description": "Definition aller 207 Labels (CL001-CL207) in 12 Kategorien",
+      "size_kb": 19,
+      "topics": ["classification", "annotation", "hand-activities", "locations", "tools"]
+    },
+    "processes": {
+      "file": "dara-skill-github-repo/knowledge/processes.md",
+      "description": "BPMN Logik, High/Mid/Low-Level Prozesse (CC08-CC10)",
+      "size_kb": 17,
+      "topics": ["retrieval", "storage", "workflow", "bpmn", "high-level", "mid-level", "low-level"]
+    },
+    "scenarios": {
+      "file": "dara-skill-github-repo/knowledge/scenarios.md",
+      "description": "Szenarien S1-S8, Charakteristika und Abläufe",
+      "size_kb": 15,
+      "topics": ["s1-s8", "retrieval", "storage", "packaging", "perfect-run"]
+    },
+    "subjects": {
+      "file": "dara-skill-github-repo/knowledge/dataset_core.md",
+      "description": "Probanden S01-S18, Demographie, Sessions, BPMN",
+      "size_kb": 12,
+      "topics": ["probanden", "demographics", "sessions", "subjects", "bpmn-diagram"]
+    },
+    "mechanics": {
+      "chunking": {
+        "file": "dara-skill-github-repo/knowledge/chunking.md",
+        "description": "Trigger T1-T10, Chunk-Logik, Segmentierung",
+        "size_kb": 18,
+        "topics": ["trigger", "segmentation", "temporal", "t1-t10", "chunk-boundaries"]
+      },
+      "synchronization": {
+        "file": "dara-skill-github-repo/knowledge/data_structure.md",
+        "description": "Frame-Synchronisation, CSV-Format, Multi-Label",
+        "size_kb": 9.5,
+        "topics": ["frames", "csv", "synchronization", "30fps", "multi-label"]
+      },
+      "semantics": {
+        "file": "dara-skill-github-repo/knowledge/semantics.md",
+        "description": "Semantische Struktur & Abhängigkeiten",
+        "size_kb": 19,
+        "topics": ["dependencies", "relationships", "semantic-rules", "label-combinations"]
+      }
+    }
+  },
+  
+  "templates": {
+    "queries": {
+      "file": "dara-skill-github-repo/templates/query_patterns.md",
+      "description": "Häufige Fragetypen mit Best-Practice-Beispielen",
+      "size_kb": 14,
+      "topics": ["label-lookup", "category-overview", "process-logic", "data-structure"]
+    }
+  },
+  
+  "literature": {
+    "path": "literature/",
+    "index_file": "literature/README.md",
+    "template": "literature/_template.md",
+    "description": "Externe Paper und theoretischer Hintergrund (Markdown)",
+    "status": "empty",
+    "topics": []
+  },
+  
+  "quick_facts": {
+    "probanden_count": 18,
+    "labels_count": 207,
+    "kategorien_count": 12,
+    "szenarien_count": 8,
+    "trigger_count": 10,
+    "dataset_stand": "2025-10-20"
+  },
+  
+  "routing_examples": [
+    {
+      "query": "Was ist CL115?",
+      "primary": "metadata/label_catalog.csv",
+      "secondary": "dara-skill-github-repo/knowledge/processes.md",
+      "reason": "Label-Lookup + Prozess-Kontext"
+    },
+    {
+      "query": "Erkläre den Retrieval-Pfad",
+      "primary": "dara-skill-github-repo/knowledge/processes.md",
+      "secondary": "dara-skill-github-repo/knowledge/dataset_core.md",
+      "reason": "Prozess-Logik + BPMN-Diagramm"
+    },
+    {
+      "query": "Welche Szenarien gibt es?",
+      "primary": "dara-skill-github-repo/knowledge/scenarios.md",
+      "reason": "Direkter Zugriff auf Szenario-Definitionen"
+    },
+    {
+      "query": "Wie funktioniert Chunking?",
+      "primary": "dara-skill-github-repo/knowledge/chunking.md",
+      "reason": "Trigger T1-T10 und Chunk-Grenzen"
+    }
+  ]
+}

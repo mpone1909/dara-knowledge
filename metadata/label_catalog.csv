@@ -1,0 +1,208 @@
+LabelID,Name
+CL001,Synchronization
+CL002,Confirming with Pen
+CL003,Confirming with Screen
+CL004,Confirming with Button
+CL005,Scanning
+CL006,Pulling Cart
+CL007,Pushing Cart
+CL008,Handling Upwards
+CL009,Handling Centered
+CL010,Handling Downwards
+CL011,Walking
+CL012,Standing
+CL013,Sitting
+CL014,Another Main Activity
+CL015,Main Activity Unknown
+CL016,Gait Cycle
+CL017,Step
+CL018,Standing Still
+CL019,Sitting
+CL020,Squat
+CL021,Lunges
+CL022,Another Leg Activity
+CL023,Leg Activity Unknown
+CL024,No Bending
+CL025,Slightly Bending
+CL026,Strongly Bending
+CL027,Torso Rotation
+CL028,Another Torso Activity
+CL029,Torso Activity Unknown
+CL030,Upwards
+CL031,Centered
+CL032,Downwards
+CL033,Position Unknown
+CL034,Reaching, Grasping, Moving, Positioning and Releasing
+CL035,Manipulating
+CL036,Holding
+CL037,No Movement
+CL038,Another Movement
+CL039,Movement Unknown
+CL040,No Object
+CL041,Large Item
+CL042,Medium Item
+CL043,Small Item
+CL044,Tool
+CL045,Cart
+CL046,Load Carrier
+CL047,Cardboard Box
+CL048,On Body
+CL049,Another Logistic Object
+CL050,No Logistic Object
+CL051,Object Unknown
+CL052,Portable Data Terminal
+CL053,Glove Scanner
+CL054,Plastic Bag
+CL055,Picking List
+CL056,Pen
+CL057,Button
+CL058,Computer
+CL059,Bubble Wrap
+CL060,Tape Dispenser
+CL061,Knife
+CL062,Shipping/Return Label
+CL063,Elastic Band
+CL064,Another Tool
+CL065,Upwards
+CL066,Centered
+CL067,Downwards
+CL068,Position Unknown
+CL069,Reaching, Grasping, Moving, Positioning and Releasing
+CL070,Manipulating
+CL071,Holding
+CL072,No Movement
+CL073,Another Movement
+CL074,Movement Unknown
+CL075,No Object
+CL076,Large Item
+CL077,Medium Item
+CL078,Small Item
+CL079,Tool
+CL080,Cart
+CL081,Load Carrier
+CL082,Cardboard Box
+CL083,On Body
+CL084,Another Logistic Object
+CL085,No Logistic Object
+CL086,Object Unknown
+CL087,Portable Data Terminal
+CL088,Glove Scanner
+CL089,Plastic Bag
+CL090,Picking List
+CL091,Pen
+CL092,Button
+CL093,Computer
+CL094,Bubble Wrap
+CL095,Tape Dispenser
+CL096,Knife
+CL097,Shipping/Return Label
+CL098,Elastic Band
+CL099,Another Tool
+CL100,2904
+CL101,2905
+CL102,2906
+CL103,No Order
+CL104,Order Unknown
+CL105,List and Pen
+CL106,List and Glove Scanner
+CL107,Portable Data Terminal
+CL108,No Information Technology
+CL109,Information Technology Unknown
+CL110,Retrieval
+CL111,Storage
+CL112,Another High-Level Process
+CL113,High-Level Process Unknown
+CL114,Preparing Order
+CL115,Picking – Travel Time
+CL116,Picking – Pick Time
+CL117,Unpacking
+CL118,Packing
+CL119,Storing – Travel Time
+CL120,Storing – Store Time
+CL121,Finalizing Order
+CL122,Another Mid-Level Process
+CL123,Mid-Level Process Unknown
+CL124,Collecting Order and Hardware
+CL125,Collecting Cart
+CL126,Collecting Empty Cardboard Boxes
+CL127,Collecting Packed Cardboard Boxes
+CL128,Transporting a Cart to the Base
+CL129,Transporting to the Packaging/Sorting Area
+CL130,Handing Over Packed Cardboard Boxes
+CL131,Returning Empty Cardboard Boxes
+CL132,Returning Cart
+CL133,Returning Hardware
+CL134,Waiting
+CL135,Reporting and Clarifying the Incident
+CL136,Removing Cardboard Box/Item from the Cart
+CL137,Moving to the Next Position
+CL138,Placing Items on a Rack
+CL139,Retrieving Items
+CL140,Moving to a Cart
+CL141,Placing Cardboard Box/Item on a Table
+CL142,Opening Cardboard Box
+CL143,Disposing of Filling Material or Shipping Label
+CL144,Sorting
+CL145,Filling Cardboard Box with Filling Material
+CL146,Printing Shipping Label and Return Slip
+CL147,Preparing or Adding Return Label
+CL148,Attaching Shipping Label
+CL149,Removing Elastic Band
+CL150,Sealing Cardboard Box
+CL151,Placing Cardboard Box/Item in a Cart
+CL152,Tying Elastic Band Around Cardboard
+CL153,Another Low-Level Process
+CL154,Low-Level Process Unknown
+CL155,Office
+CL156,Cart Area
+CL157,Cardboard Box Area
+CL158,Base
+CL159,Packing/Sorting Area
+CL160,Issuing/Receiving Area
+CL161,Path
+CL162,Cross Aisle Path
+CL163,Aisle Path
+CL164,Path (Office)
+CL165,Path (Cardboard Box Area)
+CL166,Path (Cart Area)
+CL167,Path (Issuing Area)
+CL168,1-2
+CL169,2-3
+CL170,3-4
+CL171,4-5
+CL172,1
+CL173,2
+CL174,3
+CL175,4
+CL176,5
+CL177,Front
+CL178,Back
+CL179,Another Location
+CL180,Location Unknown
+CL181,Transition between Areas
+CL182,Office
+CL183,Cart Area
+CL184,Cardboard Box Area
+CL185,Base
+CL186,Packing/Sorting Area
+CL187,Issuing/Receiving Area
+CL188,Path
+CL189,Cross Aisle Path
+CL190,Aisle Path
+CL191,Path (Office)
+CL192,Path (Cardboard Box Area)
+CL193,Path (Cart Area)
+CL194,Path (Issuing Area)
+CL195,1-2
+CL196,2-3
+CL197,3-4
+CL198,4-5
+CL199,1
+CL200,2
+CL201,3
+CL202,4
+CL203,5
+CL204,Front
+CL205,Back
+CL206,Another Location
+CL207,Location Unknown

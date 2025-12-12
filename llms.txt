@@ -1,0 +1,110 @@
+# DaRa Knowledge Base
+
+> Git-versionierte Wissensdatenbank für DaRa-Dataset (Warehouse-Prozess-Analyse).
+> Optimiert für LLM-Zugriff (Claude, ChatGPT, Gemini).
+
+## Über dieses Repository
+
+**Primärzweck:** Versionskontrolle und Backup für DaRa-Dataset-Expert-Skill
+
+**Sekundärzweck:** Erweiterbar für Thesis-Literature (später)
+
+**Datensatz-Stand:** 20.10.2025 (DaRa Dataset Description)
+
+## Repository-Struktur
+
+### DaRa-Skill (Hauptinhalt - GitHub-Kopie)
+- `dara-skill-github-repo/SKILL.md` → Orchestrierung, Workflow-Logik
+- `dara-skill-github-repo/knowledge/` → 7 Markdown-Dateien (152 KB)
+  - `dataset_core.md` → Probanden, BPMN, Sessions
+  - `class_hierarchy.md` → 207 Labels (CL001-CL207)
+  - `chunking.md` → Trigger T1-T10
+  - `scenarios.md` → 8 Szenarien (S1-S8)
+  - `processes.md` → Prozess-Details CC08-CC10
+  - `semantics.md` → Semantische Struktur
+  - `data_structure.md` → Frame-Synchronisation
+- `dara-skill-github-repo/templates/query_patterns.md` → Fragetypen
+
+**Hinweis:** Dies ist die GitHub-Kopie. Original liegt in `/mnt/skills/user/dara-dataset-expert/`
+
+### Metadata (Maschinenlesbare Indexe)
+- `metadata/label_catalog.csv` → Alle 207 Labels (LabelID,Name)
+- `metadata/index.by-topic.json` → Thematische Navigation
+
+### Literature (Für später)
+- `literature/` → Leer (wird bei erstem PDF gefüllt)
+- `literature/_template.md` → Vorlage für Paper-Extraktionen
+
+## Nutzung für LLMs
+
+### Einstieg
+1. **Erste Orientierung:** Lies diese Datei (llms.txt)
+2. **Detaillierte Navigation:** Lies `AI_INSTRUCTIONS.md`
+3. **Thematische Suche:** Nutze `metadata/index.by-topic.json`
+
+### Für DaRa-Label-Abfragen
+1. Lies `dara-skill-github-repo/SKILL.md` für Workflow-Logik
+2. Für schnelle Lookups: `metadata/label_catalog.csv`
+3. Für Details: entsprechende Datei in `dara-skill-github-repo/knowledge/`
+
+**Beispiel-Workflow:**
+```
+User: "Was ist CL115?"
+→ Lies metadata/label_catalog.csv (Schnellsuche)
+→ Lies dara-skill-github-repo/knowledge/processes.md (Details)
+→ Antwort: "CL115 ist Picking – Travel Time (CC09 Mid-Level Process)"
+```
+
+### Für Prozess-Analysen
+```
+User: "Erkläre den Retrieval-Pfad"
+→ Lies dara-skill-github-repo/knowledge/processes.md
+→ Optional: dara-skill-github-repo/knowledge/dataset_core.md (BPMN-Diagramm)
+```
+
+### Für Szenario-Fragen
+```
+User: "Welche Szenarien gibt es?"
+→ Lies dara-skill-github-repo/knowledge/scenarios.md
+```
+
+## Datensatz-Fakten (Quick Reference)
+
+| Komponente | Anzahl | Details |
+|-----------|--------|---------|
+| Probanden | 18 | S01-S18, 14 männlich, 4 weiblich |
+| Labels | 207 | CL001-CL207 in 12 Kategorien |
+| Kategorien | 12 | CC01-CC12 (Human Movement + Context) |
+| Szenarien | 8 | S1-S8 (Retrieval/Storage/Packaging) |
+| Trigger | 10 | T1-T10 (Chunking-Mechanismen) |
+
+## Wichtigste Konzepte
+
+- **207 Labels** (CL001-CL207) in 12 Kategorien (CC01-CC12)
+- **18 Probanden** (S01-S18)
+- **8 Szenarien** (S1-S8): Retrieval, Storage, Packaging
+- **10 Trigger** (T1-T10) für Chunking-Logik
+- **BPMN-Prozesse:** Retrieval-Pfad + Storage-Pfad
+- **Frame-basiert:** 30 fps, Multi-Label-Annotation
+
+## Qualitätssicherung
+
+- ✅ Automatisches Markdown-Linting (GitHub Actions)
+- ✅ Label-Validierung (207 Labels müssen vorhanden sein)
+- ✅ Wöchentliche Backups (Sonntags 3 Uhr UTC)
+
+## Erweiterungen
+
+**Status:** Literature-System vorbereitet, aber noch leer.
+
+**Wenn erstes PDF hinzukommt:**
+1. Template nutzen: `literature/_template.md`
+2. Neue Datei erstellen: `literature/paper_[autor][jahr]_[thema].md`
+3. Index aktualisieren: `metadata/index.by-topic.json`
+
+---
+
+**Maintainer:** Markus (TU Dortmund, Masterthesis FLW)  
+**Erstellt:** 2024-12-11  
+**Version:** 4.0 (Hybrid-Bauplan)  
+**Lizenz:** Private Repository (GitHub Education)

@@ -1,0 +1,15 @@
+﻿# Systemdateien
+.DS_Store
+Thumbs.db
+
+# IDE Einstellungen
+.vscode/
+.idea/
+
+# Python / Code Müll
+__pycache__/
+*.log
+node_modules/
+
+# Temporäre Daten (falls nötig)
+temp/

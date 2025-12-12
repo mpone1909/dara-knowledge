@@ -1,0 +1,37 @@
+name: Knowledge Quality Check
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Generate Label Catalog
+        run: bash tools/extract_labels.sh
+        
+      - name: Validate Repository Integrity
+        run: bash tools/check_integrity.sh
+        
+      - name: Markdown Linting
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            **/*.md
+            !**/node_modules/**
+            !.github/**
+      
+      - name: Summary
+        if: success()
+        run: |
+          echo "✅ All quality checks passed!"
+          echo "   - Label catalog: Valid"
+          echo "   - Integrity: OK"
+          echo "   - Markdown: Lint-free"

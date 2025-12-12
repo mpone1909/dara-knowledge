@@ -1,0 +1,7 @@
+# Agenten sollen keine Infrastruktur lesen
+.github/
+tools/
+.gitignore
+.llmignore
+claude_desktop_config.json
+*.log
