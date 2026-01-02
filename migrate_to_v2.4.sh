@@ -1,12 +1,22 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Starte Migration auf DaRa Dataset Expert v2.4..."
+# ==============================================================================
+# MIGRATIONSSKRIPT: DaRa Dataset Expert v1.0 -> v2.4
+# ==============================================================================
+# ZWECK:
+# - Hebt die Verzeichnisstruktur auf die oberste Ebene (Flache Hierarchie)
+# - Erstellt fehlende Knowledge-Dateien (REFA, Validierung, Matrix)
+# - Korrigiert Syntaxfehler in dataset_core.md (ASCII Diagramme)
+# - Aktualisiert Metadaten (README, CHANGELOG)
+# ==============================================================================
+
+echo "🚀 Starte Migration auf v2.4..."
 
 # ------------------------------------------------------------------
-# 1. VERZEICHNISSTRUKTUR ERSTELLEN
+# SCHRITT 1: Ordnerstruktur vorbereiten
 # ------------------------------------------------------------------
-echo "📂 Erstelle Verzeichnisse..."
+echo "📂 [1/5] Erstelle Verzeichnisse..."
 mkdir -p knowledge
 mkdir -p templates
 mkdir -p docs/analysis
@@ -14,21 +24,32 @@ mkdir -p examples
 mkdir -p metadata
 
 # ------------------------------------------------------------------
-# 2. BESTEHENDE DATEIEN SICHERN/VERSCHIEBEN
+# SCHRITT 2: Bestehende Dateien migrieren
 # ------------------------------------------------------------------
-# Falls alte Struktur existiert, verschieben wir nützliche Inhalte
+echo "📦 [2/5] Verschiebe existierende Dateien..."
+
+# Prüfen, ob der alte Unterordner existiert
 if [ -d "dara-skill-github-repo/knowledge" ]; then
-    echo "📦 Verschiebe existierende Knowledge-Dateien..."
-    # Wir kopieren alles, überschreiben aber gleich die veralteten Dateien mit den neuen Versionen
-    cp -r dara-skill-github-repo/knowledge/* knowledge/ 2>/dev/null || true
+    # Alle Markdown-Dateien aus dem alten Knowledge-Ordner in den neuen holen
+    # Wir nutzen cp -n (no clobber), um Dateien nicht zu überschreiben, die wir gleich neu generieren
+    cp -rn dara-skill-github-repo/knowledge/* knowledge/ 2>/dev/null || true
+    echo "   -> Knowledge-Dateien verschoben."
+else
+    echo "   ⚠️ Warnung: 'dara-skill-github-repo/knowledge' nicht gefunden. Überspringe Verschieben."
+fi
+
+# Templates verschieben falls vorhanden
+if [ -d "dara-skill-github-repo/templates" ]; then
+    cp -r dara-skill-github-repo/templates/* templates/ 2>/dev/null || true
 fi
 
 # ------------------------------------------------------------------
-# 3. KNOWLEDGE FILES ERSTELLEN (v2.4)
+# SCHRITT 3: Neue & Aktualisierte Dateien schreiben
 # ------------------------------------------------------------------
+echo "📝 [3/5] Generiere Dateiinhalte (v2.4)..."
 
-# --- 3.1 dataset_core.md (Mit korrigiertem Diagramm-Block) ---
-echo "📝 Erstelle knowledge/dataset_core.md..."
+# --- 3.1 dataset_core.md (Mit KORRIGIERTEM Diagramm-Block) ---
+# Hier wird das ASCII-Diagramm sicher in ```text Blöcke verpackt
 cat << 'EOF' > knowledge/dataset_core.md
 # DaRa Dataset – Kerndokumentation
 
@@ -39,7 +60,7 @@ Diese Datei enthält die fundamentalen Beschreibungen des DaRa-Datensatzes aus d
 ## 1.1 Zweck und Kontext des Datensatzes
 
 ### Zweck der Wissensbasis
-Die Wissensbasis dient als vollständig konsolidierte, technisch präzise und widerspruchsfreie Grundlage für alle weiteren Arbeiten mit dem Datensatz. Sie bildet eine zentrale und verlässliche Referenz, in der ausschließlich verifizierte und belegbare Inhalte enthalten sind.
+Die Wissensbasis dient als vollständig konsolidierte, technisch präzise und widerspruchsfreie Grundlage für alle weiteren Arbeiten mit dem Datensatz. Sie bildet eine zentrale und verlässliche Referenz.
 
 ### Verwendete Quelldokumente
 Die Wissensbasis basiert auf folgenden Quellen:
