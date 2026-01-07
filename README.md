@@ -1,4 +1,4 @@
-# DaRa Dataset Expert Skill – Version 2.4 – Version 2.3 – Installation & Übersicht
+# DaRa Dataset Expert Skill – Version 2.5 – Version 2.3 – Installation & Übersicht
 
 ## 📦 Lieferumfang
 
@@ -23,6 +23,19 @@ dara-dataset-expert/
 └── templates/
     └── query_patterns.md              # Fragetypen & Best Practices (14 KB)
 ```
+
+### ⚠️ Wichtig für v2.5:
+
+Version 2.5 integriert **CC09 (Mid-Level Process)** als primäre Erkennungsdimension und macht die **"Other"-Restkategorie** aktiv erkennbar. Diese Änderungen sind kritisch für korrekte Szenarioerkennung.
+
+**Neue Features:**
+- 🔧 CC09-Integration (8 Labels: CL114-CL121)
+- 🎯 "Other"-Erkennung (verhindert False-Positives)
+- 📊 Frame-Level-Algorithmus (21 erkennungsrelevante Labels)
+- 📖 Erweiterte Dokumentation (~21 KB neu)
+
+Siehe [`CHANGELOG_v2.4_to_v2.5.md`](knowledge/CHANGELOG_v2.4_to_v2.5.md) für Details.
+
 
 **Gesamt:** 12 Dateien, ~175 KB
 

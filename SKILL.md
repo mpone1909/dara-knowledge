@@ -3,7 +3,7 @@ name: dara-dataset-expert
 description: Warehouse-Prozess-Analyse mit 207 Labels, 47 Prozessen, 8 Szenarien, 10 Triggern. Vollständige Expertise für DaRa Datensatz + REFA-Methodik + Validierungslogik + Szenarioerkennung. 100% faktenbasiert ohne Halluzinationen.
 ---
 
-# DaRa Dataset Expert Skill – Version 2.4
+# DaRa Dataset Expert Skill – Version 2.6
 
 ## Zweck
 
@@ -11,9 +11,22 @@ Dieser Skill ermöglicht Claude die **präzise, faktenbasierte Analyse des DaRa-
 
 Der Fokus liegt auf **epistemischer Integrität**: Alle Antworten basieren ausschließlich auf verifizierten Quellen ohne Halluzinationen, Spekulationen oder Annahmen.
 
-### NEU in Version 2.4: Label-Aktivitätsanalyse
+### NEU in Version 2.5: Label-Aktivitätsanalyse
 
-Version 2.4 erweitert den Skill um empirische Label-Aktivitätsanalyse:
+### NEU in Version 2.5: CC09-Integration & "Other"-Erkennung
+
+Version 2.5 korrigiert kritische Inkonsistenzen mit dem DaRa-Paper:
+
+- **CC09 als primäre Erkennungsdimension** – Mid-Level-Prozesse unterscheiden Retrieval (Picking) von Storage (Unpacking)
+- **"Other"-Restkategorie aktiv erkennbar** – verhindert False-Positives bei S1-S8
+- **Frame-Level-Prüfung aller Labels** – jeder Frame wird individuell klassifiziert
+- **CC10 korrekt als sekundär** – nur CL135 für Error-Detection
+- **Hierarchie dokumentiert** – CC08 → CC09 → CC10
+
+**Breaking Changes:** Keine – alle S1-S8 Definitionen bleiben identisch
+
+
+Version 2.5 erweitert den Skill um empirische Label-Aktivitätsanalyse:
 
 - **Label-Aktivitätsmatrix** – Dokumentation aktiver/inaktiver Labels pro Kategorie
 - **Inaktive Labels identifiziert** – CL104, CL109, CL113 sind in S14 nicht vorhanden
@@ -42,7 +55,7 @@ Version 2.3 erweiterte den Skill um:
 - **BPMN-Prozesslogik** für Warehouse-Kommissionierung und Einlagerung
 
 **Datensatz-Stand:** 20.10.2025 (DaRa Dataset Description)  
-**Skill-Stand:** 31.12.2025 (Version 2.3)
+**Skill-Stand:** 07.01.2026 (Version 2.6)
 
 ---
 
@@ -123,21 +136,23 @@ Der Skill ist modular aufgebaut. Jede Datei deckt einen spezifischen Wissensbere
 ├── SKILL.md                                    # Diese Datei (Orchestrierung)
 ├── README.md                                   # Installation & Übersicht
 ├── knowledge/
-│   ├── class_hierarchy.md                      # Alle 12 Kategorien + 207 Labels
-│   ├── analytics_refa.md                       # REFA-Zeitarten, Formeln
-│   ├── validation_logic.md                     # Basis-Abhängigkeiten
-│   ├── validation_logic_extended.md            # 🔄 Szenario-Validierung (V-S1 bis V-S12)
-│   ├── processes.md                            # BPMN-Logik CC08-CC10
-│   ├── chunking.md                             # Trigger T1-T10
-│   ├── semantics.md                            # Semantische Grundprinzipien
-│   ├── scenarios.md                            # Szenarien S1-S8 (Beschreibungen)
-│   ├── ground_truth_matrix.md                  # Table 3 Ground Truth
-│   ├── scenario_label_states.md                # 🆕 Aktiv/Inaktiv pro Szenario (v2.4)
-│   ├── picking_strategies.md                   # 🔄 Single vs. Multi-Order (korrigiert)
-│   ├── scenario_boundary_detection.md          # 🔄 Erkennungsalgorithmus (überarbeitet)
-│   ├── label_activity_matrix.md                # 🆕 Aktive/Inaktive Labels (v2.4)
-│   ├── dataset_core.md                         # Probanden, Hardware
-│   └── data_structure.md                       # Frames, Synchronisation
+│   ├── core/
+│   │   ├── ground_truth_central.md             # 🆕 Zentrale Ground Truth (S1-S8, Matrix, Profile)
+│   │   ├── labels_207.md                       # Alle 12 Kategorien + 207 Labels (ehem. class_hierarchy.md)
+│   │   ├── recognition_algorithm_v2.6.md       # 🆕 Vollständiger Algorithmus (Score + Hybrid-Logic)
+│   │   └── validation_rules.md                 # 🆕 Alle Validierungsregeln (Merge)
+│   ├── processes/
+│   │   ├── process_hierarchy.md                # BPMN-Logik CC08-CC10 (ehem. processes.md)
+│   │   └── refa_analytics.md                   # REFA-Zeitarten, Formeln (ehem. analytics_refa.md)
+│   ├── auxiliary/
+│   │   ├── chunking.md                         # Trigger T1-T10
+│   │   ├── data_structure.md                   # Frames, Synchronisation
+│   │   ├── dataset_core.md                     # Probanden, Hardware
+│   │   └── semantics.md                        # Semantische Grundprinzipien
+│   └── changelogs/
+│       ├── CHANGELOG_v2.3_to_v2.4.md
+│       ├── CHANGELOG_v2.4_to_v2.5.md
+│       └── CHANGELOG_v2.5_to_v2.6.md           # 🆕 Hybrid-Logic + Score-System
 └── templates/
     ├── query_patterns.md                       # Häufige Fragetypen
     └── scenario_report_template.md             # Szenario-Bericht-Format
@@ -151,79 +166,78 @@ Der Skill ist modular aufgebaut. Jede Datei deckt einen spezifischen Wissensbere
 # 1. REFA / Arbeitswissenschaft / Zeiten
 
 if "REFA" or "Zeitart" or "Erholung" or "Kalkulation" or "t_MH" or "t_R" in query:
-    view("knowledge/analytics_refa.md")
+    view("knowledge/processes/refa_analytics.md")
 
 # 2. Validierung / Logik / Regeln / Konsistenz
 
 elif "Validierung" or "Logik" or "Konsistenz" or "Regel" or "Darf ich" or "gültig" in query:
-    view("knowledge/validation_logic.md")
-    view("knowledge/validation_logic_extended.md")
+    view("knowledge/core/validation_rules.md")
 
 # 3. Label-Lookup / Definitionen
 
 elif "CC" + number or "CL" + number or "Was ist" + Labelname in query:
-    view("knowledge/class_hierarchy.md")
+    view("knowledge/core/labels_207.md")
 
 # 4. Prozess-Ablauf / BPMN
 
 elif "Prozess" or "Ablauf" or "nach dem Schritt" or "High-Level" or "BPMN" in query:
-    view("knowledge/processes.md")
+    view("knowledge/processes/process_hierarchy.md")
 
 # 5. Chunking / Trigger
 
 elif "Chunk" or "Trigger" or "Segmentierung" or "T1" to "T10" in query:
-    view("knowledge/chunking.md")
+    view("knowledge/auxiliary/chunking.md")
 
 # 6. Szenarien (Beschreibungen)
 
 elif "Szenario" or "S1" to "S8" in query:
-    view("knowledge/scenarios.md")
+    view("knowledge/core/ground_truth_central.md")
 
 # 7. Szenarioerkennung / Grenzen / Ground Truth
 
 elif "Grenze" or "erkennen" or "Ground Truth" or "Table 3" or "Boundary" in query:
-    view("knowledge/ground_truth_matrix.md")
-    view("knowledge/scenario_boundary_detection.md")
+    view("knowledge/core/ground_truth_central.md")
+    view("knowledge/core/recognition_algorithm_v2.6.md")
 
 # 7b. Szenario-Label-Zustände (aktiv/inaktiv pro Szenario)
 
 elif "aktiv" or "inaktiv" or "Szenario" + "Label" or "welche Labels" + "Szenario" in query:
-    view("knowledge/scenario_label_states.md")
+    view("knowledge/core/ground_truth_central.md")
 
 # 8. Label-Aktivität / Inaktive Labels / Multi-Label
 
 elif "aktiv" or "inaktiv" or "Label-Status" or "CL104" or "CL109" or "CL113" or "Multi-Label" in query:
-    view("knowledge/label_activity_matrix.md")
+    view("knowledge/core/ground_truth_central.md")
 
 # 9. Picking Strategy / Multi-Order / Single-Order
 
 elif "Picking" or "Multi-Order" or "Single-Order" or "Order-Wechsel" in query:
-    view("knowledge/picking_strategies.md")
+    view("knowledge/core/ground_truth_central.md")
 
 # 10. IT-System / PDT / Scanner
 
 elif "IT" or "PDT" or "Scanner" or "CC07" or "CL105" or "CL106" or "CL107" in query:
-    view("knowledge/ground_truth_matrix.md")
+    view("knowledge/core/ground_truth_central.md")
 
 # 11. Semantik / Abhängigkeiten
 
 elif "Semantik" or "Abhängigkeit" or "Bedeutung" in query:
-    view("knowledge/semantics.md")
+    view("knowledge/auxiliary/semantics.md")
 
 # 12. Probanden / Subjekte
 
 elif "Proband" or "Subjekt" or "S01" to "S18" in query:
-    view("knowledge/dataset_core.md")
+    view("knowledge/auxiliary/dataset_core.md")
 
 # 13. Frames / Datenstruktur
 
 elif "Frame" or "Synchronisation" or "CSV" in query:
-    view("knowledge/data_structure.md")
+    view("knowledge/auxiliary/data_structure.md")
 
 # 13. Grundlagen / Fallback
 
 else:
-    view("knowledge/dataset_core.md")
+    view("knowledge/auxiliary/dataset_core.md")
 ```
 
 **Schritt 2: Präzise antworten**
@@ -361,9 +375,9 @@ Jede Aussage muss referenziert werden:
 
 ## Metadaten
 
-**Skill-Version:** 2.3  
+**Skill-Version:** 2.6  
 **Erstellt:** 04.12.2025  
-**Update:** 31.12.2025  
+**Update:** 07.01.2026  
 **Datensatz-Stand:** 20.10.2025  
 **Quelle:** DaRa Dataset Description (Offizielle Dokumentation)  
 
@@ -392,3 +406,4 @@ Jede Aussage muss referenziert werden:
 | 1.4.1 | 23.12.2025 | Bugfixes, Terminologie |
 | 2.0 | 30.12.2025 | Ground Truth, Szenarioerkennung, Picking Strategies |
 | **2.3** | **31.12.2025** | **Flexible Szenarioerkennung ohne harte Grenzen, S8 Order-Set korrigiert, keine feste Szenario-Anzahl** |
+| **2.6** | **07.01.2026** | **Hybrid-Identification-Logic für S1-S6, Evidence-Based Scoring (CC10-Marker), CL134 als Global Interrupt, CL103+CL108 als "Other", LOGIC v8-Kompatibilität vollständig** |
