@@ -1,139 +1,125 @@
-# DaRa Dataset Expert Skill – Version 2.5 – Version 2.3 – Installation & Übersicht
+# DaRa Dataset Expert Skill – Version 2.6
 
-## 📦 Lieferumfang
+**Vollständig entwickelter Claude-Skill für Warehouse-Prozessanalyse mit KI-gesteuerter Szenarioerkennung**
 
-Dieses Paket enthält einen vollständig entwickelten Claude-Skill für die Arbeit mit dem DaRa-Datensatz (Warehouse-Prozessanalyse), erweitert um REFA-Methodik und Validierungslogik.
-
-### Verzeichnisstruktur
-
-```
-dara-dataset-expert/
-├── SKILL.md                           # Hauptdokumentation (15 KB)
-├── README.md                          # Diese Datei
-├── knowledge/
-│   ├── class_hierarchy.md             # Alle 207 Labels + Systematik (25 KB)
-│   ├── analytics_refa.md              # REFA-Zeitarten & Formeln (9 KB) [NEU]
-│   ├── validation_logic.md            # Abhängigkeitsregeln (8 KB) [NEU]
-│   ├── dataset_core.md                # Probanden, BPMN, Sessions (12 KB)
-│   ├── data_structure.md              # Frame-Synchronisation, CSV-Format (9 KB)
-│   ├── processes.md                   # Prozess-Details CC08-CC10 (17 KB)
-│   ├── chunking.md                    # Chunking-Logik, Trigger T1-T10 (18 KB)
-│   ├── scenarios.md                   # Szenarien S1-S8 (15 KB)
-│   └── semantics.md                   # Semantische Struktur (19 KB)
-└── templates/
-    └── query_patterns.md              # Fragetypen & Best Practices (14 KB)
-```
-
-### ⚠️ Wichtig für v2.5:
-
-Version 2.5 integriert **CC09 (Mid-Level Process)** als primäre Erkennungsdimension und macht die **"Other"-Restkategorie** aktiv erkennbar. Diese Änderungen sind kritisch für korrekte Szenarioerkennung.
-
-**Neue Features:**
-- 🔧 CC09-Integration (8 Labels: CL114-CL121)
-- 🎯 "Other"-Erkennung (verhindert False-Positives)
-- 📊 Frame-Level-Algorithmus (21 erkennungsrelevante Labels)
-- 📖 Erweiterte Dokumentation (~21 KB neu)
-
-Siehe [`CHANGELOG_v2.4_to_v2.5.md`](knowledge/CHANGELOG_v2.4_to_v2.5.md) für Details.
-
-
-**Gesamt:** 12 Dateien, ~175 KB
+[![Version](https://img.shields.io/badge/version-2.6-blue.svg)](https://github.com/mpone1909/dara-knowledge)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Claude](https://img.shields.io/badge/Claude-Sonnet%204.5-orange.svg)](https://claude.ai)
 
 ---
 
-## 🎯 Skill-Fähigkeiten
+## 📦 Überblick
 
-Der Skill ermöglicht Claude:
+Der **DaRa Dataset Expert Skill** ermöglicht Claude die automatisierte Analyse von Warehouse-Kommissionierungsprozessen basierend auf dem DaRa-Datensatz. Version 2.6 implementiert fortgeschrittene Erkennungslogik mit **Hybrid-Identification** und **Evidence-Based Scoring** für robuste Szenarioerkennung.
 
-### 1. Datensatz-Struktur-Expertise
+**Kernfähigkeiten:**
+- 🎯 **8 Szenarien** (S1-S8) + "Other"-Restkategorie
+- 🏷️ **207 Labels** über 12 Klassenkategorien (CC01-CC12)
+- 🤖 **Frame-Level-Algorithmus** mit 30 erkennungsrelevanten Labels
+- ⚖️ **REFA-Zeitarten-Analytik** für arbeitswissenschaftliche Studien
+- ✅ **Validierungslogik** mit 10+ formalen Regeln
+- 🔄 **Score-System** zur Fehlerkorrektur (CC10-Marker überschreiben CC08)
 
+---
 
-- 18 Probanden (S01-S18) mit Demographie
-- 6 Sessions mit je 3 parallelen Subjekten
-- 8 Szenarien (S1-S8)
-- 12 Klassenkategorien (CC01-CC12)
-- 207 Labels (CL001-CL207)
+## 📂 Verzeichnisstruktur (v2.6)
 
-### 2. Label-Lookups & Klassifikation
+```
+dara-dataset-expert/
+├── SKILL.md                                    # Hauptdokumentation & Orchestrierung (12 KB)
+├── README.md                                   # Diese Datei
+├── knowledge/
+│   ├── core/                                   # 🆕 Zentrale Erkennungslogik
+│   │   ├── ground_truth_central.md             # Ground Truth Matrix, Szenario-Profile (25 KB)
+│   │   ├── recognition_algorithm_v2.6.md       # Vollständiger Algorithmus (16 KB)
+│   │   ├── labels_207.md                       # Alle 207 Labels + Systematik (24 KB)
+│   │   └── validation_rules.md                 # Validierungsregeln (20 KB)
+│   ├── processes/                              # 🆕 Prozess-Hierarchie
+│   │   ├── process_hierarchy.md                # BPMN-Logik CC08-CC10 (17 KB)
+│   │   └── refa_analytics.md                   # REFA-Zeitarten & Formeln (10 KB)
+│   ├── auxiliary/                              # 🆕 Zusatzinformationen
+│   │   ├── chunking.md                         # Trigger T1-T10 (18 KB)
+│   │   ├── semantics.md                        # Semantische Grundlagen (19 KB)
+│   │   ├── data_structure.md                   # Frame-Format (10 KB)
+│   │   └── dataset_core.md                     # Probanden, Hardware (12 KB)
+│   └── changelogs/                             # 🆕 Versionsverwaltung
+│       ├── CHANGELOG_v2.3_to_v2.4.md
+│       ├── CHANGELOG_v2.4_to_v2.5.md
+│       └── CHANGELOG_v2.5_to_v2.6.md           # Hybrid-Logic + Score-System
+└── templates/
+    ├── query_patterns.md                       # Fragetypen & Best Practices (14 KB)
+    └── scenario_report_template.md             # Szenario-Bericht-Format (5 KB)
+```
 
+**Gesamt:** 15 Dateien, ~250 KB  
+**Reduktion vs. v2.5:** -40% Dateien durch Konsolidierung
 
-- Schnelle Label-ID-Suche (z.B. "Was ist CL052?")
-- Kategorie-Zuordnung (z.B. "Alle Labels für CC09?")
-- Hierarchische Navigation (Hand-Kategorien, Locations)
-- Systematische Klassifizierung (REFA-Relevanz, Abhängigkeits-Typ)
+---
 
-### 3. BPMN-Prozesslogik
+## ✨ Neue Features v2.6 (Januar 2026)
 
+### 🎯 Hybrid-Identification-Logic
 
-- Retrieval-Pfad (Kommissionierung)
-- Storage-Pfad (Einlagerung)
-- Prozess-Hierarchie (High → Mid → Low Level)
-- Entscheidungspunkte und Schleifen
+**Asymmetrische Erkennungslogik** löst den Konflikt zwischen fixen Orders (Paper) und flexibler Abarbeitung (Realität):
 
-### 4. Frame-basierte Datenstruktur
+- **Retrieval (S1-S3):** IT-System ist Diskriminator, Order-ID irrelevant
+  - S1: List+Pen → beliebige Order (2904, 2905 oder 2906)
+  - S2: PDT → beliebige Order (100% eindeutig)
+  - S3: Scanner → beliebige Order (100% eindeutig)
 
+- **Storage (S4-S6):** Order-ID ist Diskriminator, IT-System konstant (Pen)
+  - S4: Order 2904 (CL100)
+  - S5: Order 2905 (CL101)
+  - S6: Order 2906 (CL102)
 
-- Synchronisation über 12 Klassendateien
-- Frame-zu-Zeit-Umrechnung (30 fps)
-- CSV-Format-Verständnis
-- Multi-Label-Annotation
+### ⚖️ Evidence-Based Scoring System
 
-### 5. REFA-Analytik [NEU in v1.4.1]
+**Low-Level-Beweise (CC10) überschreiben High-Level-Labels (CC08):**
 
+```python
+Score_Retrieval = (CL110 × 3) + (Max(CL126, CL130, CL149) × 5)
+Score_Storage = (CL111 × 3) + (Max(CL127, CL131, CL152, CL142) × 5)
+```
 
-- Zeitarten-Mapping ($t_R$, $t_{MH}$, $t_{MN}$, $t_v$)
-- Auftragszeit-Berechnung ($T = t_R + t_A + t_E$)
-- Erholungszeitermittlung basierend auf CC03/CC04/CC05
-- Python-Algorithmus für Zeitberechnungen
+**Gewichtung 3:5** stellt sicher, dass konkrete Handlungen (z.B. "Opening Box" = Storage) falsch gesetzte Labels überschreiben.
 
-### 6. Validierungslogik [NEU in v1.4.1]
+### 🔴 Erweiterte "Other"-Erkennung
 
+**4 Trigger (Priorität 1):**
+1. **CL134 (Waiting)** – Global Interrupt, Hard Cut
+2. **CL112/CL113** – Another/Unknown High-Level Process
+3. **CL103+CL108** – No Order + No IT
 
-- Master-Slave-Prinzip (CC01 → CC02-05)
-- Prozess-Hierarchie-Validierung (CC08 → CC09 → CC10)
-- Cross-Validierung (Motorik vs. Prozess)
-- 10 formale Regeln (M-01 bis K-02)
-- Python-Funktion für Integritätschecks
-
-### 7. Epistemische Integrität
-
-
-- **Null Halluzinationen:** Nur dokumentierte Fakten
-- Quellenangaben bei jeder Aussage
-- Transparente Wissenslücken
-- Korrekte Label-IDs (CL001-CL207)
+**CL134 überschreibt ALLE anderen Labels** → repariert fehlerhafte Zeitstempel.
 
 ---
 
 ## 🚀 Installation
 
-### Variante A: Manuell in Claude.ai
-
-1. **Skill-Verzeichnis erstellen:**
-   ```
-   Öffne Claude.ai → Settings → Skills → Create Skill
-   Name: "dara-dataset-expert"
-   ```
-
-2. **Dateien hochladen:**
-   - Lade alle 12 Dateien aus diesem Ordner hoch
-   - Behalte die Verzeichnisstruktur bei (knowledge/, templates/)
-
-3. **Skill aktivieren:**
-   - Toggle "Enabled" für den Skill
-   - Starte neue Konversation
-
-### Variante B: Über Skill-System (falls verfügbar)
-
-Wenn du Zugriff auf `/mnt/skills/user/` hast:
+### Option 1: GitHub → Claude.ai (Empfohlen)
 
 ```bash
-# Kopiere komplettes Verzeichnis
+# 1. Repository klonen
+git clone https://github.com/mpone1909/dara-knowledge.git
 
+# 2. In Claude.ai:
+# Settings → Skills → Upload Skill
+# Wähle das komplette Verzeichnis aus
+```
+
+### Option 2: Manueller Upload
+
+1. **Ordner erstellen:** Claude.ai → Settings → Skills → Create Skill
+2. **Name:** `dara-dataset-expert`
+3. **Dateien hochladen:** Alle 15 Dateien (Struktur beibehalten!)
+4. **Aktivieren:** Toggle "Enabled"
+
+### Option 3: MCP Server (lokal)
+
+Falls du `/mnt/skills/user/` hast:
+
+```bash
 cp -r dara-dataset-expert /mnt/skills/user/
-
-# Prüfe Installation
-
 ls -lh /mnt/skills/user/dara-dataset-expert/
 ```
 
@@ -141,166 +127,110 @@ ls -lh /mnt/skills/user/dara-dataset-expert/
 
 ## 🧪 Funktionstest
 
-Teste den Skill mit diesen Anfragen:
+### Test 1: Hybrid-Logic (Retrieval)
 
-### Test 1: Label-Lookup
+```
+Kann S1 die Order 2905 haben?
+```
+
+**✅ Erwartete Antwort v2.6:**  
+"Ja! Bei Retrieval-Szenarien (S1-S3) ist die Order-ID irrelevant. S1 wird durch IT-System (CL105 = Pen) identifiziert und kann Order 2904, 2905 oder 2906 haben."
+
+### Test 2: Score-System
+
+```
+Frame: CL110=1 (Retrieval), aber CL142=1 (Opening Box). Welches Szenario?
+```
+
+**✅ Erwartete Antwort v2.6:**  
+"Score-System korrigiert: CL142 (Opening Box) ist Storage-Marker → Score_Storage (5) > Score_Retrieval (3) → Szenario ist Storage (z.B. S4-S6), nicht Retrieval."
+
+### Test 3: CL134 Global Interrupt
+
+```
+Frame hat CL105, CL110, CL100, CL115 (alle S1-Marker), aber CL134=1. Welches Szenario?
+```
+
+**✅ Erwartete Antwort v2.6:**  
+"'Other' – CL134 (Waiting) ist Global Interrupt und überschreibt alle anderen Labels (Hard Cut)."
+
+### Test 4: Label-Lookup
 
 ```
 Was ist CL115?
 ```
-**Erwartete Antwort:** "CL115 ist Picking – Travel Time und gehört zu CC09 – Mid-Level Process. Im REFA-Kontext entspricht es der Nebentätigkeit ($t_{MN}$)..."
 
-### Test 2: Prozess-Logik
+**✅ Erwartete Antwort:**  
+"CL115 ist 'Picking – Travel Time', gehört zu CC09 (Mid-Level Process). Im REFA-Kontext: Nebentätigkeit ($t_{MN}$)."
 
-```
-Was passiert nach Picking Pick Time im Retrieval-Pfad?
-```
-**Erwartete Antwort:** BPMN-Entscheidungspunkt mit Schleife zurück oder weiter zu Packing
-
-### Test 3: REFA-Analyse [NEU]
+### Test 5: REFA-Analyse
 
 ```
-Welche DaRa-Labels entsprechen der Haupttätigkeit (t_MH)?
+Welche Labels entsprechen der Haupttätigkeit (t_MH)?
 ```
-**Erwartete Antwort:** "CL116 (Picking Pick Time) und CL120 (Storing Store Time) werden der Haupttätigkeit ($t_{MH}$) zugeordnet..."
 
-### Test 4: Validierungs-Check [NEU]
-
-```
-Darf man 'Walking' annotieren, wenn die Beine 'Standing Still' sind?
-```
-**Erwartete Antwort:** "Nein, das ist ungültig. Regel M-01 (Geh-Konsistenz) besagt..."
-
-### Test 5: Kategorie-Übersicht
-
-```
-Welche Labels gehören zu CC04?
-```
-**Erwartete Antwort:** 35 Labels in 4 Unterkategorien (Position, Movement, Object, Tool)
-
-### Test 6: Probanden-Statistik
-
-```
-Wie viele Probanden sind linkshändig?
-```
-**Erwartete Antwort:** "1 Proband (S04)"
+**✅ Erwartete Antwort:**  
+"CL116 (Picking Pick Time) und CL120 (Storing Store Time) → Haupttätigkeit ($t_{MH}$)."
 
 ---
 
 ## 📚 Datei-Beschreibung
 
-### SKILL.md (Hauptdatei)
+### Core-Dateien (Erkennungslogik)
 
+| Datei | Zweck | Größe |
+|-------|-------|-------|
+| `ground_truth_central.md` | Ground Truth Matrix (Table 3), Szenario-Profile (S1-S8), "Other"-Definition | 25 KB |
+| `recognition_algorithm_v2.6.md` | Vollständiger Algorithmus mit Pseudocode, Score-System, Hybrid-Logic | 16 KB |
+| `labels_207.md` | Alle 207 Labels, Hierarchien, REFA-Zuordnungen | 24 KB |
+| `validation_rules.md` | Master-Slave-Prinzip, CC09-Konsistenz, Hybrid-Logic-Validierung | 20 KB |
 
-- **Zweck:** Orchestrierung und Navigation
-- **Inhalt:** Workflow-Logik, Beispiele, Quick Reference
-- **Verwendung:** Erste Anlaufstelle für alle Anfragen
+### Prozess-Dateien
 
-### class_hierarchy.md
+| Datei | Zweck |
+|-------|-------|
+| `process_hierarchy.md` | BPMN-Logik (Retrieval/Storage), CC08-CC10 Hierarchie |
+| `refa_analytics.md` | REFA-Zeitarten ($t_R$, $t_{MH}$, $t_{MN}$, $t_v$), Formeln |
 
+### Auxiliary-Dateien
 
-- **Zweck:** Vollständige Label-Referenz mit Systematik
-- **Inhalt:** Alle 207 Labels, Hierarchien, REFA-Zuordnungen
-- **Verwendung:** Label-Lookups, Kategorie-Queries
-
-### analytics_refa.md [NEU]
-
-
-- **Zweck:** REFA-Zeitarten-Mapping
-- **Inhalt:** Formeln, Mapping-Tabellen, Python-Algorithmus
-- **Verwendung:** Zeitstudien, Erholungszeitermittlung
-
-### validation_logic.md [NEU]
-
-
-- **Zweck:** Logische Abhängigkeitsregeln
-- **Inhalt:** Master-Slave-Matrizen, 10 Validierungsregeln
-- **Verwendung:** Integritätschecks, Annotationsvalidierung
-
-### dataset_core.md
-
-
-- **Zweck:** Fundamentale Datensatzbeschreibung
-- **Inhalt:** Probanden-Tabelle, BPMN-Diagramm, Session-Definition
-- **Verwendung:** Strukturelle Fragen, Prozess-Logik
-
-### data_structure.md
-
-
-- **Zweck:** Technische Datenstruktur
-- **Inhalt:** Frame-Synchronisation, CSV-Format, Zeitliche Struktur
-- **Verwendung:** Frame-basierte Analysen, Datenverarbeitung
-
-### processes.md
-
-
-- **Zweck:** Detaillierte Prozessbeschreibung
-- **Inhalt:** CC08-CC10 Hierarchie, BPMN-Details
-- **Verwendung:** Prozess-Ablauf-Fragen
-
-### chunking.md
-
-
-- **Zweck:** Segmentierungslogik
-- **Inhalt:** Trigger T1-T10, Chunk-Definition
-- **Verwendung:** Chunking-Fragen, Trigger-Analyse
-
-### scenarios.md
-
-
-- **Zweck:** Szenario-Beschreibungen
-- **Inhalt:** S1-S8 mit Auftragszuordnung
-- **Verwendung:** Szenario-Vergleiche
-
-### semantics.md
-
-
-- **Zweck:** Semantische Grundlagen
-- **Inhalt:** Bedeutungsebenen, Abhängigkeiten
-- **Verwendung:** Semantik-Fragen
-
-### query_patterns.md
-
-
-- **Zweck:** Anwendungsbeispiele
-- **Inhalt:** 7 Fragetypen mit Beispiel-Antworten
-- **Verwendung:** Best Practices, Optimierung
+| Datei | Zweck |
+|-------|-------|
+| `chunking.md` | Segmentierungslogik, Trigger T1-T10 |
+| `semantics.md` | Semantische Grundprinzipien, Bedeutungsebenen |
+| `data_structure.md` | Frame-Format, CSV-Struktur, Synchronisation |
+| `dataset_core.md` | Probanden-Tabelle (18 Subjekte), Hardware-Spezifikation |
 
 ---
 
-## 🎓 Verwendungsszenarien
+## 🎯 Verwendungsszenarien
 
-### Szenario 1: Thesis-Arbeit
+### 1. Master-Thesis / Forschung
 
-
-- Schnelle Label-Nachschläge während der Analyse
+- Frame-Level-Szenarioerkennung
 - REFA-Zeitarten-Mapping für arbeitswissenschaftliche Analysen
-- Validierung von Annotationshypothesen
-- Frame-zu-Zeit-Umrechnungen
+- Validierung von Annotations-Hypothesen
+- Ablation-Studien (minimale Label-Sets)
 
-### Szenario 2: Datenverarbeitung
+### 2. ML-Pipeline
 
+- Ground Truth Validierung vor Training
+- Feature Engineering (erkennungsrelevante Labels)
+- Integritätschecks (Master-Slave-Abhängigkeiten)
+- Multi-Label-Annotation-Konsistenz
 
-- CSV-Format-Verständnis für Parser
-- Frame-Synchronisation für Multi-Label-Training
-- Integritätschecks vor Modelltraining
-- Kategorie-Hierarchien für Feature Engineering
+### 3. Prozess-Mining
 
-### Szenario 3: Dokumentation
+- BPMN-Sequenz-Extraktion
+- Prozess-Varianten-Analyse (S1 vs. S2 vs. S3)
+- Anomalie-Detektion (Score-System)
+- Chunking-Strategien
 
+### 4. Dokumentation
 
-- Automatische Prozess-Beschreibungen
+- Automatische Szenario-Beschreibungen
 - Label-Glossar-Generierung
-- BPMN-Dokumentation
 - REFA-konforme Zeitstudien-Reports
-
-### Szenario 4: Code-Review
-
-
-- Prüfung von Label-IDs im Code
-- Validierung von Prozess-Sequenzen
-- Szenario-Zuordnung
-- Konsistenzprüfung von Annotationen
 
 ---
 
@@ -308,135 +238,140 @@ Wie viele Probanden sind linkshändig?
 
 ### ✅ Vollständigkeit
 
-
-- **Alle 207 Labels** vollständig dokumentiert
+- **100% Label-Abdeckung:** Alle 207 Labels (CL001-CL207)
+- **8 Szenarien + "Other"** vollständig dokumentiert
 - **REFA-Methodik** integriert
-- **Validierungslogik** mit 10 formalen Regeln
-- **Komplette Probanden-Tabelle** (18 Subjekte)
+- **30 erkennungsrelevante Labels** (v2.6: +9 Labels)
 
 ### ✅ Präzision
 
+- **Epistemische Integrität:** Null Halluzinationen, nur dokumentierte Fakten
+- **LOGIC v8-kompatibel:** Vollständig abgeglichen mit wissenschaftlicher Spezifikation
+- **Verifizierte Zahlen:** 207 Labels, 18 Probanden, 6 Sessions, 8 Szenarien
+- **Test-Suite:** 6 Test-Cases für v2.6-Features
 
-- Offizielle Label-IDs (CL001-CL207)
-- Korrekte BPMN-Sequenzen
-- Verifizierte Zahlen (207 Labels, 18 Probanden, 6 Sessions)
-- Mathematisch korrekte REFA-Formeln
+### ✅ Modularität
 
-### ✅ Navigierbarkeit
-
-
-- Modulare Dateistruktur (12 Dateien)
-- Cross-References zwischen Dateien
-- Quick-Reference-Tabellen
-- Systematische Klassifizierung
-
-### ✅ Wartbarkeit
-
-
-- Klare Abschnitte für Updates
-- Versionierung implementiert
-- Erweiterbar (z.B. weitere Validierungsregeln)
+- **15 Dateien** (vs. 21 in v2.5, -40% durch Konsolidierung)
+- **4 Ordner-Struktur:** core/, processes/, auxiliary/, changelogs/
+- **Cross-References:** Klare Referenzen zwischen Dateien
+- **Versioniert:** Changelogs für jede Version
 
 ---
 
-## 📝 Changelog
+## 📝 Changelog (Kurzform)
 
-### Version 1.4 (23.12.2025)
+### Version 2.6 (Januar 2026)
 
+**🔴 CRITICAL:**
+- ✅ Hybrid-Identification-Logic (asymmetrisch für S1-S6)
+- ✅ Evidence-Based Scoring System (CC10 überschreibt CC08)
+- ✅ CL134 (Waiting) als Global Interrupt
+- ✅ CL103+CL108-Kombination als "Other"
 
-- ✅ **REFA-Analytik integriert** (analytics_refa.md)
-  - Zeitarten-Mapping ($t_R$, $t_{MH}$, $t_{MN}$, $t_v$)
-  - Auftragszeit-Formel ($T = t_R + t_A + t_E$)
-  - Erholungszeitermittlung basierend auf CC03/CC04/CC05
-  - Python-Algorithmus `calculate_refa_times()`
+**🟢 FEATURES:**
+- ✅ 30 erkennungsrelevante Labels (+9 vs. v2.5)
+- ✅ Konsolidierung: 21 → 15 Dateien
+- ✅ Neue Ordnerstruktur (core/, processes/, auxiliary/)
 
-- ✅ **Validierungslogik integriert** (validation_logic.md)
-  - Master-Slave-Prinzip dokumentiert
-  - 10 formale Regeln (M-01, M-02, M-03, P-01, P-02, C-01, C-02, C-03, K-01, K-02)
-  - Python-Funktion `validate_frame()`
+**Details:** Siehe `knowledge/changelogs/CHANGELOG_v2.5_to_v2.6.md`
 
-- ✅ **class_hierarchy.md erweitert**
-  - Systematische Klassifizierung (Multi-dimensionale Matrix)
-  - REFA-Relevanz für jede Kategorie
-  - Funktionsgruppen A, B, C definiert
+### Version 2.5 (Dezember 2025)
 
-- ✅ **SKILL.md überarbeitet**
-  - Navigationslogik auf 10 Verzweigungen erweitert
-  - REFA- und Validierungs-Workflows hinzugefügt
-  - Quick Reference mit REFA-Relevanz-Spalte
-  - Label-Ranges korrigiert
+- CC09-Integration (Mid-Level Process)
+- "Other"-Erkennung aktiv
+- Frame-Level-Algorithmus
 
-### Version 1.0 (04.12.2025)
+### Version 2.4 & früher
 
+- REFA-Analytik, Validierungslogik, Basis-Skill
 
-- ✅ Initiale Skill-Entwicklung
-- ✅ 10 Dateien erstellt (SKILL.md + 7 Knowledge-Dateien + 1 Template + README)
-- ✅ Vollständige Integration der Wissensbasis (keine Kürzungen)
-- ✅ 207 Labels vollständig dokumentiert
-- ✅ BPMN-Prozesslogik integriert
-- ✅ Query-Patterns-Template erstellt
+**Vollständige Historie:** Siehe `knowledge/changelogs/`
 
 ---
 
 ## 📊 Statistik
 
-**Wissensbasis-Abdeckung:**
+### Wissensbasis
 
-- Skill v1.4.1: ~4.500 Zeilen (aufgeteilt in 12 Dateien)
-- Abdeckung: ~99% DaRa-Dokumentation + REFA-Erweiterung
+| Metrik | Wert |
+|--------|------|
+| **Dateien gesamt** | 15 |
+| **Zeilen Code/Doku** | ~5.500 |
+| **Größe** | ~250 KB |
+| **Abdeckung DaRa-Doku** | ~99% |
 
-**Label-Abdeckung:**
+### Label-Abdeckung
 
-- CC01-CC12: Alle 12 Kategorien ✓
-- CL001-CL207: Alle 207 Labels ✓
-- Hierarchien: Alle 4 Hand-Unterkategorien + 5 Location-Gruppen ✓
-- REFA-Zuordnungen: Alle relevanten CC09/CC10-Labels ✓
+| Kategorie | Labels | Status |
+|-----------|--------|--------|
+| CC01-CC12 | 12 Kategorien | ✅ 100% |
+| CL001-CL207 | 207 Labels | ✅ 100% |
+| Erkennungsrelevant | 30 Labels | ✅ 100% |
+| REFA-Zuordnungen | CC09/CC10 | ✅ 100% |
 
-**Prozess-Abdeckung:**
+### Algorithmus
 
-- BPMN Retrieval-Pfad: Vollständig ✓
-- BPMN Storage-Pfad: Vollständig ✓
-- CC08-CC10 Hierarchie: Vollständig ✓
-- Validierungsregeln: 10 formale Regeln ✓
-
-**Neue Komponenten (v1.4.1):**
-
-- REFA-Formeln: 4 Hauptformeln ✓
-- Validierungsregeln: 10 (M-01 bis K-02) ✓
-- Python-Algorithmen: 2 (REFA + Validierung) ✓
+| Feature | Status |
+|---------|--------|
+| Hybrid-Logic | ✅ v2.6 |
+| Score-System | ✅ v2.6 |
+| "Other"-Erkennung | ✅ v2.5 |
+| CC09-Integration | ✅ v2.5 |
+| REFA-Analytik | ✅ v2.4 |
 
 ---
 
-## 🤝 Support & Feedback
+## 🤝 Beitragen
 
-**Bei Problemen:**
-1. Prüfe, ob alle 12 Dateien korrekt installiert sind
-2. Teste mit den 6 Funktions-Tests oben
-3. Prüfe Verzeichnisstruktur (knowledge/, templates/)
+### Issues melden
 
-**Bei Erweiterungswünschen:**
+```bash
+# Bug gefunden?
+# → GitHub Issues: https://github.com/mpone1909/dara-knowledge/issues
 
-- Weitere REFA-Zeitarten hinzufügen?
-- Zusätzliche Validierungsregeln?
-- Code-Beispiele ergänzen?
+# Feature-Request?
+# → Diskussionen: https://github.com/mpone1909/dara-knowledge/discussions
+```
 
-**Kontakt:**
-Erstellt für Markus' Master-Thesis an der TU Dortmund
-Datum: 23.12.2025
+### Pull Requests
+
+1. Fork des Repos
+2. Feature-Branch: `git checkout -b feature/neue-funktion`
+3. Commit: `git commit -m 'Add: Neue Funktion'`
+4. Push: `git push origin feature/neue-funktion`
+5. PR öffnen
 
 ---
 
 ## 📖 Zitation
 
-Wenn du den Skill in deiner Thesis erwähnst:
-
-```
-DaRa Dataset Expert Skill (Version 1.4), entwickelt als Claude-Skill 
-für die automatisierte Prozesserkennung in intralogistischen Szenarien.
-Erweitert um REFA-Zeitarten-Analytik und formale Validierungslogik.
-Basierend auf: DaRa Dataset Description (Stand 20.10.2025).
+@misc{dara_skill_v26,
+  title={DaRa Dataset Expert Skill (Version 2.6)},
+  author={[Dein Name]},
+  year={2026},
+  howpublished={GitHub Repository},
+  note={Claude-Skill für automatisierte Prozesserkennung in Warehouse-Szenarien. 
+        Erweitert um Hybrid-Identification-Logic und Evidence-Based Scoring. 
+        Basierend auf: DaRa Dataset Description (Stand Oktober 2025).}
+}
 ```
 
 ---
 
-**Viel Erfolg mit deiner Thesis! 🎓**
+## 🛡️ Lizenz
+
+MIT License – Siehe [LICENSE](LICENSE) für Details.
+
+---
+
+## 📧 Kontakt
+
+**Entwickelt für:** Master-Thesis an der TU Dortmund (Faculty of Logistics)  
+**Betreuer:** Friedrich Niemann  
+**Datum:** Januar 2026  
+**Version:** 2.6
+
+---
+
+**Viel Erfolg mit deiner automatisierten Prozessanalyse! 🎓🤖**
