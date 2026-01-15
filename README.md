@@ -1,12 +1,12 @@
 # DaRa Dataset Expert Skill – Version 3.0
 Dieser Skill dient der Analyse von Manuellen Kommissioniertätigkeiten anhand des DaRa Datensatzen im Rahmen einer Masterarbeit an der TU Dortmund Fakultät Maschinenbau Lehrstuhl FLW
-Titel der Abschlussarbeit:
-Referenzarchitektur für Agentic AI in der Intralogistik: Multi-Agent-Framework zur generativen Prozessanalyse von HAR-Daten mit LLM-Orchestrierung und REFA-Konfirmität
-Autor: Markus Phillip Fiur
-Berteut von Friedrich Niemann M. Sc. Logistik
+**Titel der Abschlussarbeit:**
+**Referenzarchitektur für Agentic AI in der Intralogistik: Multi-Agent-Framework zur generativen Prozessanalyse von HAR-Daten mit LLM-Orchestrierung und REFA-Konfirmität**
+**Autor: Markus Phillip Fiur**
+**Berteut von Friedrich Niemann M. Sc. Logistik**
 TU Dortmund
 Fakultät Maschinenbau
-Lehrstuhl flw - förer und Lagerwesen
+Lehrstuhl flw - förder und Lagerwesen
 
 **Vollständig entwickelter Claude-Skill für Warehouse-Prozessanalyse mit KI-gesteuerter Szenarioerkennung + Lagerlayout + 74 Artikel-Stammdaten**
 
