@@ -49,17 +49,29 @@ Ein Chunk umfasst:
 3. **Dauer**  
    Anzahl der Frames innerhalb des Chunks. Da die Daten mit 29,97 fps aufgezeichnet und für die Modellierung auf 30 fps gerundet werden, entspricht die Dauer (Frames / 30) Sekunden.  
      
-4. **Vollständige Zustandsbeschreibung**  
-   Für **alle 12 Klassenkategorien (CC01–CC12)** liegt pro Chunk eine vollständige Information vor. Ein Chunk enthält daher:  
-     
-   - eine Hauptaktivität (CC01),  
-   - Bewegungs- und Körperhaltungszustände (CC02–CC05),  
-   - Kontextinformationen (CC06–CC07),  
-   - Prozesszuordnungen (CC08–CC10),  
-   - Standort des Subjekts und des Wagens (CC11–CC12).
+4. **Datenstruktur und Zustandsbeschreibung**
+   Die Klassenkategorien liegen in CSV-Dateien vor (Namenskonvention z. B.: `Revised_Annotation__CC03_Sub-Activity - Torso__S14.csv`), wobei `CCxx` die Kategorie und `Sxx` die Probanden-ID (S01 bis S18) bezeichnet.
+   Für jeden Chunk ist das Chunking über alle **12 Klassenkategorien (CC01–CC12)**, die insgesamt **207 Labels (CL)** umfassen, gültig. Ein Chunk enthält somit den vollständigen Zustand über alle Dimensionen:
+   - **Hauptaktivität:** CC01
+   - **Körperliche Sub-Aktivitäten:** CC02 (Beine), CC03 (Torso), CC04 (Linke Hand), CC05 (Rechte Hand)
+   - **Kontext & Auftrag:** CC06 (Auftrag), CC07 (IT-Systeme)
+   - **Prozess-Ebene:** CC08 (High-Level), CC09 (Mid-Level), CC10 (Low-Level)
+   - **Standort:** CC11 (Mensch), CC12 (Wagen)
 
-5. **Labelsätze pro Klasse**  
-   Jede Klasse besitzt innerhalb des Chunks genau **einen aktiven Labelzustand** (multi-label möglich, falls die Klasse es zulässt, z. B. Hände mit mehreren Objekten/Tools). Dieser Zustand bleibt vom Start-Frame bis zum End-Frame unverändert.
+5. **Labelsätze und Aktivierungsregeln pro Klasse**
+   Die Klassifikation unterscheidet strikt zwischen **Single-Label**- (exklusiv) und **Multi-Label**-Kategorien (kombinierbar oder zwingend). Innerhalb eines Chunks gelten folgende Regeln:
+
+   * **Single-Label Klassen (Exklusiv):**
+       In den Kategorien **CC01, CC02, CC07, CC08, CC09, CC10** ist genau ein Label pro Frame aktiv (Min=1, Max=1).
+       - *Logik:* Die Labels schließen sich gegenseitig aus.
+       - *Priorität (Beispiel CC01):* Bei Gleichzeitigkeit gilt eine definierte Hierarchie: Sync > Confirming > Scanning > Cart > Handling > Walking/Standing.
+
+   * **Multi-Label Klassen (Kombinierbar/Hierarchisch):**
+       Hier können oder müssen mehrere Labels gleichzeitig aktiv sein:
+       - **CC03 (Torso):** Additiv (Max 2). Ein Beugungsgrad (z. B. *Slightly Bending*) kann mit *Torso Rotation* kombiniert werden.
+       - **CC04 & CC05 (Hände):** Zwingend Multi-Label (Max 4). Eine gültige Kombination besteht immer aus genau 4 Komponenten: Position + Movement + Object + Tool (z. B. Centered + Grasping + Small Item + No Tool).
+       - **CC06 (Order):** Kombinierbar (Max 2). Bei Multi-Order-Szenarien können zwei Aufträge gleichzeitig aktiv sein.
+       - **CC11 (Ort Mensch) & CC12 (Ort Wagen):** Hierarchisch (Max 3 bzw. 4). Kombination folgt der Logik: Main Area + Gasse + Position. Bei CC12 ist zusätzlich ein Transition-Label möglich.
 
 ### Bedingungen für die Konsistenz eines Chunks
 
@@ -74,19 +86,19 @@ Ein Chunk bleibt gültig, solange:
 
 - Ein Chunk ist **feiner** als Szenarioabschnitte und Prozessphasen.  
 - Ein Chunk stellt die kleinste **semantische Einheit** dar, die in der Annotation eindeutig definiert ist.  
-- Prozesse (CC08–CC10) und Szenarien (S1–S8) können aus vielen Chunks bestehen.
+- Prozesse (CC08–CC10) und Szenarien (S1–S8 und other) können aus vielen Chunks bestehen.
 
 ---
 
 ## 3.4 Trigger-Mechanismen (T1–T10)
 
-Trigger sind definierte Ereignisse oder Zustandsänderungen, die das **Ende eines Chunks** und den **Beginn eines neuen Chunks** auslösen. Ein Trigger tritt immer dann auf, wenn sich mindestens eine der 12 Klassenkategorien ändert. Das Chunking-System basiert vollständig auf diesen Triggern.
+Trigger sind definierte Ereignisse oder Zustandsänderungen, die das **Ende eines Chunks** und den **Beginn eines neuen Chunks** auslösen. Ein Trigger tritt immer dann auf, wenn sich der Zustand in **mindestens einer der 12 Klassenkategorien** ändert.
 
-Nachfolgend werden die zehn Triggermechanismen beschrieben, die offiziell definiert wurden.
+Nachfolgend werden die zehn Triggermechanismen beschrieben.
 
-### T1 – Wechsel der Main Activity (CC01)
+### T1 – Wechsel der Main Activity (CC01) [Single-Label]
 
-Ein Chunk endet sofort, wenn sich die Hauptaktivität ändert (z. B. von Walking zu Standing). Diese Änderungen sind stark semantisch relevant und definieren grundlegende Zustandswechsel.
+Ein Chunk endet sofort, wenn sich die Hauptaktivität ändert. Da dies eine Single-Label-Klasse ist, handelt es sich um einen exklusiven Austausch.
 
 **Beispiele:**
 
@@ -95,9 +107,9 @@ Ein Chunk endet sofort, wenn sich die Hauptaktivität ändert (z. B. von Walking
 
 ---
 
-### T2 – Wechsel der Beinaktivität (CC02)
+### T2 – Wechsel der Beinaktivität (CC02) [Single-Label]
 
-Ein Übergang zwischen Zuständen wie Gait Cycle, Standing Still oder Step erzeugt einen neuen Chunk. Beinaktivität ist ein zentraler Indikator für Bewegungsphasen.
+Ein Übergang zwischen exklusiven Zuständen wie Gait Cycle, Standing Still oder Step erzeugt einen neuen Chunk.
 
 **Beispiele:**
 
@@ -106,25 +118,19 @@ Ein Übergang zwischen Zuständen wie Gait Cycle, Standing Still oder Step erzeu
 
 ---
 
-### T3 – Wechsel der Torsobewegung (CC03)
+### T3 – Änderung der Torsobewegung (CC03) [Multi-Label]
 
-Änderungen zwischen No Bending, Slightly Bending oder Torso Rotation lösen einen Chunksprung aus.
+Da CC03 additiv ist, löst jede Änderung der aktiven Label-Kombination einen Trigger aus. Das beinhaltet den Wechsel des Beugungsgrades sowie das Hinzufügen/Entfernen der Rotation.
 
 **Beispiele:**
-
-- CL024 (No Bending) → CL026 (Strongly Bending)
-- CL025 (Slightly Bending) → CL024 (No Bending)
+- Wechsel: CL024 (No Bending) → CL026 (Strongly Bending)
+- Addition: CL025 (Slightly Bending) → CL025 (Slightly Bending) + CL027 (Torso Rotation)
 
 ---
 
-### T4 – Änderungen der linken Hand (CC04)
+### T4 – Änderungen der linken Hand (CC04) [Required Multi-Label]
 
-Ein neuer Chunk wird ausgelöst, wenn sich mindestens einer der Teilbereiche der linken Hand ändert:
-
-- **Primärposition** (Upwards, Centered, Downwards)  
-- **Movement Type** (z. B. Grasping, Holding)  
-- **Objekt** (z. B. Large Item, Cart)  
-- **Tool** (z. B. Pen, PDT, Knife)
+Ein neuer Chunk wird ausgelöst, wenn sich **mindestens eine** der vier zwingend erforderlichen Komponenten ändert (Position, Movement, Object, Tool).
 
 **Beispiele:**
 
@@ -135,34 +141,31 @@ Ein neuer Chunk wird ausgelöst, wenn sich mindestens einer der Teilbereiche der
 
 ---
 
-### T5 – Änderungen der rechten Hand (CC05)
+### T5 – Änderungen der rechten Hand (CC05) [Required Multi-Label]
 
-Wie T4, jedoch für die rechte Hand. Jede Änderung im Bewegungs-, Objekt- oder Toolstatus erzeugt einen neuen Chunk.
+Analog zu T4: Jede Änderung im 4-Komponenten-Status (Position, Bewegung, Objekt, Werkzeug) der rechten Hand erzeugt einen neuen Chunk.
 
 **Beispiele:**
 
 - Position: CL065 (Upwards) → CL066 (Centered)
-- Movement: CL069 (Reaching/Grasping) → CL071 (Holding)
-- Object: CL077 (Medium Item) → CL082 (Cardboard Box)
-- Tool: CL087 (PDT) → CL091 (Pen)
+- Objekt: CL077 (Medium Item) → CL082 (Cardboard Box)
 
 ---
 
-### T6 – Wechsel der Order (CC06)
+### T6 – Wechsel der Order (CC06) [Multi-Label]
 
-Wenn ein anderes Order-Label aktiv wird (z. B. Wechsel von Order 2905 zu Order 2906), beginnt ein neuer Chunk.
+Ein Trigger tritt auf, wenn sich die Auftragsnummer ändert oder – in Multi-Order-Szenarien – ein zweiter Auftrag hinzukommt bzw. wegfällt.
 
 **Beispiele:**
-
-- CL100 (2904) → CL101 (2905)
-- CL101 (2905) → CL102 (2906)
-- CL102 (2906) → CL103 (No Order)
+- Wechsel: CL100 (Order 2904) → CL101 (Order 2905)
+- Addition: CL100 (Order 2904) → CL100 (Order 2904) + CL101 (Order 2905)
+- Ende: CL102 (Order 2906) → CL103 (No Order)
 
 ---
 
-### T7 – Wechsel der Informationstechnologie (CC07)
+### T7 – Wechsel der Informationstechnologie (CC07) [Single-Label]
 
-Ein Trigger tritt auf, wenn sich der IT-Zustand ändert, z. B. Wechsel zwischen List and Pen, Portable Data Terminal oder No IT.
+Ein Trigger tritt auf, wenn das genutzte IT-System gewechselt wird.
 
 **Beispiele:**
 
@@ -171,53 +174,41 @@ Ein Trigger tritt auf, wenn sich der IT-Zustand ändert, z. B. Wechsel zwischen 
 
 ---
 
-### T8 – Wechsel des High-, Mid- oder Low-Level Prozesses (CC08–CC10)
+### T8 – Wechsel des Prozesses (CC08–CC10) [Single-Label]
 
-Ein Wechsel eines beliebigen Prozesslabels der Kategorien CC08–CC10 erzeugt automatisch einen neuen Chunk.
+Ein Wechsel eines beliebigen Labels in den Prozess-Kategorien (High-, Mid- oder Low-Level) erzeugt automatisch einen neuen Chunk. Dies ist der häufigste Trigger aufgrund der Feingliedrigkeit von CC10.
 
 **Beispiele:**
-
-- **High-Level:** CL110 (Retrieval) → CL111 (Storage)
-- **Mid-Level:** CL115 (Picking Travel Time) → CL116 (Picking Pick Time)
-- **Low-Level:** CL139 (Retrieving Items) → CL137 (Moving to Next Position)
-
-**Wichtig:** T8 ist der häufigste Trigger, da Low-Level-Prozesse sehr feingliedrig sind.
+- **High-Level (CC08):** CL110 (Retrieval) → CL111 (Storage)
+- **Mid-Level (CC09):** CL115 (Picking Travel Time) → CL116 (Picking Pick Time)
+- **Low-Level (CC10):** CL139 (Retrieving Items) → CL137 (Moving to Next Position)
 
 ---
 
-### T9 – Wechsel der Location Human (CC11)
+### T9 – Wechsel der Location Human (CC11) [Hierarchisch]
 
-Ein neuer Chunk entsteht immer dann, wenn die annotierte Position der Person wechselt:
-
-- zwischen Bereichen (z. B. Base → Cart Area)  
-- zwischen Pfaden  
-- zwischen Aisle Paths oder Cross-Aisle Paths
+Ein neuer Chunk entsteht, wenn sich irgendein Teil der Orts-Hierarchie (Main Area, Sub-Area/Gasse oder Position) ändert.
 
 **Beispiele:**
-
-- CL158 (Base) → CL163 (Aisle Path)
-- CL172 (Aisle 1) → CL173 (Aisle 2)
-- CL162 (Cross Aisle Path) → CL163 (Aisle Path)
+- Bereichswechsel: CL158 (Base) → CL163 (Aisle Path)
+- Gassenwechsel: CL172 (Aisle 1) → CL173 (Aisle 2)
+- Positionswechsel: CL177 (Front) → CL178 (Center)
 
 ---
 
-### T10 – Wechsel der Location Cart (CC12)
+### T10 – Wechsel der Location Cart (CC12) [Hierarchisch + Transition]
 
-Analog zu T9, jedoch über den Standort des Kommissionierwagens. Jeder Standortwechsel erzeugt einen neuen Chunk.
+Analog zu T9, jedoch für den Wagen. Zusätzlich löst das Auftreten oder Verschwinden des Transition-Labels (CL181) einen Trigger aus.
 
 **Beispiele:**
-
-- CL185 (Base) → CL190 (Aisle Path)
-- CL199 (Aisle 1) → CL200 (Aisle 2)
-- CL181 (Transition between Areas) → CL185 (Base)
+- Bereichswechsel: CL185 (Base) → CL190 (Aisle Path)
+- Transition: CL190 (Aisle Path) → CL190 (Aisle Path) + CL181 (Transition between Areas)
 
 ---
 
 ### Zusammenfassung Trigger
 
-Die zehn Trigger T1–T10 decken **alle möglichen Zustandswechsel** ab. Sobald ein Trigger ausgelöst wird, endet der aktuelle Chunk und ein neuer Segmentabschnitt beginnt. Dieses System stellt sicher, dass Chunks immer **semantisch stabil**, klar getrennt und vollständig über alle 12 Klassenkategorien definiert sind.
-
----
+Die zehn Trigger T1–T10 stellen sicher, dass jede Änderung im **State-Space** (definiert durch CC01–CC12) zu einer neuen Chunk-Grenze führt. Damit sind Chunks per Definition semantisch statisch: Innerhalb eines Chunks bleiben alle Labels aller Klassen unverändert.
 
 ## 3.5 Chronologische Chunk-Abfolge
 
@@ -225,7 +216,7 @@ Die chronologische Chunk-Abfolge beschreibt die tatsächliche zeitliche Struktur
 
 ### Grundprinzip der Abfolge
 
-1. Die Daten beginnen immer mit **Chunk 1**, beginnend beim ersten Frame.  
+1. Die Daten beginnen immer mit **Chunk 1**, beginnend beim ersten Frame in der zweiten Spalte der csv dateien.  
 2. Ein Chunk endet ausschließlich durch einen Trigger (T1–T10).  
 3. Der nächste Chunk beginnt **im unmittelbar folgenden Frame**.  
 4. Alle Chunks sind in ihrer Reihenfolge eindeutig und vollständig rekonstruierbar.  
@@ -240,7 +231,7 @@ Die chronologische Chunk-Abfolge beschreibt die tatsächliche zeitliche Struktur
 
 ### Beziehung zu Szenarien
 
-- Szenarien (S1–S8) bestehen aus vielen Chunks.  
+- Szenarien (S1–S8 und other) bestehen aus vielen Chunks.  
 - Szenarien haben **definierte Start- und Endpunkte**, die immer mit Chunk-Grenzen übereinstimmen.  
 - Szenarioübergänge erzeugen **immer** einen Trigger (T1, T8 oder andere), da sich Prozess- oder Aktivitätszustände ändern.
 
@@ -392,12 +383,13 @@ Chunks dienen als:
 
 **Nicht in dieser Datei:**
 
-- Label-Definitionen → Siehe `class_hierarchy.md`
+- Label-Definitionen → Siehe `labels_207.md`
 - BPMN-Prozesslogik → Siehe `dataset_core.md`
 - Frame-Synchronisation → Siehe `data_structure.md`
 
 ---
 
 **Skill-Version:** 1.1 (erweitert mit Chunking-Logik)  
-**Erstellt:** 05.12.2025  
+**Erstellt:** 05.12.2025
+**Korrigiert:** 19.01.26  
 **Quelle:** DaRa Dataset Description, Teil 3 – Chunking

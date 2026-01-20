@@ -1,8 +1,8 @@
-# DaRa Dataset Expert Skill – Version 2.6
+# DaRa Dataset Expert Skill – Version 4.0
 
-**Vollständig entwickelter Claude-Skill für Warehouse-Prozessanalyse mit KI-gesteuerter Szenarioerkennung**
+**Konsolidierter Claude-Skill für Warehouse-Prozessanalyse mit optimierter Dokumentationsstruktur**
 
-[![Version](https://img.shields.io/badge/version-2.6-blue.svg)](https://github.com/mpone1909/dara-knowledge)
+[![Version](https://img.shields.io/badge/version-4.0-blue.svg)](https://github.com/mpone1909/dara-knowledge)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Claude](https://img.shields.io/badge/Claude-Sonnet%204.5-orange.svg)](https://claude.ai)
 
@@ -10,368 +10,263 @@
 
 ## 📦 Überblick
 
-Der **DaRa Dataset Expert Skill** ermöglicht Claude die automatisierte Analyse von Warehouse-Kommissionierungsprozessen basierend auf dem DaRa-Datensatz. Version 2.6 implementiert fortgeschrittene Erkennungslogik mit **Hybrid-Identification** und **Evidence-Based Scoring** für robuste Szenarioerkennung.
+Der **DaRa Dataset Expert Skill** ermöglicht Claude die automatisierte Analyse von Warehouse-Kommissionierungsprozessen basierend auf dem DaRa-Datensatz. Version 4.0 optimiert die Wissensbasis durch **Konsolidierung redundanter Inhalte** und **verbesserte Querverweise**.
 
 **Kernfähigkeiten:**
 - 🎯 **8 Szenarien** (S1-S8) + "Other"-Restkategorie
 - 🏷️ **207 Labels** über 12 Klassenkategorien (CC01-CC12)
+- 📦 **74 Artikel** mit Storage Compartment IDs (Orders 2904/2905/2906)
+- 🏭 **Lagerlayout vollständig** (12,76m × 17,35m, 8 Regalkomplexe, 5 Gassen)
 - 🤖 **Frame-Level-Algorithmus** mit 30 erkennungsrelevanten Labels
-- ⚖️ **REFA-Zeitarten-Analytik** für arbeitswissenschaftliche Studien
+- ⚖️ **REFA/MTM-Zeitarten-Analytik** für arbeitswissenschaftliche Studien
 - ✅ **Validierungslogik** mit 10+ formalen Regeln
-- 🔄 **Score-System** zur Fehlerkorrektur (CC10-Marker überschreiben CC08)
+- 📝 **Konsolidierte Dokumentation** ohne inhaltliche Redundanzen
 
 ---
 
-## 📂 Verzeichnisstruktur (v2.6)
+## ✨ Neue Features v4.0 (Januar 2026)
+
+### 📚 Optimierte Dokumentationsstruktur
+
+**Konsolidierte Kerndokumente:**
+- `dataset_core.md` – Zentrale Datensatz-Beschreibung (Probanden, Sessions, Szenarien, BPMN)
+- `data_structure.md` – Frame-Struktur, Session-Organisation, Synchronisation
+- `warehouse_physical.md` – Komplettes Lagerlayout mit allen Details
+- `chunking.md` – Vollständige Chunking-Logik mit Trigger T1-T10
+- `semantics.md` – Semantische Grundlagen und Abhängigkeiten
+
+**Verbesserte Navigation:**
+- Klare Querverweise zwischen Dateien statt Duplikation
+- Präzise Verweis-Pfade (z.B. `warehouse_physical.md#section`)
+- Reduzierte Dateigröße durch Vermeidung von Wiederholungen
+
+**Keine inhaltlichen Verluste:**
+- Alle Informationen aus v3.0 bleiben verfügbar
+- Bessere Auffindbarkeit durch optimierte Struktur
+- Konsistente Terminologie über alle Dokumente
+
+---
+
+## 📂 Verzeichnisstruktur (v4.0)
 
 ```
 dara-dataset-expert/
 ├── SKILL.md                                    # Hauptdokumentation & Orchestrierung (12 KB)
 ├── README.md                                   # Diese Datei
 ├── knowledge/
-│   ├── core/                                   # 🆕 Zentrale Erkennungslogik
+│   ├── core/                                   # Zentrale Erkennungslogik
 │   │   ├── ground_truth_central.md             # Ground Truth Matrix, Szenario-Profile (25 KB)
-│   │   ├── recognition_algorithm_v2.6.md       # Vollständiger Algorithmus (16 KB)
 │   │   ├── labels_207.md                       # Alle 207 Labels + Systematik (24 KB)
-│   │   └── validation_rules.md                 # Validierungsregeln (20 KB)
-│   ├── processes/                              # 🆕 Prozess-Hierarchie
+│   │   ├── validation_rules.md                 # Validierungsregeln (20 KB)
+│   │   ├── articles_inventory.md               # 74 Artikel mit Lagerorten (12 KB)
+│   │   └── category_activation_matrix.md       # Label-Aktivitätsanalyse (17 KB)
+│   ├── processes/                              # Prozess-Hierarchie + MTM-Codes
 │   │   ├── process_hierarchy.md                # BPMN-Logik CC08-CC10 (17 KB)
-│   │   └── refa_analytics.md                   # REFA-Zeitarten & Formeln (10 KB)
-│   ├── auxiliary/                              # 🆕 Zusatzinformationen
-│   │   ├── chunking.md                         # Trigger T1-T10 (18 KB)
-│   │   ├── semantics.md                        # Semantische Grundlagen (19 KB)
-│   │   ├── data_structure.md                   # Frame-Format (10 KB)
-│   │   └── dataset_core.md                     # Probanden, Hardware (12 KB)
-│   └── changelogs/                             # 🆕 Versionsverwaltung
-│       ├── CHANGELOG_v2.3_to_v2.4.md
-│       ├── CHANGELOG_v2.4_to_v2.5.md
-│       └── CHANGELOG_v2.5_to_v2.6.md           # Hybrid-Logic + Score-System
+│   │   ├── refa_analytics.md                   # REFA-Zeitarten & Formeln (10 KB)
+│   │   └── mtm_codes.md                        # MTM-1 Codes (R, G, M, P, RL, B, W) (8 KB)
+│   └── auxiliary/                              # 🆕 Konsolidierte Basisdokumente
+│       ├── dataset_core.md                     # 🆕 Zentrale Datensatz-Beschreibung (15 KB)
+│       ├── data_structure.md                   # 🆕 Frame-Struktur & Sessions (10 KB)
+│       ├── warehouse_physical.md               # 🆕 Lagerlayout komplett (20 KB)
+│       ├── chunking.md                         # 🆕 Chunking-Logik vollständig (18 KB)
+│       └── semantics.md                        # 🆕 Semantische Grundlagen (19 KB)
 └── templates/
     ├── query_patterns.md                       # Fragetypen & Best Practices (14 KB)
     └── scenario_report_template.md             # Szenario-Bericht-Format (5 KB)
 ```
 
-**Gesamt:** 15 Dateien, ~250 KB  
-**Reduktion vs. v2.5:** -40% Dateien durch Konsolidierung
+**Gesamt:** 17 Dateien, ~280 KB (optimiert von ~290 KB in v3.0)  
+**Neu in v4.0:** Konsolidierte auxiliary/-Dateien ersetzen fragmentierte Dokumentation
 
 ---
 
-## ✨ Neue Features v2.6 (Januar 2026)
+## 🔄 Änderungen v3.0 → v4.0
 
-### 🎯 Hybrid-Identification-Logic
+### Strukturelle Optimierungen
 
-**Asymmetrische Erkennungslogik** löst den Konflikt zwischen fixen Orders (Paper) und flexibler Abarbeitung (Realität):
+**Vorher (v3.0):**
+- Fragmentierte Information über mehrere Dateien
+- Redundante Abschnitte (z.B. Probanden-Info in 3 Dateien)
+- Inkonsistente Detailtiefe
 
-- **Retrieval (S1-S3):** IT-System ist Diskriminator, Order-ID irrelevant
-  - S1: List+Pen → beliebige Order (2904, 2905 oder 2906)
-  - S2: PDT → beliebige Order (100% eindeutig)
-  - S3: Scanner → beliebige Order (100% eindeutig)
+**Nachher (v4.0):**
+- **dataset_core.md** = Eine zentrale Quelle für Probanden, Sessions, Szenarien
+- **warehouse_physical.md** = Komplettes Lagerlayout (statt verstreut)
+- **data_structure.md** = Alle Frame-Details an einem Ort
+- **Klare Verweise** statt Duplikation (z.B. "Siehe warehouse_physical.md#gassen")
 
-- **Storage (S4-S6):** Order-ID ist Diskriminator, IT-System konstant (Pen)
-  - S4: Order 2904 (CL100)
-  - S5: Order 2905 (CL101)
-  - S6: Order 2906 (CL102)
+### Inhaltliche Verbesserungen
 
-### ⚖️ Evidence-Based Scoring System
-
-**Low-Level-Beweise (CC10) überschreiben High-Level-Labels (CC08):**
-
-```python
-Score_Retrieval = (CL110 × 3) + (Max(CL126, CL130, CL149) × 5)
-Score_Storage = (CL111 × 3) + (Max(CL127, CL131, CL152, CL142) × 5)
-```
-
-**Gewichtung 3:5** stellt sicher, dass konkrete Handlungen (z.B. "Opening Box" = Storage) falsch gesetzte Labels überschreiben.
-
-### 🔴 Erweiterte "Other"-Erkennung
-
-**4 Trigger (Priorität 1):**
-1. **CL134 (Waiting)** – Global Interrupt, Hard Cut
-2. **CL112/CL113** – Another/Unknown High-Level Process
-3. **CL103+CL108** – No Order + No IT
-
-**CL134 überschreibt ALLE anderen Labels** → repariert fehlerhafte Zeitstempel.
+✅ **Keine Informationsverluste** – Alle Inhalte aus v3.0 enthalten  
+✅ **Bessere Auffindbarkeit** – Präzise Querverweise  
+✅ **Konsistente Terminologie** – Einheitliche Begriffe über alle Dateien  
+✅ **Aktualisierte Metadaten** – Stand 19.01.2026
 
 ---
 
 ## 🚀 Installation
 
-### Option 1: GitHub → Claude.ai (Empfohlen)
+### Option 1: Claude.ai Skill-Upload (Empfohlen)
 
-```bash
-# 1. Repository klonen
-git clone https://github.com/mpone1909/dara-knowledge.git
+1. In Claude.ai → **Settings → Profile → Skills**
+2. **"Add Skill"** → ZIP-Datei `dara-dataset-expert_v4.0.zip` hochladen
+3. Skill aktivieren
 
-# 2. In Claude.ai:
-# Settings → Skills → Upload Skill
-# Wähle das komplette Verzeichnis aus
-```
+### Option 2: Manuelles Einfügen (Lokal)
 
-### Option 2: Manueller Upload
+1. **ZIP-Archiv entpacken**
+2. **Verzeichnisstruktur beibehalten:**
+   ```
+   dara-dataset-expert/
+   ├── SKILL.md
+   ├── README.md
+   ├── knowledge/
+   │   ├── core/
+   │   ├── processes/
+   │   └── auxiliary/  ← Neue konsolidierte Dateien
+   └── templates/
+   ```
+3. **Skill in Claude.ai hochladen** (ZIP neu erstellen falls nötig)
 
-1. **Ordner erstellen:** Claude.ai → Settings → Skills → Create Skill
-2. **Name:** `dara-dataset-expert`
-3. **Dateien hochladen:** Alle 15 Dateien (Struktur beibehalten!)
-4. **Aktivieren:** Toggle "Enabled"
+---
 
-### Option 3: MCP Server (lokal)
+## 📖 Schnellstart
 
-Falls du `/mnt/skills/user/` hast:
+### Beispiel-Queries (v4.0)
 
-```bash
-cp -r dara-dataset-expert /mnt/skills/user/
-ls -lh /mnt/skills/user/dara-dataset-expert/
+```python
+# Datensatz-Grundlagen
+"Wie viele Probanden gibt es und welche Erfahrung haben sie?"
+→ dataset_core.md: 18 Probanden, Tabelle 4 mit Erfahrungslevels
+
+"Wie sind die Frames synchronisiert?"
+→ data_structure.md: 30 fps, alle 12 CC-Dateien identische Zeilenzahl
+
+# Lagerlayout
+"Wo ist der Artikel 'Palmenerde' gelagert?"
+→ warehouse_physical.md: R7.3.1.A (Aisle 4, Regalkomplex 7, Ebene 1 = Bodenebene)
+
+"Welche funktionalen Bereiche gibt es im Picking Lab?"
+→ warehouse_physical.md: 9 Hauptbereiche (Office, Cart Area, Base, etc.)
+
+# Chunking & Semantik
+"Was löst Trigger T4 aus?"
+→ chunking.md: Änderung in CC04 (Left Hand) – Position, Movement, Object oder Tool
+
+"Welche semantischen Abhängigkeiten gibt es zwischen CC01 und CC03?"
+→ semantics.md: Walking → Gait Cycle + No/Slightly Bending
+
+# REFA & MTM
+"Was ist MTM-Code B (Bend) und wie viele TMU hat er?"
+→ mtm_codes.md: Beugen, 29,0 TMU = 1,04 Sekunden, DaRa-Labels: CL129 + CL025
+
+"Welche DaRa-Labels entsprechen der Haupttätigkeit (t_MH)?"
+→ refa_analytics.md: CC09: CL116, CL120 + CC10: CL149, CL150, CL146
+
+# Szenarioerkennung
+"Wie erkenne ich Szenario S2?"
+→ ground_truth_central.md: PDT (CL107) ist 100% eindeutig
 ```
 
 ---
 
-## 🧪 Funktionstest
+## 🎓 Anwendungsfälle
 
-### Test 1: Hybrid-Logic (Retrieval)
+### 1. Arbeitswissenschaft & REFA
 
+**Use Case:** Berechne Kommissionierzeit für Order 2904
 ```
-Kann S1 die Order 2905 haben?
-```
-
-**✅ Erwartete Antwort v2.6:**  
-"Ja! Bei Retrieval-Szenarien (S1-S3) ist die Order-ID irrelevant. S1 wird durch IT-System (CL105 = Pen) identifiziert und kann Order 2904, 2905 oder 2906 haben."
-
-### Test 2: Score-System
-
-```
-Frame: CL110=1 (Retrieval), aber CL142=1 (Opening Box). Welches Szenario?
+1. Lade dataset_core.md für BPMN-Prozesslogik
+2. Analysiere Artikel-Gewichte in articles_inventory.md
+3. Berechne Wegstrecke anhand warehouse_physical.md (Gassen 1-5)
+4. Summiere MTM-Codes aus mtm_codes.md (R + G + M + P + RL + B + W)
+5. Addiere Erholungszeit für Large [L]-Artikel (refa_analytics.md)
 ```
 
-**✅ Erwartete Antwort v2.6:**  
-"Score-System korrigiert: CL142 (Opening Box) ist Storage-Marker → Score_Storage (5) > Score_Retrieval (3) → Szenario ist Storage (z.B. S4-S6), nicht Retrieval."
+### 2. Datensatz-Validierung
 
-### Test 3: CL134 Global Interrupt
-
+**Use Case:** Prüfe Konsistenz von CSV-Annotationen
 ```
-Frame hat CL105, CL110, CL100, CL115 (alle S1-Marker), aber CL134=1. Welches Szenario?
-```
-
-**✅ Erwartete Antwort v2.6:**  
-"'Other' – CL134 (Waiting) ist Global Interrupt und überschreibt alle anderen Labels (Hard Cut)."
-
-### Test 4: Label-Lookup
-
-```
-Was ist CL115?
+1. Frame-by-Frame-Analyse (data_structure.md)
+2. Master-Slave-Abhängigkeiten prüfen (validation_rules.md)
+3. Szenario-Erkennung (ground_truth_central.md)
+4. Error-Flag-Detection (CL135 in category_activation_matrix.md)
+5. Validierungsreport generieren
 ```
 
-**✅ Erwartete Antwort:**  
-"CL115 ist 'Picking – Travel Time', gehört zu CC09 (Mid-Level Process). Im REFA-Kontext: Nebentätigkeit ($t_{MN}$)."
+### 3. Prozess-Optimierung
 
-### Test 5: REFA-Analyse
-
+**Use Case:** Optimiere Kommissionier-Wegstrecke
 ```
-Welche Labels entsprechen der Haupttätigkeit (t_MH)?
-```
-
-**✅ Erwartete Antwort:**  
-"CL116 (Picking Pick Time) und CL120 (Storing Store Time) → Haupttätigkeit ($t_{MH}$)."
-
----
-
-## 📚 Datei-Beschreibung
-
-### Core-Dateien (Erkennungslogik)
-
-| Datei | Zweck | Größe |
-|-------|-------|-------|
-| `ground_truth_central.md` | Ground Truth Matrix (Table 3), Szenario-Profile (S1-S8), "Other"-Definition | 25 KB |
-| `recognition_algorithm_v2.6.md` | Vollständiger Algorithmus mit Pseudocode, Score-System, Hybrid-Logic | 16 KB |
-| `labels_207.md` | Alle 207 Labels, Hierarchien, REFA-Zuordnungen | 24 KB |
-| `validation_rules.md` | Master-Slave-Prinzip, CC09-Konsistenz, Hybrid-Logic-Validierung | 20 KB |
-
-### Prozess-Dateien
-
-| Datei | Zweck |
-|-------|-------|
-| `process_hierarchy.md` | BPMN-Logik (Retrieval/Storage), CC08-CC10 Hierarchie |
-| `refa_analytics.md` | REFA-Zeitarten ($t_R$, $t_{MH}$, $t_{MN}$, $t_v$), Formeln |
-
-### Auxiliary-Dateien
-
-| Datei | Zweck |
-|-------|-------|
-| `chunking.md` | Segmentierungslogik, Trigger T1-T10 |
-| `semantics.md` | Semantische Grundprinzipien, Bedeutungsebenen |
-| `data_structure.md` | Frame-Format, CSV-Struktur, Synchronisation |
-| `dataset_core.md` | Probanden-Tabelle (18 Subjekte), Hardware-Spezifikation |
-
----
-
-## 🎯 Verwendungsszenarien
-
-### 1. Master-Thesis / Forschung
-
-- Frame-Level-Szenarioerkennung
-- REFA-Zeitarten-Mapping für arbeitswissenschaftliche Analysen
-- Validierung von Annotations-Hypothesen
-- Ablation-Studien (minimale Label-Sets)
-
-### 2. ML-Pipeline
-
-- Ground Truth Validierung vor Training
-- Feature Engineering (erkennungsrelevante Labels)
-- Integritätschecks (Master-Slave-Abhängigkeiten)
-- Multi-Label-Annotation-Konsistenz
-
-### 3. Prozess-Mining
-
-- BPMN-Sequenz-Extraktion
-- Prozess-Varianten-Analyse (S1 vs. S2 vs. S3)
-- Anomalie-Detektion (Score-System)
-- Chunking-Strategien
-
-### 4. Dokumentation
-
-- Automatische Szenario-Beschreibungen
-- Label-Glossar-Generierung
-- REFA-konforme Zeitstudien-Reports
-
----
-
-## 🔍 Qualitätsmerkmale
-
-### ✅ Vollständigkeit
-
-- **100% Label-Abdeckung:** Alle 207 Labels (CL001-CL207)
-- **8 Szenarien + "Other"** vollständig dokumentiert
-- **REFA-Methodik** integriert
-- **30 erkennungsrelevante Labels** (v2.6: +9 Labels)
-
-### ✅ Präzision
-
-- **Epistemische Integrität:** Null Halluzinationen, nur dokumentierte Fakten
-- **LOGIC v8-kompatibel:** Vollständig abgeglichen mit wissenschaftlicher Spezifikation
-- **Verifizierte Zahlen:** 207 Labels, 18 Probanden, 6 Sessions, 8 Szenarien
-- **Test-Suite:** 6 Test-Cases für v2.6-Features
-
-### ✅ Modularität
-
-- **15 Dateien** (vs. 21 in v2.5, -40% durch Konsolidierung)
-- **4 Ordner-Struktur:** core/, processes/, auxiliary/, changelogs/
-- **Cross-References:** Klare Referenzen zwischen Dateien
-- **Versioniert:** Changelogs für jede Version
-
----
-
-## 📝 Changelog (Kurzform)
-
-### Version 2.6 (Januar 2026)
-
-**🔴 CRITICAL:**
-- ✅ Hybrid-Identification-Logic (asymmetrisch für S1-S6)
-- ✅ Evidence-Based Scoring System (CC10 überschreibt CC08)
-- ✅ CL134 (Waiting) als Global Interrupt
-- ✅ CL103+CL108-Kombination als "Other"
-
-**🟢 FEATURES:**
-- ✅ 30 erkennungsrelevante Labels (+9 vs. v2.5)
-- ✅ Konsolidierung: 21 → 15 Dateien
-- ✅ Neue Ordnerstruktur (core/, processes/, auxiliary/)
-
-**Details:** Siehe `knowledge/changelogs/CHANGELOG_v2.5_to_v2.6.md`
-
-### Version 2.5 (Dezember 2025)
-
-- CC09-Integration (Mid-Level Process)
-- "Other"-Erkennung aktiv
-- Frame-Level-Algorithmus
-
-### Version 2.4 & früher
-
-- REFA-Analytik, Validierungslogik, Basis-Skill
-
-**Vollständige Historie:** Siehe `knowledge/changelogs/`
-
----
-
-## 📊 Statistik
-
-### Wissensbasis
-
-| Metrik | Wert |
-|--------|------|
-| **Dateien gesamt** | 15 |
-| **Zeilen Code/Doku** | ~5.500 |
-| **Größe** | ~250 KB |
-| **Abdeckung DaRa-Doku** | ~99% |
-
-### Label-Abdeckung
-
-| Kategorie | Labels | Status |
-|-----------|--------|--------|
-| CC01-CC12 | 12 Kategorien | ✅ 100% |
-| CL001-CL207 | 207 Labels | ✅ 100% |
-| Erkennungsrelevant | 30 Labels | ✅ 100% |
-| REFA-Zuordnungen | CC09/CC10 | ✅ 100% |
-
-### Algorithmus
-
-| Feature | Status |
-|---------|--------|
-| Hybrid-Logic | ✅ v2.6 |
-| Score-System | ✅ v2.6 |
-| "Other"-Erkennung | ✅ v2.5 |
-| CC09-Integration | ✅ v2.5 |
-| REFA-Analytik | ✅ v2.4 |
-
----
-
-## 🤝 Beitragen
-
-### Issues melden
-
-```bash
-# Bug gefunden?
-# → GitHub Issues: https://github.com/mpone1909/dara-knowledge/issues
-
-# Feature-Request?
-# → Diskussionen: https://github.com/mpone1909/dara-knowledge/discussions
-```
-
-### Pull Requests
-
-1. Fork des Repos
-2. Feature-Branch: `git checkout -b feature/neue-funktion`
-3. Commit: `git commit -m 'Add: Neue Funktion'`
-4. Push: `git push origin feature/neue-funktion`
-5. PR öffnen
-
----
-
-## 📖 Zitation
-
-@misc{dara_skill_v26,
-  title={DaRa Dataset Expert Skill (Version 2.6)},
-  author={[Dein Name]},
-  year={2026},
-  howpublished={GitHub Repository},
-  note={Claude-Skill für automatisierte Prozesserkennung in Warehouse-Szenarien. 
-        Erweitert um Hybrid-Identification-Logic und Evidence-Based Scoring. 
-        Basierend auf: DaRa Dataset Description (Stand Oktober 2025).}
-}
+1. Analysiere Artikel-Verteilung (warehouse_physical.md)
+2. Identifiziere Hotspots (schwere Artikel in Aisle 4)
+3. Simuliere alternative Order-Abarbeitung (dataset_core.md: BPMN)
+4. Berechne Zeit-Ersparnis (mtm_codes.md + refa_analytics.md)
 ```
 
 ---
 
-## 🛡️ Lizenz
+## 🔧 Technische Details
 
-MIT License – Siehe [LICENSE](LICENSE) für Details.
+### Datensatz-Umfang (unverändert zu v3.0)
+
+| Komponente | Anzahl | Beschreibung |
+|------------|--------|--------------|
+| Probanden | 18 | S01-S18 (14 männlich, 4 weiblich) |
+| Sessions | 6 | 3 parallele Subjekte pro Session |
+| Szenarien | 8 | S1-S8 (Retrieval + Storage) |
+| Orders | 3 | 2904 (CL100), 2905 (CL101), 2906 (CL102) |
+| Artikel | 74 | Mit Storage Compartment IDs |
+| Labels | 207 | CC01-CC12 (12 Kategorien) |
+| Regalkomplexe | 8 | R1-R8 |
+| Gassen | 5 | Aisle 1-5 |
+| Funktionsbereiche | 9 | Office, Cart Area, Base, etc. |
+| MTM-Codes | 7 | R, G, M, P, RL, B, W |
+
+### Dokumentations-Struktur (optimiert)
+
+| Datei | Zweck | Größe | Status |
+|-------|-------|-------|--------|
+| `SKILL.md` | Orchestrierung + Navigation | 12 KB | Optimiert |
+| `dataset_core.md` | ✨ Zentrale Datensatz-Info | 15 KB | ✨ Konsolidiert |
+| `data_structure.md` | ✨ Frame-Struktur komplett | 10 KB | ✨ Konsolidiert |
+| `warehouse_physical.md` | ✨ Lagerlayout vollständig | 20 KB | ✨ Konsolidiert |
+| `chunking.md` | ✨ Chunking-Logik T1-T10 | 18 KB | ✨ Konsolidiert |
+| `semantics.md` | ✨ Semantische Grundlagen | 19 KB | ✨ Konsolidiert |
+| `ground_truth_central.md` | Szenarien S1-S8, Matrix | 25 KB | Unverändert |
+| `labels_207.md` | Alle 207 Labels | 24 KB | Unverändert |
+| `validation_rules.md` | Validierungslogik | 20 KB | Unverändert |
+| `articles_inventory.md` | 74 Artikel | 12 KB | Unverändert |
+| `category_activation_matrix.md` | Label-Aktivität | 17 KB | Unverändert |
+| `process_hierarchy.md` | BPMN-Logik | 17 KB | Unverändert |
+| `refa_analytics.md` | REFA-Zeitarten | 10 KB | Unverändert |
+| `mtm_codes.md` | MTM-1 Codes | 8 KB | Unverändert |
+
+✨ = Neu konsolidiert in v4.0
 
 ---
 
-## 📧 Kontakt
+## 📞 Support & Wartung
 
-**Entwickelt für:** Master-Thesis an der TU Dortmund (Faculty of Logistics)  
-**Betreuer:** Friedrich Niemann  
-**Datum:** Januar 2026  
-**Version:** 2.6
+**Skill-Version:** 4.0  
+**Datensatz-Stand:** 20.10.2025 (DaRa Dataset Description)  
+**Letztes Update:** 19.01.2026  
+
+**Wartung:** Bei Aktualisierungen der DaRa Dataset Description überarbeiten
+
+**Autor:** DaRa Expert System  
+**Lizenz:** MIT  
 
 ---
 
-**Viel Erfolg mit deiner automatisierten Prozessanalyse! 🎓🤖**
+## 🙏 Credits
+
+- **DaRa Dataset:** TU Dortmund (FLW) + Fraunhofer IML
+- **Hauptforscher:** Friedrich Niemann (Doktorand FLW)
+- **Publikation:** "DaRa Dataset Description" (Stand 20.10.2025)
+- **PDF-Quelle:** "Anatomisch-Biomechanische Bewegungsanalyse der manuellen Kommissionierung"
+- **Lagerlayout-Quelle:** Fraunhofer IML Picking Lab Dokumentation
+
+---
+
+**Hinweis:** Dieser Skill ist für wissenschaftliche Forschungszwecke entwickelt und basiert ausschließlich auf verifizierten Quellen (DaRa Dataset Description + Lagerlayout-Dokumentation).

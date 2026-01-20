@@ -23,10 +23,12 @@ Der DaRa-Datensatz umfasst **8 definierte Szenarien (S1-S8)** plus die Restkateg
 
 ### Retrieval-Szenarien (Kommissionierung)
 
-- **S1** – Standard Retrieval (Pen, beliebige Order, Errors möglich)
-- **S2** – Variant Retrieval (PDT, beliebige Order, keine Errors)
-- **S3** – Error Retrieval (Scanner, beliebige Order, Errors möglich)
+- **S1** – Standard Retrieval (Pen, Order 2904*, Errors möglich)
+- **S2** – Variant Retrieval (PDT, Order 2905*, keine Errors)
+- **S3** – Error Retrieval (Scanner, Order 2906*, Errors möglich)
 - **S7** – Multi-Order Retrieval Perfect Run (Pen, Orders 2904+2905)
+
+*Hybrid-Logic: Order ist sekundär, IT-System ist primärer Diskriminator für S1-S3
 
 ### Storage-Szenarien (Einlagerung)
 
@@ -47,9 +49,9 @@ Der DaRa-Datensatz umfasst **8 definierte Szenarien (S1-S8)** plus die Restkateg
 
 | Szenario | CC08 (High) | CC09 (Mid-Level) | Strategy | CC07 (IT) | CC06 (Order) | Errors |
 |:--------:|:-----------:|:----------------:|:--------:|:---------:|:------------:|:------:|
-| **S1** | CL110 | Picking+Packing | Single | CL105 | **Beliebig*** | Yes |
-| **S2** | CL110 | Picking+Packing | Single | **CL107** | **Beliebig*** | No |
-| **S3** | CL110 | Picking+Packing | Single | **CL106** | **Beliebig*** | Yes |
+| **S1** | CL110 | Picking+Packing | Single | CL105 | CL100* | Yes |
+| **S2** | CL110 | Picking+Packing | Single | CL107 | CL101* | No |
+| **S3** | CL110 | Picking+Packing | Single | CL106 | CL102* | Yes |
 | **S4** | CL111 | Unpacking+Storing | Single | CL105 | **CL100** | No |
 | **S5** | CL111 | Unpacking+Storing | Single | CL105 | **CL101** | No |
 | **S6** | CL111 | Unpacking+Storing | Single | CL105 | **CL102** | No |
@@ -63,6 +65,11 @@ Der DaRa-Datensatz umfasst **8 definierte Szenarien (S1-S8)** plus die Restkateg
 - **Fettdruck** = Eindeutige Diskriminatoren
 - CC09 (Neu in v2.5): Primäre Dimension zur Prozess-Unterscheidung
 - "Other": Restkategorie – **MUSS erkannt werden!**
+
+**Hybrid-Logic (v3.0):**
+- *S1-S3 (Retrieval):* Order-Zuordnung ist sekundär (CL100/CL101/CL102), IT-System ist primärer Diskriminator
+- *S4-S6 (Storage):* Order-Zuordnung ist primär, IT-System ist konstant (CL105)
+- Dokumentation siehe: articles_inventory.md (Order 2904 = CL100, Order 2905 = CL101, Order 2906 = CL102)
 
 ---
 

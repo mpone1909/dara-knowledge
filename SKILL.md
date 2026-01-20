@@ -1,61 +1,39 @@
 ---
 name: dara-dataset-expert
-description: Warehouse-Prozess-Analyse mit 207 Labels, 47 Prozessen, 8 Szenarien, 10 Triggern. Vollständige Expertise für DaRa Datensatz + REFA-Methodik + Validierungslogik + Szenarioerkennung. 100% faktenbasiert ohne Halluzinationen.
+description: Warehouse-Prozess-Analyse mit 207 Labels, 47 Prozessen, 8 Szenarien, 10 Triggern. Vollständige Expertise für DaRa Datensatz + REFA-Methodik + Validierungslogik + Szenarioerkennung + Lagerlayout + 74 Artikel-Stammdaten. 100% faktenbasiert ohne Halluzinationen.
 ---
 
-# DaRa Dataset Expert Skill – Version 2.6
+# DaRa Dataset Expert Skill – Version 4.0
 
 ## Zweck
 
-Dieser Skill ermöglicht Claude die **präzise, faktenbasierte Analyse des DaRa-Datensatzes** für intralogistische Warehouse-Prozesse. Er kombiniert die Datensatz-Dokumentation mit **arbeitswissenschaftlichen Methoden (REFA)**, formaler **Validierungslogik** und **automatischer Szenarioerkennung**.
+Dieser Skill ermöglicht Claude die **präzise, faktenbasierte Analyse des DaRa-Datensatzes** für intralogistische Warehouse-Prozesse. Er kombiniert die Datensatz-Dokumentation mit **arbeitswissenschaftlichen Methoden (REFA/MTM)**, formaler **Validierungslogik**, **automatischer Szenarioerkennung** und **vollständiger Lagerlayout-Dokumentation**.
 
 Der Fokus liegt auf **epistemischer Integrität**: Alle Antworten basieren ausschließlich auf verifizierten Quellen ohne Halluzinationen, Spekulationen oder Annahmen.
 
-### NEU in Version 2.5: Label-Aktivitätsanalyse
+### NEU in Version 4.0: Konsolidierte Datenstruktur-Dokumentation
 
-### NEU in Version 2.5: CC09-Integration & "Other"-Erkennung
+Version 4.0 optimiert die Wissensbasis durch Konsolidierung redundanter Inhalte:
 
-Version 2.5 korrigiert kritische Inkonsistenzen mit dem DaRa-Paper:
+- **Konsolidierte Kerndokumentationen** – dataset_core.md, data_structure.md, warehouse_physical.md als zentrale Referenzen
+- **Reduzierte Redundanz** – Klare Verweise zwischen Dateien statt Wiederholungen
+- **Optimierte Navigation** – Verbesserte Querverweise für schnelleren Zugriff
+- **Vollständige Abdeckung** – Alle bisherigen Inhalte bleiben verfügbar, besser strukturiert
 
-- **CC09 als primäre Erkennungsdimension** – Mid-Level-Prozesse unterscheiden Retrieval (Picking) von Storage (Unpacking)
-- **"Other"-Restkategorie aktiv erkennbar** – verhindert False-Positives bei S1-S8
-- **Frame-Level-Prüfung aller Labels** – jeder Frame wird individuell klassifiziert
-- **CC10 korrekt als sekundär** – nur CL135 für Error-Detection
-- **Hierarchie dokumentiert** – CC08 → CC09 → CC10
-
-**Breaking Changes:** Keine – alle S1-S8 Definitionen bleiben identisch
-
-
-Version 2.5 erweitert den Skill um empirische Label-Aktivitätsanalyse:
-
-- **Label-Aktivitätsmatrix** – Dokumentation aktiver/inaktiver Labels pro Kategorie
-- **Inaktive Labels identifiziert** – CL104, CL109, CL113 sind in S14 nicht vorhanden
-- **Multi-Label-Quantifizierung** – 44.76% der Frames haben 2+ aktive Orders (S7/S8-Detection)
-- **CL135-Prävalenz** – 2.82% Error-Frames für S1/S3-Identifikation
-- **Optimierte Erkennungslogik** – Inaktive Labels können übersprungen werden
-
-### NEU in Version 2.3: Flexible Szenarioerkennung
-
-Version 2.3 erweiterte den Skill um:
-
-- **Merkmalbasierte Erkennung** anhand der 5 Dimensionen (CC06, CC07, CC08, Strategy, Errors)
-- **Keine harten Grenzen** – funktioniert für alle 18 Subjekte ohne Frame-Nummern
-- **Flexible Reihenfolge** – keine Annahme über chronologische Szenario-Abfolge
-- **Order-Change-Detection** für Storage-Blöcke (S4/S5/S6-Unterscheidung)
-- **Korrigierte Multi-Order-Logik** – S7 und S8 haben beide {CL100, CL101}
-
-**Datensatz-Umfang:**
+**Datensatz-Umfang (unverändert):**
 
 - **18 Probanden (S01-S18)** mit demografischen und Erfahrungsprofilen
 - **Session-basierte Aufzeichnungen** mit 3 parallelen Subjekten pro Session
 - **8 Szenarien (S1-S8)** für Retrieval- und Storage-Prozesse
 - **12 Klassenkategorien (CC01-CC12)** mit insgesamt **207 Labels (CL001-CL207)**
-- **REFA-Zeitarten-Mapping** ($t_{R}$, $t_{MH}$, $t_{MN}$, $t_{v}$)
+- **74 Artikel** über 3 Orders (2904/2905/2906) mit Lagerorten
+- **8 Regalkomplexe** in 5 Gassen (Aisle 1-5)
+- **REFA/MTM-Zeitarten-Mapping** ($t_{R}$, $t_{MH}$, $t_{MN}$, $t_{v}$)
 - **Validierungsregeln** (Master-Slave-Abhängigkeiten + Szenario-Validierung)
 - **BPMN-Prozesslogik** für Warehouse-Kommissionierung und Einlagerung
 
 **Datensatz-Stand:** 20.10.2025 (DaRa Dataset Description)  
-**Skill-Stand:** 07.01.2026 (Version 2.6)
+**Skill-Stand:** 19.01.2026 (Version 4.0)
 
 ---
 
@@ -79,6 +57,7 @@ Version 2.3 erweiterte den Skill um:
    - "Wie wird die Erholungszeit basierend auf CC03 berechnet?"
    - "Ist 'Travel Time' eine Nebentätigkeit?"
    - "Berechne die Auftragszeit für ein Szenario"
+   - "Was ist MTM-Code B (Bend) und wie viele TMU hat er?"
 
 4. **Validierung & Logik**
    - "Darf man 'Walking' annotieren, wenn die Beine 'Standing Still' sind?"
@@ -101,19 +80,28 @@ Version 2.3 erweiterte den Skill um:
    - "In welcher Kategorie ist 'Portable Data Terminal'?"
    - "Alle Labels für Locations"
 
-8. **🆕 Szenarioerkennung** (verbessert in v2.3)
+8. **Szenarioerkennung**
    - "Wie erkenne ich die Szenario-Grenzen in den CSV-Daten?"
    - "Was unterscheidet S2 von S1 und S3?"
    - "Wie funktioniert Multi-Order-Picking?"
    - "Welche IT-Systeme werden in welchen Szenarien verwendet?"
    - "Wie validiere ich ein erkanntes Szenario?"
 
-9. **🆕 Label-Aktivitätsanalyse** (NEU in v2.4)
+9. **Label-Aktivitätsanalyse**
    - "Welche Labels sind in S14 aktiv/inaktiv?"
    - "Wie viele Frames haben mehrere aktive Orders?"
    - "Ist CL104 (Order Unknown) jemals aktiv?"
    - "Wie erkenne ich Multi-Order-Szenarien durch Co-Aktivierung?"
    - "Wie häufig kommt CL135 (Error-Reporting) vor?"
+
+10. **Lagerlayout & Artikel**
+    - "Wo ist Artikel 'Palmenerde' gelagert?" (R7.3.1.A)
+    - "Welche Artikel sind in Gasse 4 (Aisle 4)?"
+    - "Was bedeutet Storage Compartment ID R1.2.7.A?"
+    - "Wie groß sind die Regalfächer?"
+    - "Welche Gewichtsklasse hat 'Softshell Jacket'?"
+    - "Zeige mir alle Artikel aus Order 2904"
+    - "Welche funktionalen Bereiche gibt es im Picking Lab?"
 
 ### ❌ Nutze diesen Skill NICHT für:
 
@@ -125,117 +113,60 @@ Version 2.3 erweiterte den Skill um:
 
 ---
 
-## Skill-Dateien & Navigation
+## Navigationslogik (Orchestrierung)
 
-Der Skill ist modular aufgebaut. Jede Datei deckt einen spezifischen Wissensbereich ab:
-
-### 📁 Dateistruktur
-
-```
-/mnt/skills/user/dara-dataset-expert/
-├── SKILL.md                                    # Diese Datei (Orchestrierung)
-├── README.md                                   # Installation & Übersicht
-├── knowledge/
-│   ├── core/
-│   │   ├── ground_truth_central.md             # 🆕 Zentrale Ground Truth (S1-S8, Matrix, Profile)
-│   │   ├── labels_207.md                       # Alle 12 Kategorien + 207 Labels (ehem. class_hierarchy.md)
-│   │   ├── recognition_algorithm_v2.6.md       # 🆕 Vollständiger Algorithmus (Score + Hybrid-Logic)
-│   │   └── validation_rules.md                 # 🆕 Alle Validierungsregeln (Merge)
-│   ├── processes/
-│   │   ├── process_hierarchy.md                # BPMN-Logik CC08-CC10 (ehem. processes.md)
-│   │   └── refa_analytics.md                   # REFA-Zeitarten, Formeln (ehem. analytics_refa.md)
-│   ├── auxiliary/
-│   │   ├── chunking.md                         # Trigger T1-T10
-│   │   ├── data_structure.md                   # Frames, Synchronisation
-│   │   ├── dataset_core.md                     # Probanden, Hardware
-│   │   └── semantics.md                        # Semantische Grundprinzipien
-│   └── changelogs/
-│       ├── CHANGELOG_v2.3_to_v2.4.md
-│       ├── CHANGELOG_v2.4_to_v2.5.md
-│       └── CHANGELOG_v2.5_to_v2.6.md           # 🆕 Hybrid-Logic + Score-System
-└── templates/
-    ├── query_patterns.md                       # Häufige Fragetypen
-    └── scenario_report_template.md             # Szenario-Bericht-Format
-```
-
-### 🧭 Navigationslogik
-
-**Schritt 1: Frage klassifizieren & Datei laden**
+**Schritt 1: Identifiziere die Fragedomäne**
 
 ```python
-# 1. REFA / Arbeitswissenschaft / Zeiten
-
-if "REFA" or "Zeitart" or "Erholung" or "Kalkulation" or "t_MH" or "t_R" in query:
-    view("knowledge/processes/refa_analytics.md")
-
-# 2. Validierung / Logik / Regeln / Konsistenz
-
-elif "Validierung" or "Logik" or "Konsistenz" or "Regel" or "Darf ich" or "gültig" in query:
-    view("knowledge/core/validation_rules.md")
-
-# 3. Label-Lookup / Definitionen
-
-elif "CC" + number or "CL" + number or "Was ist" + Labelname in query:
-    view("knowledge/core/labels_207.md")
-
-# 4. Prozess-Ablauf / BPMN
-
-elif "Prozess" or "Ablauf" or "nach dem Schritt" or "High-Level" or "BPMN" in query:
-    view("knowledge/processes/process_hierarchy.md")
-
-# 5. Chunking / Trigger
-
-elif "Chunk" or "Trigger" or "Segmentierung" or "T1" to "T10" in query:
-    view("knowledge/auxiliary/chunking.md")
-
-# 6. Szenarien (Beschreibungen)
-
-elif "Szenario" or "S1" to "S8" in query:
-    view("knowledge/core/ground_truth_central.md")
-
-# 7. Szenarioerkennung / Grenzen / Ground Truth
-
-elif "Grenze" or "erkennen" or "Ground Truth" or "Table 3" or "Boundary" in query:
-    view("knowledge/core/ground_truth_central.md")
-    view("knowledge/core/recognition_algorithm_v2.6.md")
-
-# 7b. Szenario-Label-Zustände (aktiv/inaktiv pro Szenario)
-
-elif "aktiv" or "inaktiv" or "Szenario" + "Label" or "welche Labels" + "Szenario" in query:
-    view("knowledge/core/ground_truth_central.md")
-
-# 8. Label-Aktivität / Inaktive Labels / Multi-Label
-
-elif "aktiv" or "inaktiv" or "Label-Status" or "CL104" or "CL109" or "CL113" or "Multi-Label" in query:
-    view("knowledge/core/ground_truth_central.md")
-
-# 9. Picking Strategy / Multi-Order / Single-Order
-
-elif "Picking" or "Multi-Order" or "Single-Order" or "Order-Wechsel" in query:
-    view("knowledge/core/ground_truth_central.md")
-
-# 10. IT-System / PDT / Scanner
-
-elif "IT" or "PDT" or "Scanner" or "CC07" or "CL105" or "CL106" or "CL107" in query:
-    view("knowledge/core/ground_truth_central.md")
-
-# 11. Semantik / Abhängigkeiten
-
-elif "Semantik" or "Abhängigkeit" or "Bedeutung" in query:
-    view("knowledge/auxiliary/semantics.md")
-
-# 12. Probanden / Subjekte
-
-elif "Proband" or "Subjekt" or "S01" to "S18" in query:
+# 1. Grundlegende Datensatz-Informationen
+if "Proband" or "Subjekt" or "S01" to "S18" or "Session" in query:
     view("knowledge/auxiliary/dataset_core.md")
 
-# 13. Frames / Datenstruktur
-
-elif "Frame" or "Synchronisation" or "CSV" in query:
+# 2. Datenstruktur / Frame-Synchronisation
+elif "Frame" or "Synchronisation" or "CSV" or "Zeile" in query:
     view("knowledge/auxiliary/data_structure.md")
 
-# 13. Grundlagen / Fallback
+# 3. Lagerlayout / Physische Umgebung
+elif "Lager" or "Regal" or "Gasse" or "Aisle" or "Zone" or "Compartment" in query:
+    view("knowledge/auxiliary/warehouse_physical.md")
 
+# 4. Chunking-Logik
+elif "Chunk" or "Trigger" or "T1" to "T10" or "Segment" in query:
+    view("knowledge/auxiliary/chunking.md")
+
+# 5. Semantik / Abhängigkeiten
+elif "Semantik" or "Abhängigkeit" or "Bedeutung" or "Zusammenhang" in query:
+    view("knowledge/auxiliary/semantics.md")
+
+# 6. Label-Definitionen
+elif "Label" or "CL" or "CC" or "Kategorie" in query:
+    view("knowledge/core/labels_207.md")
+
+# 7. Artikel-Stammdaten
+elif "Artikel" or "Order 2904" or "Order 2905" or "Order 2906" or "Gewicht" in query:
+    view("knowledge/core/articles_inventory.md")
+
+# 8. Szenarioerkennung
+elif "Szenario" or "S1" to "S8" or "Erkennung" or "Ground Truth" in query:
+    view("knowledge/core/ground_truth_central.md")
+
+# 9. REFA / Zeitarten
+elif "REFA" or "Zeitart" or "t_MH" or "Erholung" or "Verteilzeit" in query:
+    view("knowledge/processes/refa_analytics.md")
+
+# 10. MTM-Codes
+elif "MTM" or "TMU" or "Reach" or "Grasp" or "Move" in query:
+    view("knowledge/processes/mtm_codes.md")
+
+# 11. Prozess-Hierarchie
+elif "BPMN" or "Prozess" or "Retrieval" or "Storage" or "High-Level" in query:
+    view("knowledge/processes/process_hierarchy.md")
+
+# 12. Validierungsregeln
+elif "Validierung" or "Master-Slave" or "Regel" or "Konsistenz" in query:
+    view("knowledge/core/validation_rules.md")
+
+# 13. Fallback
 else:
     view("knowledge/auxiliary/dataset_core.md")
 ```
@@ -245,44 +176,7 @@ else:
 - Nur dokumentierte Fakten verwenden
 - Label-IDs korrekt zitieren (z.B. "CL115")
 - Verwende Fachbegriffe aus den Dateien (z.B. "Master-Slave", "$t_{MN}$")
-- Quelle angeben (z.B. "Gemäß Regel V-S1 in validation_logic_extended.md...")
-
----
-
-## 🔄 Szenarioerkennung (überarbeitet in v2.3)
-
-### Ground-Truth-Übersicht (Table 3)
-
-Die Szenarioerkennung basiert auf **5 Dimensionen** aus Table 3 des DaRa-Papers:
-
-| Szenario | High-Level (CC08) | Picking Strategy | IT (CC07) | Order (CC06) | Errors |
-|----------|------------------|------------------|-----------|--------------|--------|
-| **S1** | Retrieval (CL110) | Single-Order | List+Pen (CL105) | 2904 (CL100) | Ja |
-| **S2** | Retrieval (CL110) | Single-Order | **PDT (CL107)** | 2905 (CL101) | Nein |
-| **S3** | Retrieval (CL110) | Single-Order | **Scanner (CL106)** | 2906 (CL102) | Ja |
-| **S4** | Storage (CL111) | Single-Order | List+Pen (CL105) | 2904 (CL100) | Nein |
-| **S5** | Storage (CL111) | Single-Order | List+Pen (CL105) | 2905 (CL101) | Nein |
-| **S6** | Storage (CL111) | Single-Order | List+Pen (CL105) | 2906 (CL102) | Nein |
-| **S7** | Retrieval (CL110) | **Multi-Order** | List+Pen (CL105) | 2904 + 2905 | Nein |
-| **S8** | Storage (CL111) | **Multi-Order** | List+Pen (CL105) | 2904 + 2905 | Nein |
-
-### Eindeutige Identifikatoren
-
-| Szenario | Merkmal | Erkennungsregel |
-|----------|---------|-----------------|
-| **S2** | PDT (CL107) | `if CC07 == CL107 → S2` (100% eindeutig) |
-| **S3** | Scanner (CL106) | `if CC07 == CL106 → S3` (100% eindeutig) |
-| **S7** | Multi-Order + Retrieval | `if orders == {CL100,CL101} AND CC08 == CL110 → S7` |
-| **S8** | Multi-Order + Storage | `if orders == {CL100,CL101} AND CC08 == CL111 → S8` |
-
-### Wichtige Hinweise (v2.3)
-
-1. **CL112/CL113 sind KEINE Szenarien** → Übergangsphasen filtern!
-2. **S4/S5/S6-Unterscheidung** nur durch Order innerhalb Storage → Order-Wechsel prüfen
-3. **Multi-Label-Annotation bei CC06** → Set-basierte Analyse erforderlich
-4. **S7 und S8 haben dieselben 2 Orders:** 2904 + 2905 (CL100 + CL101)
-5. **Keine harten Grenzen:** Keine Frame-Nummern, keine feste Szenario-Anzahl
-6. **Flexible Reihenfolge:** Szenarien können in beliebiger Reihenfolge auftreten
+- Quelle angeben (z.B. "Gemäß Regel V-S1 in validation_rules.md...")
 
 ---
 
@@ -301,11 +195,14 @@ Unterscheide klar zwischen dem, was annotiert ist (DaRa), und dem, was methodisc
 - "CC04 – Sub-Activity: Left Hand"
 - "Label CL115: Picking – Travel Time"
 - "Kategorie CC09 (Mid-Level Process)"
+- "Storage Compartment ID R1.2.7.A"
+- "Gewichtsklasse Large [L]"
 
 **❌ Falsch:**
 - "Linke Hand" (ohne CC04)
 - "CL-115" (falsches Format)
 - "Mid-level" (inkonsistente Schreibweise)
+- "Regal 1.2.7.A" (ohne R-Präfix)
 
 ### 3. Formale Korrektheit
 
@@ -325,28 +222,9 @@ CC10 Low-Level      → CL139 Retrieving Items / CL137 Moving to Next Position
 ### 5. Quellenangaben
 
 Jede Aussage muss referenziert werden:
-- "Laut Ground Truth Matrix (ground_truth_matrix.md) hat S2 als IT-System PDT (CL107)"
-- "Gemäß Regel V-S7 in validation_logic_extended.md ist PDT S2-exklusiv"
-
----
-
-## Grenzen des Skills
-
-### Was der Skill NICHT kann:
-
-1. **Statistische Berechnungen** – Keine Rohdaten verfügbar
-2. **Bildanalyse** – Keine Videodaten im Skill
-3. **Modellentwicklung** – Außerhalb des Scopes
-4. **Unvollständige Abschnitte:**
-   - Abschnitt 1.2 (Physische Umgebung) nicht ausgearbeitet
-   - Abschnitt 1.3 (Laboraufbau) nicht verfügbar
-
-### Was der Skill NICHT annimmt (v2.3):
-
-- **Keine feste Szenario-Anzahl** pro Subjekt
-- **Keine chronologische Reihenfolge** der Szenarien
-- **Keine Frame-Nummern** als Grenzen
-- **Keine subjektspezifischen Werte**
+- "Laut Ground Truth Matrix (ground_truth_central.md) hat S2 als IT-System PDT (CL107)"
+- "Gemäß warehouse_physical.md ist Palmenerde in R7.3.1.A gelagert"
+- "Nach dataset_core.md (Tabelle 4) ist S10 der kleinste Proband mit 160cm"
 
 ---
 
@@ -367,27 +245,46 @@ Jede Aussage muss referenziert werden:
 | CC11 | Location Human | 26 | CL155-CL180 | Räumliche Ergänzung |
 | CC12 | Location Cart | 27 | CL181-CL207 | Räumliche Ergänzung |
 
-**Gesamt:** 12 Kategorien, 207 Labels, 47 Prozesse, 8 Szenarien, 10 Trigger
+**Gesamt:** 12 Kategorien, 207 Labels, 47 Prozesse, 8 Szenarien, 10 Trigger, **74 Artikel**, **8 Regalkomplexe**, **5 Gassen**
 
 **★ = Erkennungsrelevant für Szenarien S1-S8**
 
 ---
 
+## Grenzen des Skills
+
+### Was der Skill NICHT kann:
+
+1. **Statistische Berechnungen** – Keine Rohdaten verfügbar
+2. **Bildanalyse** – Keine Videodaten im Skill
+3. **Modellentwicklung** – Außerhalb des Scopes
+
+### Was der Skill NICHT annimmt:
+
+- **Keine feste Szenario-Anzahl** pro Subjekt
+- **Keine chronologische Reihenfolge** der Szenarien
+- **Keine Frame-Nummern** als Grenzen
+- **Keine subjektspezifischen Werte**
+
+---
+
 ## Metadaten
 
-**Skill-Version:** 2.6  
+**Skill-Version:** 4.0  
 **Erstellt:** 04.12.2025  
-**Update:** 07.01.2026  
+**Update:** 19.01.2026  
 **Datensatz-Stand:** 20.10.2025  
 **Quelle:** DaRa Dataset Description (Offizielle Dokumentation)  
 
 **Enthaltene Module:**
-- REFA-Methodik (analytics_refa.md)
-- Validierungslogik (validation_logic.md, validation_logic_extended.md)
-- Szenarioerkennung (ground_truth_matrix.md, scenario_boundary_detection.md)
-- Picking Strategies (picking_strategies.md)
+- REFA/MTM-Methodik (refa_analytics.md, mtm_codes.md)
+- Lagerlayout-Dokumentation (warehouse_physical.md, articles_inventory.md)
+- Validierungslogik (validation_rules.md)
+- Szenarioerkennung (ground_truth_central.md)
+- Prozesslogik (process_hierarchy.md)
 - Chunking (chunking.md)
-- Prozesslogik (processes.md)
+- Semantik (semantics.md)
+- Datenstruktur (data_structure.md, dataset_core.md)
 
 **Autor:** DaRa Expert System  
 **Wartung:** Bei Aktualisierungen der Dataset Description überarbeiten
@@ -399,11 +296,8 @@ Jede Aussage muss referenziert werden:
 | Version | Datum | Änderungen |
 |---------|-------|------------|
 | 1.0 | 04.12.2025 | Initiale Version |
-| 1.1 | 05.12.2025 | Chunking-Logik, Szenario-Details |
-| 1.2 | 08.12.2025 | Prozess-Details erweitert |
-| 1.3 | 15.12.2025 | Semantik-Dokumentation |
-| 1.4 | 23.12.2025 | Validierungslogik, REFA-Analytik |
-| 1.4.1 | 23.12.2025 | Bugfixes, Terminologie |
-| 2.0 | 30.12.2025 | Ground Truth, Szenarioerkennung, Picking Strategies |
-| **2.3** | **31.12.2025** | **Flexible Szenarioerkennung ohne harte Grenzen, S8 Order-Set korrigiert, keine feste Szenario-Anzahl** |
-| **2.6** | **07.01.2026** | **Hybrid-Identification-Logic für S1-S6, Evidence-Based Scoring (CC10-Marker), CL134 als Global Interrupt, CL103+CL108 als "Other", LOGIC v8-Kompatibilität vollständig** |
+| 2.0 | 30.12.2025 | Ground Truth, Szenarioerkennung |
+| 2.3 | 31.12.2025 | Flexible Szenarioerkennung ohne harte Grenzen |
+| 2.6 | 07.01.2026 | Hybrid-Identification-Logic |
+| 3.0 | 14.01.2026 | Lagerlayout vollständig, 74 Artikel, MTM-1 Codes |
+| **4.0** | **19.01.2026** | **Konsolidierte Dokumentation, optimierte Struktur, verbesserte Querverweise** |

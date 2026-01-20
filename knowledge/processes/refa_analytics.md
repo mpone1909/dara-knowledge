@@ -262,3 +262,43 @@ def calculate_refa_times(chunks):
 
 **Erstellt:** 23.12.2025
 **Basis:** DaRa Dataset Description & REFA-Kompendium Arbeitsorganisation
+
+---
+
+## 7. MTM-1 Grundbewegungen (siehe mtm_codes.md)
+
+**Vollständige Dokumentation:** `knowledge/processes/mtm_codes.md`
+
+### Kurzreferenz: MTM ↔ DaRa-Labels
+
+| MTM-Code | Bewegung | TMU-Wert | DaRa-Label (CC10) | REFA-Zeitart |
+|----------|----------|----------|-------------------|--------------|
+| R | Reach | R50B: 18,4 | CL149 "Reaching for Items" | $t_{MN}$ |
+| G | Grasp | G1A: 2,0 | CL150 "Grasping Items" | $t_{MH}$ |
+| M | Move | M40B: 15,6 | CL146 "Placing Items" | $t_{MH}$ |
+| P | Position | P1SE: 5,6 | CL146 (implizit) | $t_{MH}$ |
+| RL | Release | RL1: 2,0 | CL146 (implizit) | $t_{MH}$ |
+| B | Bend | B: 29,0 | CL129 "Bending" + CL025 "Downwards" | $t_{MH}$ + $t_E$ |
+| W | Walk | W: 15,0 | CL137 "Moving" + CL022 "Walking" | $t_{MN}$ |
+
+**TMU-Einheit:** 1 TMU = 0,036 Sekunden
+
+### Anwendungsbeispiel: Order 2904, Position 14 (Palmenerde)
+
+```
+Artikel: Palm Soil (5149g, Large [L])
+Lagerort: R7.3.1.A (Aisle 4, Regalkomplex 7, Ebene 1 = Bodenebene)
+
+MTM-Sequenz:
+1. W (Walking to Aisle 4): ~200 TMU
+2. R50B (Reach to Ebene 1): 18,4 TMU
+3. B (Bend to Bodenebene): 29,0 TMU
+4. G1A (Grasp Bulky Unit): 2,0 TMU
+5. M40B (Move to Cart): 15,6 TMU
+6. RL1 (Release): 2,0 TMU
+
+Gesamt: ~267 TMU = 9,6 Sekunden (ohne Erholungszeit)
++ Erholungszeit für B + Large [L] → ~15-20 Sekunden gesamt
+```
+
+**Siehe:** `mtm_codes.md` für vollständige TMU-Tabellen und Berechnungsbeispiele

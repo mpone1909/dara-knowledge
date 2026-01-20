@@ -17,9 +17,8 @@ Die Wissensbasis integriert nur Inhalte, die nachweislich aus den autorisierten 
 ### Verwendete Quelldokumente
 
 Die Wissensbasis basiert auf folgenden Quellen:
-
-- den durch dich festgelegten Korrekturen und Priorisierungsregeln,  
-- den relevanten Inhalten der aktuellen DaRa Dataset Description (Stand 20.10.2025),  
+- den durch dich festgelegten Korrekturen und Priorisierungsregeln,
+- den relevanten Inhalten der aktuellen DaRa Dataset Description (Stand 20.10.2025),
 - den von dir als relevant eingestuften Dokumenten und Informationen.
 
 Nicht berücksichtigt werden ältere Versionen oder Dokumente, die von deinen Vorgaben abweichen.
@@ -30,21 +29,18 @@ Die Wissensbasis umfasst ausschließlich die klar verifizierten Inhalte zum Date
 
 ---
 
-## 1.2 Physische Umgebung
+## 1.2 Physische Umgebung (OMNI Warehouse)
 
-*(Wird nach Freigabe von Abschnitt 1.1 vollständig ausgearbeitet.)*
+Die physische Laborumgebung ist vollständig in der Datei [warehouse_physical.md](warehouse_physical.md) dokumentiert.
 
-**Status:** Nicht verfügbar in der aktuellen Dokumentation.
+Diese umfasst:
+- **Zonenaufteilung (9 Hauptbereiche):** Office, Cart Area, Cardboard Box Area, Base, Packing/Sorting Area, Issuing/Receiving Area, Path, Cross Aisle Path, Aisle Path
+- **Gassen-System:** 5 Aisles mit 8 Regalkomplexen (R1-R8), Gassen 1-5
+- **Regalfächer:** Standardfächer (95,5 × 39,5 × 21 cm) und Spezialfächer für verschiedene Artikel-Typen
+- **Laborinfrastruktur:** Packtisch, Kommissionierwagen mit Bluetooth-Tracking, Return-Aisle-Strategie
+- **Transition-Logik:** CL181 bei Zonenübergängen
 
----
-
-## 1.3 Laboraufbau und Infrastruktur
-
-*(Wird nach Abschluss von Abschnitt 1.2 erstellt.)*
-
-**Status:** Nicht verfügbar in der aktuellen Dokumentation.
-
----
+**Siehe:** [warehouse_physical.md](warehouse_physical.md) für vollständige technische Spezifikationen.
 
 ## 1.4 Probanden (Subjects S01–S18)
 
@@ -59,132 +55,96 @@ Die folgenden Angaben stammen aus der in der DaRa Dataset Description (Stand 20.
 - **Größe (Height)** – In Zentimetern
 - **Händigkeit (Handedness)** – R (Right) / L (Left)
 - **Beschäftigungsstatus (Employment Status)** – Student / Employee / Retiree / Job seeker
-- **Erfahrungswerte:** Order Picking / Packaging / Similar Studies  
-  *(Skala: 1 = Extensive, 6 = None)*
+- **Erfahrungswerte:** Order Picking / Packaging / Similar Studies
+ *(Skala: 1 = Extensive, 6 = None)*
 
 ### Vollständige Tabelle aller Probanden
 
-| ID | Sex | Age | Weight (kg) | Height (cm) | Handedness | Employment | Exp. Order Picking | Exp. Packaging | Exp. Similar Studies |
-| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-| S01 | F | 32 | 68 | 171 | R | Student | 2 | 3 | 6 |
-| S02 | M | 27 | 76 | 167 | R | Student | 3 | 6 | 6 |
-| S03 | M | 64 | 69 | 171 | R | Employee | 6 | 5 | 5 |
-| S04 | M | 31 | 85 | 183 | L | Employee | 5 | 4 | 6 |
-| S05 | M | 67 | 100 | 177 | R | Retiree | 6 | 3 | 6 |
-| S06 | M | 24 | 82 | 178 | R | Student | 4 | 6 | 6 |
-| S07 | M | 41 | 70 | 180 | R | Employee | 6 | 5 | 6 |
-| S08 | F | 29 | 62 | 163 | R | Student | 6 | 6 | 6 |
-| S09 | M | 21 | 85 | 180 | R | Student | 6 | 6 | 6 |
-| S10 | M | 28 | 85 | 160 | R | Student | 3 | 3 | 6 |
-| S11 | M | 59 | 85 | 178 | R | Employee | 3 | 2 | 6 |
-| S12 | M | 43 | 103 | 186 | R | Job seeker | 6 | 6 | 4 |
-| S13 | F | 52 | 66 | 175 | R | Employee | 5 | 4 | 6 |
-| S14 | M | 32 | 80 | 176 | R | Employee | 6 | 5 | 5 |
-| S15 | M | 43 | 88 | 177 | R | Employee | 6 | 5 | 6 |
-| S16 | M | 29 | 100 | 175 | R | Student | 6 | 3 | 6 |
-| S17 | F | 25 | 75 | 180 | R | Employee | 6 | 5 | 6 |
-| S18 | M | 26 | 80 | 187 | R | Student | 6 | 6 | 6 |
+| Session | ID | Sex | Age | Weight (kg) | Height (cm) | Handedness | Employment | Exp. Picking | Exp. Packaging | Exp. Studies |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | S01 | F | 32 | 68 | 171 | R | Student | 2 | 3 | 6 |
+| 1 | S02 | M | 27 | 76 | 167 | R | Student | 3 | 6 | 6 |
+| 1 | S03 | M | 64 | 69 | 171 | R | Employee | 6 | 5 | 5 |
+| 2 | S04 | M | 31 | 85 | 183 | L | Employee | 5 | 4 | 6 |
+| 2 | S05 | M | 67 | 100 | 177 | R | Retiree | 6 | 3 | 6 |
+| 2 | S06 | M | 24 | 82 | 178 | R | Student | 4 | 6 | 6 |
+| 3 | S07 | M | 41 | 70 | 180 | R | Employee | 6 | 5 | 6 |
+| 3 | S08 | F | 29 | 62 | 163 | R | Student | 6 | 6 | 6 |
+| 3 | S09 | M | 21 | 85 | 180 | R | Student | 6 | 6 | 6 |
+| 4 | S10 | M | 28 | 85 | 160 | R | Student | 3 | 3 | 6 |
+| 4 | S11 | M | 59 | 85 | 178 | R | Employee | 3 | 2 | 6 |
+| 4 | S12 | M | 43 | 103 | 186 | R | Job seeker | 6 | 6 | 4 |
+| 5 | S13 | F | 52 | 66 | 175 | R | Employee | 5 | 4 | 6 |
+| 5 | S14 | M | 32 | 80 | 176 | R | Employee | 6 | 5 | 5 |
+| 5 | S15 | M | 43 | 88 | 177 | R | Employee | 6 | 5 | 6 |
+| 6 | S16 | M | 29 | 100 | 175 | R | Student | 6 | 3 | 6 |
+| 6 | S17 | F | 25 | 75 | 180 | R | Employee | 6 | 5 | 6 |
+| 6 | S18 | M | 26 | 80 | 187 | R | Student | 6 | 6 | 6 |
 
 ### Demographische Zusammenfassung
+- **Geschlechterverteilung:** 14 Männlich (M), 4 Weiblich (F)
+- **Händigkeit:** 17 Rechtshändig (R), 1 Linkshändig (S04)
+- **Beschäftigungsstatus:** 7 Studenten, 8 Angestellte, 1 Rentner, 1 Arbeitssuchend
+- **Altersbereich:** 21 Jahre (S09) bis 67 Jahre (S05)
 
-**Geschlechterverteilung:**
+### Probanden-Erfahrungslevel-Analyse
 
-- Männlich (M): 14 Probanden
-- Weiblich (F): 4 Probanden
+**Quelle:** Tabelle 4 (Subject specifications), Spalten "Exp. in order picking", "Exp. in packaging", "Exp. in similar studies".
 
-**Händigkeit:**
+**Order Picking Erfahrung**
+- **Level 2 (Sehr erfahren):** 1 Proband (S01)
+- **Level 3 (Erfahren):** 3 Probanden (S02, S10, S11)
+- **Level 4 (Gering):** 1 Proband (S06)
+- **Level 5 (Kaum):** 2 Probanden (S04, S13)
+- **Level 6 (Keine):** **11 Probanden** (S03, S05, S07, S08, S09, S12, S14, S15, S16, S17, S18)
 
-- Rechtshändig (R): 17 Probanden
-- Linkshändig (L): 1 Proband (S04)
+**Erkenntnis:**
+> 61% der Probanden (11/18) haben keine Order-Picking-Erfahrung (Level 6). Dies impliziert höhere Varianz in Prozesszeiten ($t_{MH}$) und längere Lernkurven während der Aufzeichnung.
 
-**Beschäftigungsstatus:**
+**Packaging Erfahrung**
+- **Level 2 (Sehr erfahren):** 1 Proband (S11)
+- **Level 3 (Erfahren):** 4 Probanden (S01, S05, S10, S16)
+- **Level 4 (Gering):** 2 Probanden (S04, S13)
+- **Level 5 (Kaum):** 5 Probanden (S03, S07, S14, S15, S17)
+- **Level 6 (Keine):** 6 Probanden (S02, S06, S08, S09, S12, S18)
 
-- Studenten: 7 Probanden
-- Angestellte (Employee): 8 Probanden
-- Rentner (Retiree): 1 Proband
-- Arbeitssuchende (Job seeker): 1 Proband
+**Erkenntnis:**
+> Packaging-Erfahrung ist breiter verteilt als Order-Picking-Erfahrung. 33% der Probanden (6/18) haben keine Packaging-Erfahrung.
 
-**Altersbereich:**
+**Similar Studies Erfahrung**
+- **Level 6 (Keine):** **15 Probanden** (S01, S02, S04, S05, S06, S07, S08, S09, S10, S11, S13, S15, S16, S17, S18)
 
-- Jüngster Proband: 21 Jahre (S09)
-- Ältester Proband: 67 Jahre (S05)
-
----
+**Erkenntnis:**
+> 83% der Probanden (15/18) haben keine Erfahrung mit ähnlichen Studien (Level 6). Dies bedeutet, dass die Mehrheit der Probanden keine Vorerfahrung mit Bewegungsanalyse-Studien oder ähnlichen experimentellen Settings hat.
 
 ## 1.5 Sessions
 
 Dieser Abschnitt beschreibt **ausschließlich** die expliziten, verifizierbaren Informationen aus der DaRa Dataset Description (Stand 20.10.2025) zur Struktur und Bedeutung von Sessions.
 
 ### Definition der Recording Sessions
-
-Eine **Recording Session** ist ein aufgezeichneter Block, in dem **drei Subjekte gleichzeitig** am Prozess teilnahmen. Die Aufzeichnung erfolgte synchron für alle drei Subjekte innerhalb derselben Session.
+Eine **Recording Session** ist ein aufgezeichneter Block, in dem **drei Subjekte gleichzeitig** am Prozess teilnahmen. Es fanden insgesamt 6 Sessions statt. Die Aufzeichnung erfolgte synchron für alle drei Subjekte innerhalb derselben Session.
 
 ### Szenarien innerhalb einer Session
 
 Innerhalb einer einzelnen Session konnten **mehrere unterschiedliche Szenarien** durchlaufen werden. Die Szenarien wurden dabei **nicht** auf eine Session begrenzt. Mehrere Szenarien konnten in beliebiger Reihenfolge und Anzahl innerhalb derselben Session auftreten.
 
 ### Subjektbezogene Zuordnung
-
-Jedes der drei gleichzeitig aufgezeichneten Subjekte verfügte innerhalb einer Session über einen **eigenständigen Datensatz**, der seine individuelle Durchführung der Szenarien abbildet. Die Daten jedes Subjekts enthalten die zugehörigen Klassendateien, Labels und Zeitreihen.
+Jedes der drei gleichzeitig aufgezeichneten Subjekte verfügte innerhalb einer Session über einen **eigenständigen Datensatz**, der seine individuelle Durchführung der Szenarien abbildet.
 
 ### Struktur innerhalb einer Session
-
-- **Drei parallele Subjekte** – Jede Session umfasst genau 3 Subjekte
-- **Gemeinsamer, synchroner Zeitstrahl** – Alle drei Subjekte werden zeitgleich aufgezeichnet
-- **Szenarien können mehrfach oder in variierender Reihenfolge auftreten** – Keine feste Szenario-Sequenz
-- **Jede Session bildet eine abgeschlossene zeitliche Einheit der Aufzeichnung**
-
-### Abgrenzung
-
-Es werden nur die Aspekte aufgenommen, die in der Quelle eindeutig beschrieben sind. Weitere Details, wie z. B. genaue Anzahl der Szenarien pro Session oder exakte Zeitangaben, werden nicht integriert, da hierzu keine gesicherten Informationen vorliegen.
+- **Drei parallele Subjekte** – Jede Session umfasst genau 3 Subjekte.
+- **Gemeinsamer, synchroner Zeitstrahl** – Alle drei Subjekte werden zeitgleich aufgezeichnet.
+- **Variable Sequenz** – Szenarien können mehrfach oder in variierender Reihenfolge auftreten.
 
 ---
 
 ## 1.6 Offizielle Prozesslogik (BPMN)
 
-Die offizielle Prozesslogik basiert ausschließlich auf dem in der Quelle dargestellten **Business Process Model and Notation (BPMN)**. Der Prozess bildet einen vollständigen Ablauf von **Start Work** bis **End Work** ab und enthält zwei alternative Hauptpfade: einen **Retrieval-Pfad** und einen **Storage-Pfad**. Beide Pfade bestehen aus mehreren aufeinander folgenden Aktivitäten und Entscheidungspunkten und führen nach ihrem Abschluss wieder auf einen gemeinsamen Prozessfluss zurück.
-
-### Hauptstruktur des Prozesses
-
-- Der Prozess beginnt an einem Startpunkt (**Start Work**).  
-- Es folgt der erste Aktivitätsschritt **Preparing Order**.  
-- Anschließend erfolgt eine Entscheidung, ob der Ablauf dem **Retrieval-Pfad** oder dem **Storage-Pfad** folgt.
-
-### Retrieval-Pfad (oberer Pfad)
-
-1. **Picking Travel Time** – ein Aktivitätsschritt zum Reisen innerhalb des Picking-Prozesses.  
-2. **Picking Pick Time** – ein Aktivitätsschritt, der den eigentlichen Pick-Vorgang darstellt.  
-3. **Entscheidungspunkt: All positions completed?**  
-   - Wenn **nein**, kehrt der Prozess zu **Picking Travel Time** zurück.  
-   - Wenn **ja**, geht der Prozess weiter.  
-4. **Packing** – ein weiterer Aktivitätsschritt zum Verpacken.  
-5. **Erneuter Entscheidungspunkt: All positions completed?**  
-   - Wenn **nein**, führt der Ablauf zurück zu **Packing**.  
-   - Wenn **ja**, endet der Pfad und führt zurück in den gemeinsamen Bereich.
-
-### Storage-Pfad (unterer Pfad)
-
-1. **Unpacking** – ein Aktivitätsschritt zum Entpacken.  
-2. **Storing Travel Time** – Reisezeit innerhalb des Storage-Prozesses.  
-3. **Storing Store Time** – eigentliche Storage-Aktivität.  
-4. **Entscheidungspunkt: All positions completed?**  
-   - Wenn **nein**, führt der Ablauf zurück zu **Storing Travel Time**.  
-   - Wenn **ja**, endet der Pfad und führt wieder in den gemeinsamen Prozessbereich.
-
-### Gemeinsamer Prozessbereich nach beiden Pfaden
-
-1. **Finalizing Order** – ein abschließender Aktivitätsschritt, der nach dem erfolgreichen Durchlauf eines der beiden Pfade folgt.  
-2. **Entscheidungspunkt: More orders available?**  
-   - Wenn **ja**, springt der Prozess zurück zum Anfang des Modells.  
-   - Wenn **nein**, wird der Ablauf mit **End Work** beendet.
-
-### Gesamtüberblick
-
-Der Prozess erlaubt sowohl Wiederholungen innerhalb der einzelnen Pfade (z. B. Wiederholung von Picking- oder Storage-Schritten) als auch eine Wiederholung des gesamten Prozesses, wenn weitere Aufträge vorhanden sind. Die Struktur führt über definierte Aktivitäten und Entscheidungspunkte zuverlässig vom Start bis zum Ende des Arbeitsablaufs. Der Ablauf umfasst ausschließlich die explizit dargestellten Aktivitäten und Entscheidungspunkte des BPMN-Diagramms.
+Die offizielle Prozesslogik basiert ausschließlich auf dem in der Quelle dargestellten **Business Process Model and Notation (BPMN)**. Der Prozess bildet einen vollständigen Ablauf von **Start Work** bis **End Work** ab und enthält zwei alternative Hauptpfade: einen **Retrieval-Pfad** und einen **Storage-Pfad**.
 
 ### Prozessfluss-Übersicht (Textuelle Darstellung)
 
-```
+```text
 START WORK
     ↓
 Preparing Order (CL114)
@@ -211,37 +171,94 @@ YES ↓                    ↓
                     YES → Back to Preparing Order
                     NO ↓
                     END WORK
-```
+
 
 ---
 
-## Szenarien (S1–S8)
+## 1.7 Szenarien (S1–S8) und Kategorie "Other"
 
-Die DaRa-Dokumentation beschreibt **8 Szenarien**, die in den Sessions durchlaufen werden. Jedes Szenario repräsentiert eine spezifische Kombination von Prozess-Typen und Aufgaben.
+Die Dokumentation definiert 8 Szenarien und eine Restkategorie.
 
-**Bekannte Szenarien:**
+### Definition Kategorie "Other"
+Die Kategorie **Other** ist explizit definiert durch das aktive Low-Level-Label **CL134 (Waiting)**.
+Sie beinhaltet ausschließlich:
+- Wartezeiten (Waiting).
+- Zeiten, die nicht explizit einem der Szenarien S1–S8 zugeordnet sind.
+- Anlegen der Sensoren.
+- Synchronisationsbewegungen.
+- Vor- und Nachbereitungszeiten.
 
-- S1 bis S8 (exakte Definitionen siehe Originalquelle)
+### Szenario-Übersicht
 
-**Wichtig:**
+| Szenario | Typ (High-Level) | Order ID | Strategie | IT-System | Geplante Fehler |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **S1** | Retrieval | 2904 | Single | Liste & Stift | **Ja** (Falscher Ort) |
+| **S2** | Retrieval | 2905 | Single | PDT | Nein |
+| **S3** | Retrieval | 2906 | Single | Liste & Scanner | **Ja** (Falsche Menge) |
+| **S4** | Storage | 2904 | Single | Liste & Stift | Nein |
+| **S5** | Storage | 2905 | Single | Liste & Stift | Nein |
+| **S6** | Storage | 2906 | Single | Liste & Stift | Nein |
+| **S7** | Retrieval | 2904+05 | **Multi** | Liste & Stift | Nein |
+| **S8** | Storage | 2904+05 | **Multi** | Liste & Stift | Nein |
 
-- Szenarien können **mehrfach innerhalb einer Session** auftreten
-- Szenariogrenzen werden durch **Prozess-Labels (CC08-CC10)** markiert
-- Keine feste Sequenz – Reihenfolge variiert pro Session
+**Fehler-Kategorien (Errors):**
+- **Intentional Errors (Geplante Störungen):**
+  - S1: Falsche Lagerplatzangaben auf der Papierliste.
+  - S3: Mengenabweichungen (Diskrepanz zwischen System/Liste und realer Menge).
+  - Zusätzlich: Fehlendes Verpackungsmaterial oder künstliche Wartezeiten an besetzten Packtischen.
+  - Zweck: Simulation von Stress/Realität.
+- **Unintended Errors (Unbeabsichtigte Fehler):**
+  - Menschliches Versagen (z. B. Bedienfehler PDT in S2, Übersehen von Seiten in S1/S3).
+  - Fehlgriffe bei Menge oder Artikeltyp.
+
+---
+
+### Implikationen für DaRa-Analyse
+
+**Hohe Varianz in Prozesszeiten:**
+- Unerfahrene Probanden (Level 6) haben längere $t_{MH}$ (Haupttätigkeit).
+- Höhere Fehlerrate (CL135 "Error-Reporting") bei S01, S05, S07, S08 erwartet.
+
+**Lernkurven-Effekt:**
+- Erste Sessions können ineffizientere Bewegungsmuster zeigen.
+- Multi-Order-Szenarien (S7/S8) besonders herausfordernd für Unerfahrene.
+
+**Anthropometrische Extremwerte:**
+
+| Proband | Order-Picking Exp. | Größe | Gewicht | Besonderheit |
+| :--- | :--- | :--- | :--- | :--- |
+| **S10** | Level 3 (Erfahren) | **160cm** (kleinster) | 85kg | Erfahren trotz geringer Größe |
+| **S18** | Level 6 (Keine Erfahrung) | **187cm** (größter) | 80kg | Unerfahren trotz günstiger Anthropometrie |
+| **S05** | Level 6 (Keine Erfahrung) | 177cm | **100kg** | Ältester (67 Jahre), unerfahren, schwer |
+| **S12** | Level 6 (Keine Erfahrung) | 186cm | **103kg** (schwerster) | Einziger mit Studie-Erfahrung (Level 4) |
+
+---
+
+### Verwendung in REFA-Analytik
+
+**Erholungszeit-Kalkulation:**
+- Unerfahrene Probanden (Level 6) → Höhere $t_E$ (Erholungszeit).
+- Beispiel: S05 (67 Jahre, 100kg, Level 6) → Deutlich erhöhte $t_E$ bei Large [L]-Artikeln.
+
+**Artikel-Zuordnung (siehe articles_inventory.md):**
+- Small [S]-Artikel (z.B. M5 Muttern): Zählen erfordert Konzentration (höhere Fehlerrate bei Unerfahrenen).
+- Large [L]-Artikel (z.B. Palmenerde 5149g, R7.3.1.A): Beugen zu Ebene 1 (MTM-Code B) + hohe Last → Maximale Erholungszeit.
 
 ---
 
 ## Verwendungshinweise für diese Datei
 
 **Diese Datei nutzen für:**
-
-- Fragen zu Probanden-Demographie (Tabelle 4)
-- BPMN-Prozesslogik und Ablaufstrukturen
-- Session-Definitionen und Grundstruktur
-- Szenario-Konzepte
+- Fragen zu Probanden-Demographie (Tabelle 4).
+- BPMN-Prozesslogik und Ablaufstrukturen.
+- Session-Definitionen und Grundstruktur.
+- Szenario-Konzepte und die Definition von "Other".
+- Absicht und Strategie des DaRa-Datensatzes.
 
 **Nicht in dieser Datei:**
-
-- Klassendefinitionen (CC01-CC12) → Siehe `class_hierarchy.md`
-- Frame-Synchronisation → Siehe `data_structure.md`
-- Detaillierte Label-Lookups → Siehe `class_hierarchy.md`
+- Klassendefinitionen (CC01-CC12) → Siehe [labels_207.md](../core/labels_207.md)
+- Frame-Synchronisation → Siehe [data_structure.md](data_structure.md)
+- Detaillierte Label-Lookups → Siehe [labels_207.md](../core/labels_207.md)
+- Physisches Laborlayout → Siehe [warehouse_physical.md](warehouse_physical.md)
+- Semantische Struktur → Siehe [semantics.md](semantics.md)
+- Szenario-Matrizen → Siehe [ground_truth_central.md](../core/ground_truth_central.md)
