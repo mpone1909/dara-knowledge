@@ -1,4 +1,5 @@
-# Changelog â€” DaRa Skill v5.0
+```md
+# Changelog — DaRa Skill v5.0
 
 **Release-Datum:** 05.02.2026  
 **Versionierung:** Semantic Versioning (5.0.0)  
@@ -8,18 +9,18 @@
 
 ## [5.0.0] - 2026-02-05
 
-### ðŸŽ¯ MAJOR RELEASE: VollstÃ¤ndige Neuerstellung & Konsolidierung
+### 🎯 MAJOR RELEASE: Vollständige Neuerstellung & Konsolidierung
 
-Komplette Ãœberarbeitung des DaRa-Skills durch systematische 7-Phasen-Analyse, Bereinigung und Reorganisation aller Skill-Dateien.
+Komplette Überarbeitung des DaRa-Skills durch systematische 7-Phasen-Analyse, Bereinigung und Reorganisation aller Skill-Dateien.
 
 ---
 
-## âœ¨ Added (Neue Inhalte & Dateien)
+## ✨ Added (Neue Inhalte & Dateien)
 
 ### Neue Dateien
 - **core_validation_rules_v5_0.md** (798 Zeilen, 30 KB)
   - Zentrale Sammlung aller Frame-Level Validierungsregeln
-  - Master-Slave-AbhÃ¤ngigkeiten (CC01 â†’ CC02-CC05)
+  - Master-Slave-Abhängigkeiten (CC01 → CC02-CC05)
   - Label-Kombinationsregeln mit Python-Code-Beispielen
   - Spezielle Validierungen (Multi-Order, CL134 Global Interrupt)
   - BPMN-Prozess-Mappings im Anhang
@@ -29,35 +30,35 @@ Komplette Ãœberarbeitung des DaRa-Skills durch systematische 7-Phasen-Analyse,
   - Detailed Process Flows (Zeilen 192-426): Exakte Activity-Sequenzen aus Figures A2-A7
   - Scenario-Routing Matrix (Section 2.1.4): S1-S8 Mapping mit Prozess-Pfaden
   - Error-Handling Details (Section 2.1.5): CL135 Aktivierungsbedingungen pro Prozess
-  - Cross-Process Consistency (Section 2.1.6): Identische vs. unterschiedliche AktivitÃ¤ten
+  - Cross-Process Consistency (Section 2.1.6): Identische vs. unterschiedliche Aktivitäten
 
 - **auxiliary_chunking_v5_0_repaired.md:**
   - Multi-Order Handling (Kapitel 4.6): S7/S8 Trigger-Integration
   - Ground Truth v3.0 Synchronisierung (Kapitel 4.5): T11-T13 Mapping
-  - Erweiterte Trigger-Logik fÃ¼r Extensions-Kategorie
+  - Erweiterte Trigger-Logik für Extensions-Kategorie
 
 - **core_ground_truth_central_v5_0.md:**
-  - 5-Schritt Decision-Logik (Ã¼berarbeitet)
-  - Szenario-Matrix mit vollstÃ¤ndigen Trigger-Mappings
+  - 5-Schritt Decision-Logik (überarbeitet)
+  - Szenario-Matrix mit vollständigen Trigger-Mappings
   - Multi-Order Loop-Validierung (S7/S8)
 
 ---
 
-## ðŸ”„ Changed (Ãœberarbeitete Inhalte)
+## 🔄 Changed (Überarbeitete Inhalte)
 
-### Strukturelle Ã„nderungen
+### Strukturelle Änderungen
 - **Referenz-Versionierung:** Alle Datei-Referenzen mit `_v5_0`-Endung versehen
-  - Beispiel: `siehe chunking.md` â†’ `siehe auxiliary_chunking_v5_0_repaired.md`
-  - Betrifft: ~80+ Cross-Referenzen Ã¼ber alle Dateien
+  - Beispiel: `siehe chunking.md` → `siehe auxiliary_chunking_v5_0_repaired.md`
+  - Betrifft: ~80+ Cross-Referenzen über alle Dateien
 
 - **Dateinamen-Konventionen:**
-  - Suffix `_repaired` fÃ¼r Dateien mit Fehlerkorrektur:
+  - Suffix `_repaired` für Dateien mit Fehlerkorrektur:
     - `auxiliary_chunking_v5_0_repaired.md` (vorher: Encoding-Fehler)
     - `processes_process_hierarchy_v5_0_repaired.md` (vorher: Formatfehler)
-  - Suffix `_NEW` fÃ¼r Neuerstellung:
-    - `processes_bpmn_validation_v5_0_NEW.md` (vorher: fundamentale WidersprÃ¼che)
+  - Suffix `_NEW` für Neuerstellung:
+    - `processes_bpmn_validation_v5_0_NEW.md` (vorher: fundamentale Widersprüche)
 
-### Inhaltliche Ãœberarbeitungen
+### Inhaltliche Überarbeitungen
 - **core_labels_207_v5_0.md:**
   - Chunking Trigger-Referenzen aktualisiert (Zeile 700)
   - Konsistente Label-Nummerierung verifiziert (CL001-CL207)
@@ -68,33 +69,33 @@ Komplette Ãœberarbeitung des DaRa-Skills durch systematische 7-Phasen-Analyse,
 
 - **assets_query_patterns_v5_0.md:**
   - Alle Datei-Referenzen auf v5_0-Versionen aktualisiert
-  - Query-Pattern-Beispiele ergÃ¤nzt
+  - Query-Pattern-Beispiele ergänzt
 
 - **processes_process_hierarchy_v5_0_repaired.md:**
   - Cross-Referenzen korrigiert (4 Referenzen aktualisiert)
-  - Prozess-Hierarchie-Tabellen Ã¼berarbeitet
+  - Prozess-Hierarchie-Tabellen überarbeitet
 
 - **auxiliary_semantics_v5_0.md:**
   - Referenzen auf core_labels und chunking aktualisiert
-  - Semantische Grunddefinitionen prÃ¤zisiert
+  - Semantische Grunddefinitionen präzisiert
 
 ---
 
-## ðŸ—‘ï¸ Deprecated (Veraltete Dateien â†’ Ersetzt)
+## 🗑️ Deprecated (Veraltete Dateien → Ersetzt)
 
 ### Ersetzt durch v5.0-Versionen
-- `auxiliary_chunking.md` â†’ `auxiliary_chunking_v5_0_repaired.md`
-- `auxiliary_chunking_v5_0.md` â†’ `auxiliary_chunking_v5_0_repaired.md` (Encoding-Fehler behoben)
-- `processes_bpmn_validation.md` â†’ `processes_bpmn_validation_v5_0_NEW.md`
-- `processes_bpmn_validation_v5_0.md` â†’ `processes_bpmn_validation_v5_0_NEW.md` (Neuerstellung)
-- `processes_process_hierarchy.md` â†’ `processes_process_hierarchy_v5_0_repaired.md`
-- `core_ground_truth_central.md` â†’ `core_ground_truth_central_v5_0.md`
+- `auxiliary_chunking.md` → `auxiliary_chunking_v5_0_repaired.md`
+- `auxiliary_chunking_v5_0.md` → `auxiliary_chunking_v5_0_repaired.md` (Encoding-Fehler behoben)
+- `processes_bpmn_validation.md` → `processes_bpmn_validation_v5_0_NEW.md`
+- `processes_bpmn_validation_v5_0.md` → `processes_bpmn_validation_v5_0_NEW.md` (Neuerstellung)
+- `processes_process_hierarchy.md` → `processes_process_hierarchy_v5_0_repaired.md`
+- `core_ground_truth_central.md` → `core_ground_truth_central_v5_0.md`
 
-**Hinweis:** Deprecated-Dateien sind nicht mehr gÃ¼ltig. Verwenden Sie ausschlieÃŸlich v5_0-Versionen.
+**Hinweis:** Deprecated-Dateien sind nicht mehr gültig. Verwenden Sie ausschließlich v5_0-Versionen.
 
 ---
 
-## ðŸ› Fixed (Behobene Fehler & Inkonsistenzen)
+## 🐛 Fixed (Behobene Fehler & Inkonsistenzen)
 
 ### Referenz-Fehler
 - **11 fehlerhafte Referenzen korrigiert:**
@@ -102,58 +103,58 @@ Komplette Ãœberarbeitung des DaRa-Skills durch systematische 7-Phasen-Analyse,
   - 4x in `processes_process_hierarchy_v5_0_repaired.md` (Zeilen 577-580)
   - 1x in `processes_refa_analytics_v5_0.md` (Zeile 267)
   - 1x in `core_labels_207_v5_0.md` (Zeile 700)
-  - Globale Korrektur: `v5.0` â†’ `v5_0` in allen Dateinamen
+  - Globale Korrektur: `v5.0` → `v5_0` in allen Dateinamen
 
-### Interne WidersprÃ¼che behoben
-- **processes_bpmn_validation:** Fundamentale BPMN-Logik-WidersprÃ¼che eliminiert durch Neuerstellung
+### Interne Widersprüche behoben
+- **processes_bpmn_validation:** Fundamentale BPMN-Logik-Widersprüche eliminiert durch Neuerstellung
 - **auxiliary_chunking:** Trigger-Definitions-Inkonsistenzen mit Ground Truth v3.0 harmonisiert
-- **core_validation_rules:** Master-Slave-AbhÃ¤ngigkeiten aus mehreren Dateien konsolidiert
+- **core_validation_rules:** Master-Slave-Abhängigkeiten aus mehreren Dateien konsolidiert
 
 ### Encoding-Fehler
 - **auxiliary_chunking_v5_0_repaired.md:** UTF-8 Encoding-Fehler behoben (Sonderzeichen)
 - **processes_process_hierarchy_v5_0_repaired.md:** Markdown-Formatfehler behoben
 
 ### Metadaten-Konsistenz
-- YAML-Header ergÃ¤nzt fÃ¼r 11/18 Dateien (version: 5.0, status: finalisiert)
+- YAML-Header ergänzt für 11/18 Dateien (version: 5.0, status: finalisiert)
 - 7 Dateien ohne YAML-Header (funktional nicht kritisch)
 
 ---
 
-## ðŸ“Š Statistik
+## 📊 Statistik
 
-### DateiÃ¼bersicht
+### Dateiübersicht
 - **Gesamt:** 18 finale v5_0-Dateien
 - **Neu erstellt:** 1 (core_validation_rules)
-- **Ãœberarbeitet:** 8 (>20% Ã„nderungen)
-- **Korrigiert:** 6 (<20% Ã„nderungen)
-- **Nur versioniert:** 3 (inhaltlich unverÃ¤ndert)
+- **Überarbeitet:** 8 (>20% Änderungen)
+- **Korrigiert:** 6 (<20% Änderungen)
+- **Nur versioniert:** 3 (inhaltlich unverändert)
 
-### GrÃ¶ÃŸenverteilung
+### Größenverteilung
 - **Klein** (<300 Zeilen): 5 Dateien (28%)
 - **Mittel** (300-600 Zeilen): 8 Dateien (44%)
-- **GroÃŸ** (600-1200 Zeilen): 4 Dateien (22%)
-- **Sehr groÃŸ** (>1200 Zeilen): 1 Datei (6%)
+- **Groß** (600-1200 Zeilen): 4 Dateien (22%)
+- **Sehr groß** (>1200 Zeilen): 1 Datei (6%)
 
 ### Cross-Referenzen
 - **Gesamt:** ~80+ Datei-Links
 - **Korrigiert:** 11 fehlerhafte Referenzen
-- **IntegritÃ¤t:** 100% nach Korrektur
+- **Integrität:** 100% nach Korrektur
 
 ---
 
-## ðŸ—ï¸ StrukturÃ¤nderungen
+## 🏗️ Strukturänderungen
 
 ### Phase 4 Entscheidung: Keine Konsolidierung
 Nach systematischer Analyse aller 18 Dateien:
-- **0 ZusammenfÃ¼hrungen** (keine Kandidaten erfÃ¼llten Kriterien)
-- **0 Aufteilungen** (ThemenblÃ¶cke stark verzahnt)
-- **PrÃ¤fix-basierte Struktur beibehalten** (optimal fÃ¼r 18 Dateien)
+- **0 Zusammenführungen** (keine Kandidaten erfüllten Kriterien)
+- **0 Aufteilungen** (Themenblöcke stark verzahnt)
+- **Präfix-basierte Struktur beibehalten** (optimal für 18 Dateien)
 
-**BegrÃ¼ndung:** Aktuelle Struktur ist funktional optimal, Ã„nderungen wÃ¼rden KomplexitÃ¤t ohne Mehrwert erhÃ¶hen.
+**Begründung:** Aktuelle Struktur ist funktional optimal, Änderungen würden Komplexität ohne Mehrwert erhöhen.
 
 ---
 
-## ðŸ“‹ Prozess-Dokumentation
+## 📋 Prozess-Dokumentation
 
 ### Phase 1: Globale Bestandsaufnahme
 - 18 Dateien inventarisiert
@@ -166,15 +167,15 @@ Nach systematischer Analyse aller 18 Dateien:
 - Referenz-Versionierung: Alle Links mit `_v5_0`-Endung
 
 ### Phase 4: Konsolidierungsanalyse
-- ZusammenfÃ¼hrungs-Kandidaten geprÃ¼ft: 0 genehmigt
-- Aufteilungs-Kandidaten geprÃ¼ft: 0 erforderlich
+- Zusammenführungs-Kandidaten geprüft: 0 genehmigt
+- Aufteilungs-Kandidaten geprüft: 0 erforderlich
 - Strukturempfehlung: Flat structure beibehalten
 
 ### Phase 5: Strukturelle Reorganisation
-- Ãœbersprungen (keine Konsolidierungen)
+- Übersprungen (keine Konsolidierungen)
 
 ### Phase 6: Globale Verifikation
-- ReferenzintegritÃ¤t: 11 Fehler behoben
+- Referenzintegrität: 11 Fehler behoben
 - Cross-File-Konsistenz: Verifiziert
 - Release-Dokumentation: Changelog, Migration-Guide, Struktur
 
@@ -184,49 +185,49 @@ Nach systematischer Analyse aller 18 Dateien:
 
 ---
 
-## ðŸ”— Verwandte Dokumente
+## 🔗 Verwandte Dokumente
 
-- **MIGRATION_v4.x_to_v5.0.md** â€” Upgrade-Anleitung fÃ¼r bestehende Implementierungen
-- **STRUCTURE_v5_0.md** â€” VollstÃ¤ndige Dateistruktur-Ãœbersicht
-- **phase4_konsolidierungsplan_v5_0.md** â€” Detaillierte Konsolidierungsanalyse
+- **MIGRATION_v4.x_to_v5.0.md** — Upgrade-Anleitung für bestehende Implementierungen
+- **STRUCTURE_v5_0.md** — Vollständige Dateistruktur-Übersicht
+- **phase4_konsolidierungsplan_v5_0.md** — Detaillierte Konsolidierungsanalyse
 
 ---
 
-## ðŸ“ Hinweise zur Verwendung
+## 📝 Hinweise zur Verwendung
 
-### FÃ¼r Entwickler
+### Für Entwickler
 - **Immer v5_0-Versionen verwenden** (keine deprecated Dateien)
 - **Referenzen mit `_v5_0`-Endung** (z.B. `core_labels_207_v5_0.md`)
 - **Suffixe beachten:** `_repaired` (Fehlerkorrektur), `_NEW` (Neuerstellung)
 
-### FÃ¼r Forscher
+### Für Forscher
 - **Quickstart-Guide:** `processes_bpmn_validation_quickstart_v5_0.md`
 - **Szenario-Definitionen:** `core_ground_truth_central_v5_0.md`
 - **Label-Lookup:** `core_labels_207_v5_0.md`
 
-### FÃ¼r Skill-Integration
+### Für Skill-Integration
 - **Hauptdatei:** `SKILL.md` (v5.0 in Phase 7)
 - **Navigationslogik:** Verweist auf alle v5_0-Dateien
-- **KompatibilitÃ¤t:** RÃ¼ckwÃ¤rtskompatibel mit v4.x-Daten
+- **Kompatibilität:** Rückwärtskompatibel mit v4.x-Daten
 
 ---
 
-## ðŸŽ¯ Breaking Changes
+## 🎯 Breaking Changes
 
-### Dateinamen geÃ¤ndert
-- `chunking.md` â†’ `auxiliary_chunking_v5_0_repaired.md`
-- `bpmn_validation.md` â†’ `processes_bpmn_validation_v5_0_NEW.md`
-- `process_hierarchy.md` â†’ `processes_process_hierarchy_v5_0_repaired.md`
+### Dateinamen geändert
+- `chunking.md` → `auxiliary_chunking_v5_0_repaired.md`
+- `bpmn_validation.md` → `processes_bpmn_validation_v5_0_NEW.md`
+- `process_hierarchy.md` → `processes_process_hierarchy_v5_0_repaired.md`
 
-**Migration erforderlich:** Alle Code-Referenzen auf alte Dateinamen mÃ¼ssen aktualisiert werden.
+**Migration erforderlich:** Alle Code-Referenzen auf alte Dateinamen müssen aktualisiert werden.
 
 ### Neue Dependencies
 - `core_validation_rules_v5_0.md` wird von mehreren Dateien referenziert
-- Integration erforderlich fÃ¼r vollstÃ¤ndige FunktionalitÃ¤t
+- Integration erforderlich für vollständige Funktionalität
 
 ---
 
-## ðŸš€ NÃ¤chste Schritte (Phase 7)
+## 🚀 Nächste Schritte (Phase 7)
 
 1. **SKILL.md v5.0 erstellen**
    - Navigationslogik aktualisieren (alle v5_0-Referenzen)
@@ -236,12 +237,13 @@ Nach systematischer Analyse aller 18 Dateien:
 2. **Finales Release-Package**
    - Alle 18 v5_0-Dateien + SKILL.md v5.0
    - README_v5_0.md (optional)
-   - VollstÃ¤ndige Dokumentation (Changelog, Migration, Struktur)
+   - Vollständige Dokumentation (Changelog, Migration, Struktur)
 
 ---
 
 **Version:** 5.0.0  
 **Erstellt:** 05.02.2026  
 **Autor:** Phase 6 Globale Verifikation  
-**Status:** Finalisiert âœ…  
+**Status:** Finalisiert ✅  
 **Format:** Keep a Changelog v1.1.0
+```
