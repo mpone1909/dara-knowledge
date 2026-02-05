@@ -1,0 +1,601 @@
+# DaRa Skill v5.0 â€” Struktur-Ãœbersicht
+
+**Release:** v5.0.0  
+**Datum:** 05.02.2026  
+**Dateien:** 18 finale v5_0-Dateien  
+**GesamtgrÃ¶ÃŸe:** ~324 KB, 9.655 Zeilen
+
+---
+
+## ðŸ“Š STRUKTURBAUM
+
+```
+/dara-skill-v5.0/
+â”œâ”€â”€ CORE (5 Dateien, ~123 KB, 2.890 Zeilen)
+â”‚   â”œâ”€â”€ core_labels_207_v5_0.md (711 Zeilen, 21 KB)
+â”‚   â”œâ”€â”€ core_articles_inventory_v5_0.md (162 Zeilen, 7.8 KB)
+â”‚   â”œâ”€â”€ core_category_activation_matrix_v5_0.md (742 Zeilen, 25 KB)
+â”‚   â”œâ”€â”€ core_ground_truth_central_v5_0.md (478 Zeilen, 19 KB)
+â”‚   â””â”€â”€ core_validation_rules_v5_0.md (798 Zeilen, 30 KB) [NEU v5.0]
+â”‚
+â”œâ”€â”€ AUXILIARY (5 Dateien, ~95 KB, 2.252 Zeilen)
+â”‚   â”œâ”€â”€ auxiliary_chunking_v5_0_repaired.md (1.212 Zeilen, 43 KB)
+â”‚   â”œâ”€â”€ auxiliary_data_structure_v5_0.md (326 Zeilen, 10 KB)
+â”‚   â”œâ”€â”€ auxiliary_dataset_core_v5_0.md (258 Zeilen, 14 KB)
+â”‚   â”œâ”€â”€ auxiliary_semantics_v5_0.md (187 Zeilen, 9 KB)
+â”‚   â””â”€â”€ auxiliary_warehouse_physical_v5_0.md (270 Zeilen, 11 KB)
+â”‚
+â”œâ”€â”€ PROCESSES (5 Dateien, ~87 KB, 3.276 Zeilen)
+â”‚   â”œâ”€â”€ processes_bpmn_validation_v5_0_NEW.md (1.623 Zeilen, 55 KB)
+â”‚   â”œâ”€â”€ processes_bpmn_validation_quickstart_v5_0.md (522 Zeilen, 14 KB)
+â”‚   â”œâ”€â”€ processes_process_hierarchy_v5_0_repaired.md (597 Zeilen, 18 KB)
+â”‚   â”œâ”€â”€ processes_refa_analytics_v5_0.md (313 Zeilen, 12 KB)
+â”‚   â””â”€â”€ processes_mtm_codes_v5_0.md (223 Zeilen, 6.6 KB)
+â”‚
+â”œâ”€â”€ ASSETS (3 Dateien, ~34 KB, 1.198 Zeilen)
+â”‚   â”œâ”€â”€ assets_query_patterns_v5_0.md (570 Zeilen, 16 KB)
+â”‚   â”œâ”€â”€ assets_bpmn_validation_report_template_v5_0.md (371 Zeilen, 9.3 KB)
+â”‚   â””â”€â”€ assets_scenario_report_template_v5_0.md (257 Zeilen, 8.6 KB)
+â”‚
+â”œâ”€â”€ RELEASE-DOKUMENTATION
+â”‚   â”œâ”€â”€ CHANGELOG_v5_0.md
+â”‚   â”œâ”€â”€ MIGRATION_v4_x_to_v5_0.md
+â”‚   â”œâ”€â”€ STRUCTURE_v5_0.md (diese Datei)
+â”‚   â””â”€â”€ phase4_konsolidierungsplan_v5_0.md
+â”‚
+â””â”€â”€ SKILL (Phase 7, ausstehend)
+    â””â”€â”€ SKILL_v5_0.md
+```
+
+---
+
+## ðŸ“ DATEI-DETAILS
+
+### CORE-DATEIEN
+
+#### 1. core_labels_207_v5_0.md
+**Zeilen:** 711 | **GrÃ¶ÃŸe:** 21 KB | **Status:** finalisiert
+
+**Zweck:** VollstÃ¤ndiges Label-Inventar (CL001-CL207)
+
+**Inhalt:**
+- Systematische Klassifizierung der 12 Klassenkategorien (CC01-CC12)
+- Detaillierte Label-Definitionen mit Beschreibungen
+- Hierarchische Struktur (High/Mid/Low-Level)
+- Chunking Trigger-Referenzen (T1-T13)
+
+**AbhÃ¤ngigkeiten:** Keine (Root-Datei)
+
+**Wird referenziert von:**
+- core_validation_rules_v5_0.md
+- auxiliary_chunking_v5_0_repaired.md
+- auxiliary_semantics_v5_0.md
+- processes_bpmn_validation_v5_0_NEW.md
+
+---
+
+#### 2. core_articles_inventory_v5_0.md
+**Zeilen:** 162 | **GrÃ¶ÃŸe:** 7.8 KB | **Status:** finalisiert
+
+**Zweck:** Artikel-Stammdaten (74 Artikel)
+
+**Inhalt:**
+- Gewichtsklassen (sehr leicht bis sehr schwer)
+- Artikel-Lookup-Tabelle (ID, Name, Gewicht, Abmessungen)
+- Handling-Anforderungen pro Gewichtsklasse
+
+**AbhÃ¤ngigkeiten:** Keine
+
+**Wird referenziert von:** Selten (meist interne Nutzung)
+
+---
+
+#### 3. core_category_activation_matrix_v5_0.md
+**Zeilen:** 742 | **GrÃ¶ÃŸe:** 25 KB | **Status:** finalisiert
+
+**Zweck:** Szenario-Label-Mappings
+
+**Inhalt:**
+- Category Activation Matrices fÃ¼r S1-S8
+- Erwartete Label-Kombinationen pro Szenario
+- IT-System-Mappings (PDT, List+Pen, Computer)
+- Multi-Order Patterns (S7/S8)
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- core_ground_truth_central_v5_0.md
+
+**Wird referenziert von:**
+- core_validation_rules_v5_0.md
+- core_ground_truth_central_v5_0.md
+
+---
+
+#### 4. core_ground_truth_central_v5_0.md
+**Zeilen:** 478 | **GrÃ¶ÃŸe:** 19 KB | **Status:** finalisiert
+
+**Zweck:** Szenario-Klassifikationslogik (Ground Truth v3.0)
+
+**Inhalt:**
+- 5-Schritt Decision-Logik
+- Global Interrupts (T11-T13: Other_Waiting, Other_Process, Other_NoData)
+- Szenario-Definitionen (S1-S8 + Other)
+- Trigger-Mappings
+- Multi-Order Loop-Validierung (S7/S8)
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- core_category_activation_matrix_v5_0.md
+- auxiliary_chunking_v5_0_repaired.md (implizit: Trigger T11-T13)
+
+**Wird referenziert von:**
+- processes_bpmn_validation_v5_0_NEW.md
+- core_validation_rules_v5_0.md
+- auxiliary_chunking_v5_0_repaired.md
+
+---
+
+#### 5. core_validation_rules_v5_0.md â­ NEU
+**Zeilen:** 798 | **GrÃ¶ÃŸe:** 30 KB | **Status:** finalisiert
+
+**Zweck:** Zentrale Frame-Level Validierungsregeln
+
+**Inhalt:**
+- Master-Slave-AbhÃ¤ngigkeiten (CC01 â†’ CC02-CC05)
+- Label-Kombinationsregeln (Python-Code-Beispiele)
+- Spezielle Validierungen:
+  - Multi-Order Co-Activation
+  - CL134 Global Interrupt Priorisierung
+  - Tool-Requirements (CL145, CL150, etc.)
+- BPMN-Prozess-Mappings (Anhang)
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- core_category_activation_matrix_v5_0.md
+- core_ground_truth_central_v5_0.md
+
+**Wird referenziert von:**
+- processes_bpmn_validation_v5_0_NEW.md
+- auxiliary_chunking_v5_0_repaired.md
+
+---
+
+### AUXILIARY-DATEIEN
+
+#### 6. auxiliary_chunking_v5_0_repaired.md
+**Zeilen:** 1.212 | **GrÃ¶ÃŸe:** 43 KB | **Status:** finalisiert (repaired)
+
+**Zweck:** Chunking-Logik & Trigger-System
+
+**Inhalt:**
+- Fundamentale Chunk-Definition
+- Trigger-System (T1-T13):
+  - Motor-Trigger (T1-T5)
+  - Context-Trigger (T6-T7)
+  - Process-Trigger (T8-T10)
+  - Extensions-Trigger (T11-T13)
+- Chunk-Detection-Algorithmus
+- Integration Ground Truth v3.0
+- Multi-Order Handling (S7/S8)
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- core_ground_truth_central_v5_0.md
+- processes_process_hierarchy_v5_0_repaired.md
+- core_validation_rules_v5_0.md
+
+**Wird referenziert von:**
+- core_ground_truth_central_v5_0.md
+- auxiliary_semantics_v5_0.md
+- processes_refa_analytics_v5_0.md
+
+**Hinweis:** `_repaired`-Suffix zeigt Encoding-Fehlerkorrektur an.
+
+---
+
+#### 7. auxiliary_data_structure_v5_0.md
+**Zeilen:** 326 | **GrÃ¶ÃŸe:** 10 KB | **Status:** finalisiert
+
+**Zweck:** Datenstruktur & Sessions
+
+**Inhalt:**
+- Frame-Struktur (30 fps)
+- Session-Definitionen (1-6 pro Proband)
+- CSV-Format-Spezifikationen
+- Synchronisation zwischen Kategorien
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- auxiliary_dataset_core_v5_0.md
+
+**Wird referenziert von:**
+- auxiliary_dataset_core_v5_0.md
+- processes_bpmn_validation_v5_0_NEW.md
+
+---
+
+#### 8. auxiliary_dataset_core_v5_0.md
+**Zeilen:** 258 | **GrÃ¶ÃŸe:** 14 KB | **Status:** finalisiert
+
+**Zweck:** Dataset-Kerndokumentation
+
+**Inhalt:**
+- Zweck und Kontext des Datensatzes
+- OMNI Warehouse physische Umgebung (Referenz)
+- Probanden-Demographie (S01-S18)
+- Session-Ãœbersicht
+
+**AbhÃ¤ngigkeiten:**
+- auxiliary_warehouse_physical_v5_0.md
+- core_labels_207_v5_0.md
+- auxiliary_data_structure_v5_0.md
+
+**Wird referenziert von:**
+- auxiliary_warehouse_physical_v5_0.md
+- processes_process_hierarchy_v5_0_repaired.md
+
+---
+
+#### 9. auxiliary_semantics_v5_0.md
+**Zeilen:** 187 | **GrÃ¶ÃŸe:** 9 KB | **Status:** finalisiert
+
+**Zweck:** Semantische Grunddefinitionen
+
+**Inhalt:**
+- Semantische Hierarchie (12 Klassenkategorien)
+- Label-Kombinationen und Beziehungen
+- Interpretation von Multi-Label-ZustÃ¤nden
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- core_ground_truth_central_v5_0.md
+- auxiliary_chunking_v5_0_repaired.md
+
+**Wird referenziert von:**
+- auxiliary_dataset_core_v5_0.md
+
+---
+
+#### 10. auxiliary_warehouse_physical_v5_0.md
+**Zeilen:** 270 | **GrÃ¶ÃŸe:** 11 KB | **Status:** finalisiert
+
+**Zweck:** Physische Umgebung & Laboraufbau
+
+**Inhalt:**
+- OMNI Warehouse (Fraunhofer IML) Spezifikationen
+- Lagerlayout (Aisles, Base, Office, Computer Station)
+- Location-Graph (CC11-Transitions)
+- Dimensionen und AbstÃ¤nde
+
+**AbhÃ¤ngigkeiten:**
+- auxiliary_dataset_core_v5_0.md
+- core_labels_207_v5_0.md
+
+**Wird referenziert von:**
+- auxiliary_dataset_core_v5_0.md
+- processes_bpmn_validation_v5_0_NEW.md
+
+---
+
+### PROCESSES-DATEIEN
+
+#### 11. processes_bpmn_validation_v5_0_NEW.md
+**Zeilen:** 1.623 | **GrÃ¶ÃŸe:** 55 KB | **Status:** finalisiert (NEW)
+
+**Zweck:** VollstÃ¤ndige BPMN-Validierungslogik
+
+**Inhalt:**
+- Sequenz-Validierung (FSM fÃ¼r CC09)
+- Detaillierte Prozessflows (Figures A2-A7):
+  - CL114: Preparing Order
+  - CL115/CL116: Picking (Travel/Pick Time)
+  - CL118: Packing
+  - CL117: Unpacking
+  - CL119/CL120: Storing (Travel/Store Time)
+  - CL121: Finalizing Order
+- Szenario-Routing Matrix (S1-S8)
+- Error-Handling Details (CL135)
+- Tool-Validierung (CL145, CL150, etc.)
+- Location-Validierung & Teleportation-Detection
+- Multi-Order-Validierung (S7/S8)
+- CL134 Global Interrupt Priorisierung
+- BPMN-Generierung & Visualisierung
+- Abweichungs-Kategorien & Reporting
+- Automatische Fehlerursachen-Hypothesen
+
+**AbhÃ¤ngigkeiten:**
+- core_validation_rules_v5_0.md
+- core_labels_207_v5_0.md
+- processes_process_hierarchy_v5_0_repaired.md
+- core_ground_truth_central_v5_0.md
+- auxiliary_data_structure_v5_0.md
+
+**Wird referenziert von:**
+- processes_bpmn_validation_quickstart_v5_0.md
+- auxiliary_chunking_v5_0_repaired.md
+
+**Hinweis:** `_NEW`-Suffix zeigt vollstÃ¤ndige Neuerstellung an.
+
+---
+
+#### 12. processes_bpmn_validation_quickstart_v5_0.md
+**Zeilen:** 522 | **GrÃ¶ÃŸe:** 14 KB | **Status:** finalisiert
+
+**Zweck:** Praktischer Leitfaden fÃ¼r BPMN-Validierung
+
+**Inhalt:**
+- Quick Start (4 Schritte)
+- 5 Verwendungsszenarien
+- Visualisierung (Mermaid)
+- Report-Generierung
+- Fehlersuche & Troubleshooting
+- Best Practices
+
+**AbhÃ¤ngigkeiten:**
+- processes_bpmn_validation_v5_0_NEW.md (Hauptreferenz)
+
+**Wird referenziert von:** Selten (Tutorial-Charakter)
+
+---
+
+#### 13. processes_process_hierarchy_v5_0_repaired.md
+**Zeilen:** 597 | **GrÃ¶ÃŸe:** 18 KB | **Status:** finalisiert (repaired)
+
+**Zweck:** Prozess-Details & Hierarchie
+
+**Inhalt:**
+- High-Level Prozesse (CC08): CL110 Retrieval, CL111 Storage
+- Mid-Level Prozesse (CC09): CL114-CL121 (7 Prozesse)
+- Low-Level Prozesse (CC10): CL124-CL152 (29 Prozesse)
+- Prozess-Mappings und Hierarchie-Tabellen
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md
+- core_ground_truth_central_v5_0.md
+- auxiliary_chunking_v5_0_repaired.md
+- auxiliary_dataset_core_v5_0.md
+
+**Wird referenziert von:**
+- processes_bpmn_validation_v5_0_NEW.md
+- auxiliary_chunking_v5_0_repaired.md
+
+**Hinweis:** `_repaired`-Suffix zeigt Format-Fehlerkorrektur an.
+
+---
+
+#### 14. processes_refa_analytics_v5_0.md
+**Zeilen:** 313 | **GrÃ¶ÃŸe:** 12 KB | **Status:** finalisiert
+
+**Zweck:** REFA-Analytik und Zeitarten
+
+**Inhalt:**
+- Transformation DaRa â†’ REFA-Zeitarten
+- REFA-Hauptzeitarten (Grundzeit, Verteilzeit, Erholungszeit)
+- Zuordnungstabellen (CC09 â†’ REFA)
+- Chunking-Integration
+
+**AbhÃ¤ngigkeiten:**
+- auxiliary_chunking_v5_0_repaired.md
+- processes_process_hierarchy_v5_0_repaired.md
+
+**Wird referenziert von:** Selten (Spezialthema)
+
+---
+
+#### 15. processes_mtm_codes_v5_0.md
+**Zeilen:** 223 | **GrÃ¶ÃŸe:** 6.6 KB | **Status:** finalisiert
+
+**Zweck:** MTM-1 Grundbewegungen Mapping
+
+**Inhalt:**
+- MTM-Einheit (TMU)
+- MTM-1 Grundbewegungen (Greifen, Hinlangen, Loslassen, etc.)
+- DaRa-Label â†’ MTM-Mapping
+- Bewegungsanalyse-Grundlagen
+
+**AbhÃ¤ngigkeiten:**
+- core_labels_207_v5_0.md (implizit)
+
+**Wird referenziert von:** Selten (Spezialthema)
+
+---
+
+### ASSETS-DATEIEN
+
+#### 16. assets_query_patterns_v5_0.md
+**Zeilen:** 570 | **GrÃ¶ÃŸe:** 16 KB | **Status:** finalisiert
+
+**Zweck:** Query Patterns & Best Practices
+
+**Inhalt:**
+- Fragetypen-Klassifikation
+- Query-Routing-Logik
+- Beispiel-Queries mit LÃ¶sungen
+- Skill-Anwendungsszenarien
+
+**AbhÃ¤ngigkeiten:**
+- Alle core_*-Dateien (referenziert fÃ¼r Query-Routing)
+- Alle auxiliary_*-Dateien
+- Alle processes_*-Dateien
+
+**Wird referenziert von:** SKILL.md (in Phase 7)
+
+---
+
+#### 17. assets_bpmn_validation_report_template_v5_0.md
+**Zeilen:** 371 | **GrÃ¶ÃŸe:** 9.3 KB | **Status:** finalisiert
+
+**Zweck:** BPMN Validation Report Template
+
+**Inhalt:**
+- Metadaten-Sektion
+- Executive Summary Template
+- IST vs. SOLL Comparison Template
+- Violation Analysis Template (7 Kategorien)
+- BPMN-Visualisierung Template
+- Error Hypotheses Template
+- Recommendations Template
+
+**AbhÃ¤ngigkeiten:**
+- processes_bpmn_validation_v5_0_NEW.md (Referenz fÃ¼r Verwendung)
+
+**Wird referenziert von:**
+- processes_bpmn_validation_quickstart_v5_0.md
+
+---
+
+#### 18. assets_scenario_report_template_v5_0.md
+**Zeilen:** 257 | **GrÃ¶ÃŸe:** 8.6 KB | **Status:** finalisiert
+
+**Zweck:** Szenario-Bericht-Template
+
+**Inhalt:**
+- JSON-Ausgabeformat (maschinenlesbar)
+- Markdown-Bericht-Template (menschenlesbar)
+- Szenario-Statistiken
+- Chunk-Level-Details
+
+**AbhÃ¤ngigkeiten:**
+- core_ground_truth_central_v5_0.md (fÃ¼r Szenario-Definitionen)
+
+**Wird referenziert von:** Selten (Template-Charakter)
+
+---
+
+## ðŸ”— DEPENDENCY-GRAPH
+
+```
+[Root-Dateien: Keine Dependencies]
+  core_labels_207_v5_0.md
+  core_articles_inventory_v5_0.md
+
+[Tier 1: AbhÃ¤ngig von Root]
+  core_category_activation_matrix_v5_0.md â† core_labels_207
+  core_ground_truth_central_v5_0.md â† core_labels_207, category_matrix
+  auxiliary_data_structure_v5_0.md â† core_labels_207
+  auxiliary_warehouse_physical_v5_0.md â† core_labels_207
+
+[Tier 2: AbhÃ¤ngig von Tier 1]
+  core_validation_rules_v5_0.md â† labels, category_matrix, ground_truth
+  auxiliary_dataset_core_v5_0.md â† warehouse_physical, labels, data_structure
+  auxiliary_chunking_v5_0_repaired.md â† labels, ground_truth, validation_rules
+  processes_process_hierarchy_v5_0_repaired.md â† labels, ground_truth
+
+[Tier 3: AbhÃ¤ngig von Tier 2]
+  processes_bpmn_validation_v5_0_NEW.md â† validation_rules, labels, process_hierarchy, ground_truth
+  auxiliary_semantics_v5_0.md â† labels, ground_truth, chunking
+
+[Tier 4: AbhÃ¤ngig von Tier 3]
+  processes_bpmn_validation_quickstart_v5_0.md â† bpmn_validation_NEW
+  processes_refa_analytics_v5_0.md â† chunking, process_hierarchy
+  processes_mtm_codes_v5_0.md â† (implizit: labels)
+
+[Assets: Multi-Tier Dependencies]
+  assets_query_patterns_v5_0.md â† ALLE (Query-Routing)
+  assets_bpmn_validation_report_template_v5_0.md â† bpmn_validation_NEW
+  assets_scenario_report_template_v5_0.md â† ground_truth_central
+```
+
+---
+
+## ðŸ“ˆ STATISTIKEN
+
+### GrÃ¶ÃŸenverteilung
+
+| Kategorie | Anzahl | Anteil |
+|-----------|--------|--------|
+| Klein (<10 KB) | 5 | 28% |
+| Mittel (10-20 KB) | 7 | 39% |
+| GroÃŸ (20-50 KB) | 5 | 28% |
+| Sehr groÃŸ (>50 KB) | 1 | 5% |
+
+### Zeilenverteilung
+
+| Kategorie | Anzahl | Anteil |
+|-----------|--------|--------|
+| Klein (<300 Zeilen) | 5 | 28% |
+| Mittel (300-600 Zeilen) | 8 | 44% |
+| GroÃŸ (600-1200 Zeilen) | 4 | 22% |
+| Sehr groÃŸ (>1200 Zeilen) | 1 | 6% |
+
+### KomplexitÃ¤t (nach AbhÃ¤ngigkeiten)
+
+| KomplexitÃ¤t | Anzahl | Dateien |
+|-------------|--------|---------|
+| **Niedrig** (0-1 Dependencies) | 6 | labels, articles, data_structure, warehouse, mtm, scenario_template |
+| **Mittel** (2-3 Dependencies) | 8 | category_matrix, ground_truth, dataset_core, semantics, process_hierarchy, quickstart, refa, report_template |
+| **Hoch** (4+ Dependencies) | 4 | validation_rules, chunking, bpmn_validation_NEW, query_patterns |
+
+---
+
+## ðŸŽ¯ VERWENDUNGSHINWEISE
+
+### FÃ¼r Entwickler
+1. **Start:** `core_labels_207_v5_0.md` (Label-Definitionen)
+2. **Szenario-Logik:** `core_ground_truth_central_v5_0.md`
+3. **Validierung:** `core_validation_rules_v5_0.md` + `processes_bpmn_validation_v5_0_NEW.md`
+
+### FÃ¼r Forscher
+1. **Dataset-Ãœberblick:** `auxiliary_dataset_core_v5_0.md`
+2. **Chunking verstehen:** `auxiliary_chunking_v5_0_repaired.md`
+3. **BPMN-Validierung anwenden:** `processes_bpmn_validation_quickstart_v5_0.md`
+
+### FÃ¼r Skill-Integration
+1. **Query-Routing:** `assets_query_patterns_v5_0.md`
+2. **Navigationslogik:** SKILL.md v5.0 (Phase 7)
+3. **Referenzen:** Alle Dateien mit `_v5_0`-Endung
+
+---
+
+## ðŸ” DATEINAMEN-KONVENTIONEN
+
+### PrÃ¤fixe
+- **core_** â†’ Kern-Definitionen (Labels, Szenarien, Validierung)
+- **auxiliary_** â†’ Hilfsinformationen (Chunking, Struktur, Warehouse)
+- **processes_** â†’ Prozess-spezifische Logik (BPMN, REFA, MTM)
+- **assets_** â†’ Wiederverwendbare Templates & Patterns
+
+### Suffixe
+- **_v5_0** â†’ Versionsnummer (alle Dateien)
+- **_repaired** â†’ Fehlerkorrektur (Encoding, Format)
+- **_NEW** â†’ VollstÃ¤ndige Neuerstellung (>50% geÃ¤ndert)
+
+---
+
+## âœ… QUALITÃ„TSMERKMALE
+
+### Konsistenz
+- âœ… Alle Dateinamen mit `_v5_0`-Suffix
+- âœ… Alle Cross-Referenzen mit korrekten Dateinamen
+- âœ… 0 fehlerhafte Referenzen nach Phase 6
+
+### VollstÃ¤ndigkeit
+- âœ… 18/18 Dateien finalisiert
+- âœ… 11/18 Dateien mit YAML-Headern (version, status)
+- âœ… Alle Dependencies dokumentiert
+
+### StrukturqualitÃ¤t
+- âœ… Klare PrÃ¤fix-Gruppierung (core, auxiliary, processes, assets)
+- âœ… Ausgeglichene GrÃ¶ÃŸenverteilung (max. 55 KB)
+- âœ… Minimale Cross-Referenzen (~80 Links)
+
+---
+
+## ðŸ“ NÃ„CHSTE SCHRITTE (Phase 7)
+
+1. **SKILL_v5_0.md erstellen**
+   - Navigationslogik mit allen v5_0-Referenzen
+   - Metadaten-Update (Version 5.0, Feature-Liste)
+   - Changelog-Integration
+
+2. **README_v5_0.md** (optional)
+   - Quick Start fÃ¼r neue Nutzer
+   - Installation & Setup
+   - Beispiel-Workflows
+
+---
+
+**Version:** 1.0  
+**Erstellt:** 05.02.2026  
+**Status:** Finalisiert âœ…  
+**Autor:** Phase 6 Globale Verifikation

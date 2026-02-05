@@ -1,0 +1,347 @@
+# DaRa Skill v5.0 â€” Quick Start Guide
+
+**Version:** 5.0.0  
+**Release-Datum:** 05.02.2026  
+**Status:** Production-Ready âœ…
+
+---
+
+## ðŸŽ¯ Was ist der DaRa Skill?
+
+Der **DaRa Dataset Expert Skill** ermÃ¶glicht Claude die prÃ¤zise, faktenbasierte Analyse des DaRa-Datensatzes fÃ¼r intralogistische Warehouse-Prozesse.
+
+**Kern-Features:**
+- âœ… **207 Labels** in 12 Klassenkategorien (CC01-CC12)
+- âœ… **8 Szenarien** (S1-S8) fÃ¼r Retrieval/Storage-Prozesse
+- âœ… **18 Probanden** (S01-S18) mit vollstÃ¤ndiger Demographie
+- âœ… **BPMN-Validierung** fÃ¼r IST/SOLL-Vergleich
+- âœ… **REFA/MTM-Integration** fÃ¼r Zeitartenanalyse
+- âœ… **Chunking-System** mit 13 Triggern (T1-T13)
+- âœ… **Ground Truth v3.0** mit 5-Schritt Decision-Logik
+
+---
+
+## ðŸš€ Quick Start (3 Schritte)
+
+### Schritt 1: Skill aktivieren
+
+Der Skill ist bereits in diesem Projekt aktiviert. Alle 18 v5_0-Dateien sind verfÃ¼gbar.
+
+### Schritt 2: Erste Frage stellen
+
+**Beispiel-Fragen:**
+```
+"Wie viele Probanden gibt es im DaRa-Datensatz?"
+"ErklÃ¤re das Chunking-System"
+"Was ist der Unterschied zwischen S1 und S7?"
+"Validiere einen Retrieval-Prozess gegen BPMN"
+```
+
+### Schritt 3: Tiefere Analysen
+
+**FÃ¼r Forscher:**
+- Szenario-Klassifikation
+- BPMN-Validierung
+- Multi-Order Analysen (S7/S8)
+
+**FÃ¼r Entwickler:**
+- Label-Kombinationsregeln
+- Validierungslogik implementieren
+- REFA-Zeitarten-Mapping
+
+---
+
+## ðŸ“ Dateistruktur
+
+```
+/dara-skill-v5.0/
+â”œâ”€â”€ CORE (5 Dateien)
+â”‚   â”œâ”€â”€ core_labels_207_v5_0.md          â†’ 207 Label-Definitionen
+â”‚   â”œâ”€â”€ core_ground_truth_central_v5_0.md â†’ Szenario-Klassifikation
+â”‚   â”œâ”€â”€ core_validation_rules_v5_0.md    â†’ Frame-Level Validierung
+â”‚   â”œâ”€â”€ core_category_activation_matrix_v5_0.md
+â”‚   â””â”€â”€ core_articles_inventory_v5_0.md
+â”‚
+â”œâ”€â”€ AUXILIARY (5 Dateien)
+â”‚   â”œâ”€â”€ auxiliary_chunking_v5_0_repaired.md â†’ Chunking & Trigger
+â”‚   â”œâ”€â”€ auxiliary_dataset_core_v5_0.md       â†’ Dataset-Ãœbersicht
+â”‚   â”œâ”€â”€ auxiliary_data_structure_v5_0.md
+â”‚   â”œâ”€â”€ auxiliary_semantics_v5_0.md
+â”‚   â””â”€â”€ auxiliary_warehouse_physical_v5_0.md
+â”‚
+â”œâ”€â”€ PROCESSES (5 Dateien)
+â”‚   â”œâ”€â”€ processes_bpmn_validation_v5_0_NEW.md â†’ BPMN-Validierung
+â”‚   â”œâ”€â”€ processes_bpmn_validation_quickstart_v5_0.md
+â”‚   â”œâ”€â”€ processes_process_hierarchy_v5_0_repaired.md
+â”‚   â”œâ”€â”€ processes_refa_analytics_v5_0.md
+â”‚   â””â”€â”€ processes_mtm_codes_v5_0.md
+â”‚
+â””â”€â”€ ASSETS (3 Dateien)
+    â”œâ”€â”€ assets_query_patterns_v5_0.md
+    â”œâ”€â”€ assets_bpmn_validation_report_template_v5_0.md
+    â””â”€â”€ assets_scenario_report_template_v5_0.md
+```
+
+**Gesamt:** 18 Dateien, ~324 KB, 9.655 Zeilen
+
+---
+
+## ðŸŽ“ Lernpfad
+
+### Stufe 1: Einsteiger (1-2 Stunden)
+
+**Ziel:** Verstehen der Grundstruktur
+
+1. **Dataset-Ãœberblick**
+   - Lies: `auxiliary_dataset_core_v5_0.md`
+   - Verstehe: 18 Probanden, Sessions, Szenarien
+
+2. **Label-System**
+   - Lies: `core_labels_207_v5_0.md` (Ãœberblick)
+   - Lerne: 12 Kategorien (CC01-CC12)
+
+3. **Erste Analyse**
+   - Stelle Fragen: "Wie funktioniert Szenario S1?"
+   - Nutze: Claude's Antworten basieren auf den Skill-Dateien
+
+---
+
+### Stufe 2: Fortgeschritten (3-5 Stunden)
+
+**Ziel:** Arbeiten mit Validierung & Chunking
+
+1. **Chunking-System**
+   - Lies: `auxiliary_chunking_v5_0_repaired.md`
+   - Verstehe: Trigger T1-T13
+
+2. **Szenario-Klassifikation**
+   - Lies: `core_ground_truth_central_v5_0.md`
+   - Verstehe: 5-Schritt Decision-Logik
+
+3. **Validierungsregeln**
+   - Lies: `core_validation_rules_v5_0.md`
+   - Implementiere: Master-Slave-AbhÃ¤ngigkeiten
+
+---
+
+### Stufe 3: Experte (5-10 Stunden)
+
+**Ziel:** BPMN-Validierung & vollstÃ¤ndige Analysen
+
+1. **BPMN-Validierung**
+   - Lies: `processes_bpmn_validation_v5_0_NEW.md`
+   - Tutorial: `processes_bpmn_validation_quickstart_v5_0.md`
+
+2. **VollstÃ¤ndige Analysen**
+   - Multi-Order Szenarien (S7/S8)
+   - IST/SOLL-Vergleich
+   - Conformity Scores
+
+3. **REFA/MTM Integration**
+   - Zeitarten-Mapping
+   - MTM-Grundbewegungen
+
+---
+
+## ðŸ’¡ HÃ¤ufige AnwendungsfÃ¤lle
+
+### Use Case 1: Szenario-Erkennung
+
+**Frage:** "Wie erkenne ich, ob ein Frame zu S7 gehÃ¶rt?"
+
+**Antwort nutzt:**
+- `core_ground_truth_central_v5_0.md` â†’ 5-Schritt Logik
+- `core_labels_207_v5_0.md` â†’ Label-Definitionen
+- `auxiliary_chunking_v5_0_repaired.md` â†’ Trigger T6 (Order Addition)
+
+---
+
+### Use Case 2: BPMN-Validierung
+
+**Frage:** "Validiere diesen Retrieval-Prozess gegen BPMN"
+
+**Antwort nutzt:**
+- `processes_bpmn_validation_v5_0_NEW.md` â†’ Sequenz-FSM
+- `core_validation_rules_v5_0.md` â†’ Tool-Requirements
+- `processes_process_hierarchy_v5_0_repaired.md` â†’ Prozess-Details
+
+**Tutorial:** `processes_bpmn_validation_quickstart_v5_0.md`
+
+---
+
+### Use Case 3: Multi-Order Analyse (S7/S8)
+
+**Frage:** "Wie unterscheiden sich S7 und S8?"
+
+**Antwort nutzt:**
+- `core_ground_truth_central_v5_0.md` â†’ S7/S8 Definitionen
+- `auxiliary_chunking_v5_0_repaired.md` â†’ Multi-Order Handling (Kapitel 4.6)
+- `core_category_activation_matrix_v5_0.md` â†’ IT-Switch Patterns
+
+---
+
+### Use Case 4: REFA-Zeitarten
+
+**Frage:** "Welche DaRa-Labels entsprechen der HaupttÃ¤tigkeit?"
+
+**Antwort nutzt:**
+- `processes_refa_analytics_v5_0.md` â†’ REFA-Mapping
+- `core_labels_207_v5_0.md` â†’ Label-Definitionen
+- `processes_process_hierarchy_v5_0_repaired.md` â†’ CC09-Prozesse
+
+---
+
+## ðŸ“Š Skill-Capabilities (Ãœbersicht)
+
+### âœ… Kann beantwortet werden
+
+| DomÃ¤ne | Beispiel-Fragen |
+|--------|-----------------|
+| **Labels** | "Welche Labels gehÃ¶ren zu CC04?", "Was ist CL115?" |
+| **Szenarien** | "Unterschied S1 vs S4?", "Wie erkenne ich S7?" |
+| **Validierung** | "Darf CC01=Walking wenn CC02=Standing Still?", "Tool-Requirements fÃ¼r CL145?" |
+| **BPMN** | "Validiere Prozess gegen BPMN", "IST/SOLL-Vergleich" |
+| **Chunking** | "Was sind Trigger T1-T13?", "Wann endet ein Chunk?" |
+| **REFA** | "Was ist $t_{MH}$?", "Erholungszeit fÃ¼r CC03=Bending?" |
+| **Warehouse** | "Wie groÃŸ ist Aisle 3?", "Location-Transitions?" |
+| **Artikel** | "Gewicht von Artikel 2904-001?", "Alle Large-Artikel?" |
+
+### âŒ Kann NICHT beantwortet werden
+
+| DomÃ¤ne | Warum nicht |
+|--------|-------------|
+| **Rohdaten-Analyse** | Keine CSV-Dateien im Skill |
+| **Statistik** | Keine Frame-Daten, nur Dokumentation |
+| **Vorhersagen** | Skill ist deskriptiv, nicht prÃ¤diktiv |
+| **Modelltraining** | AuÃŸerhalb des Scopes |
+| **Video-Analyse** | Keine Video-Daten |
+
+---
+
+## ðŸ”§ FÃ¼r Entwickler
+
+### Integration in eigene Anwendung
+
+**Python-Beispiel:**
+```python
+from claude_api import Claude
+
+# Initialisiere Claude mit DaRa Skill
+claude = Claude(project="dara-skill-v5.0")
+
+# Stelle Frage
+response = claude.query("Validiere diesen Frame gegen CC01-Master-Slave-Regeln")
+
+# Antwort basiert auf core_validation_rules_v5_0.md
+print(response)
+```
+
+### Wichtige Dateien fÃ¼r Entwickler
+
+| Aufgabe | Datei |
+|---------|-------|
+| **Label-Lookup** | `core_labels_207_v5_0.md` |
+| **Validierung** | `core_validation_rules_v5_0.md` |
+| **Szenario-Klassifikation** | `core_ground_truth_central_v5_0.md` |
+| **BPMN-Validierung** | `processes_bpmn_validation_v5_0_NEW.md` |
+| **Query-Patterns** | `assets_query_patterns_v5_0.md` |
+
+---
+
+## ðŸ“š Dokumentation
+
+### Release-Dokumente (v5.0)
+
+- **CHANGELOG_v5_0.md** â€” VollstÃ¤ndige Ã„nderungshistorie
+- **MIGRATION_v4_x_to_v5_0.md** â€” Upgrade-Anleitung von v4.x
+- **STRUCTURE_v5_0.md** â€” Detaillierte Dateistruktur-Ãœbersicht
+- **README_v5_0.md** â€” Dieses Dokument
+
+### Prozess-Dokumentation
+
+- **phase4_konsolidierungsplan_v5_0.md** â€” Konsolidierungsanalyse
+- **phase6_abschlussbericht.md** â€” Verifikations-Bericht
+
+---
+
+## ðŸ†˜ HÃ¤ufige Probleme & LÃ¶sungen
+
+### Problem 1: "Skill antwortet nicht prÃ¤zise"
+
+**LÃ¶sung:** Stelle spezifischere Fragen
+- âŒ "Was ist DaRa?"
+- âœ… "Wie viele Labels gibt es in CC04?"
+
+---
+
+### Problem 2: "Referenz auf alte Dateinamen"
+
+**LÃ¶sung:** Nutze v5_0-Dateinamen
+- âŒ `chunking.md`
+- âœ… `auxiliary_chunking_v5_0_repaired.md`
+
+---
+
+### Problem 3: "Wie finde ich die richtige Datei?"
+
+**LÃ¶sung:** Nutze `assets_query_patterns_v5_0.md`
+- EnthÃ¤lt Query-Routing-Logik
+- Zeigt, welche Datei fÃ¼r welche Frage relevant ist
+
+---
+
+## ðŸš¦ NÃ¤chste Schritte
+
+### FÃ¼r AnfÃ¤nger
+1. âœ… Lies dieses README
+2. âœ… Ã–ffne `auxiliary_dataset_core_v5_0.md`
+3. âœ… Stelle erste Frage: "Wie viele Probanden gibt es?"
+
+### FÃ¼r Fortgeschrittene
+1. âœ… Lies `core_ground_truth_central_v5_0.md`
+2. âœ… Verstehe 5-Schritt Decision-Logik
+3. âœ… Analysiere Multi-Order Szenarien (S7/S8)
+
+### FÃ¼r Experten
+1. âœ… Lies `processes_bpmn_validation_v5_0_NEW.md`
+2. âœ… Implementiere Validierung in eigener Anwendung
+3. âœ… Erweitere Skill mit eigenen Analysen
+
+---
+
+## ðŸ“ž Support & Community
+
+**Fragen zu v5.0?**
+- Siehe `MIGRATION_v4_x_to_v5_0.md` fÃ¼r Upgrade-Hilfe
+- Siehe `CHANGELOG_v5_0.md` fÃ¼r alle Ã„nderungen
+
+**Feature-Requests?**
+- Kontaktiere das Anthropic-Team
+- Nutze Feedback-Button in Claude.ai
+
+**Bug-Reports?**
+- Dokumentiere: Welche Frage, welche Antwort, was erwartet
+- Referenz: Relevante Skill-Datei
+
+---
+
+## ðŸŽ‰ Zusammenfassung
+
+**DaRa Skill v5.0 bietet:**
+- âœ… 18 finale, verifizierte Dateien
+- âœ… 0 fehlerhafte Referenzen
+- âœ… 100% ReferenzintegritÃ¤t
+- âœ… VollstÃ¤ndige BPMN-Validierung
+- âœ… Ground Truth v3.0 Integration
+- âœ… Multi-Order Support (S7/S8)
+- âœ… REFA/MTM-Methodik
+- âœ… Produktions-reif
+
+**Viel Erfolg mit dem DaRa Skill v5.0!** ðŸš€
+
+---
+
+**Version:** 1.0  
+**Erstellt:** 05.02.2026  
+**Autor:** Phase 7 Finaler Skill-Aufbau  
+**Status:** Production-Ready âœ…
