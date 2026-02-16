@@ -133,107 +133,164 @@ Version 5.0 ist ein **Major Release** mit systematischer Überarbeitung aller Sk
 
 ---
 
-## Navigationslogik (Orchestrierung) — v5.0
+## Navigationslogik (Orchestrierung) — v5.0 (Hierarchisches Ebenen-System)
 
-**Schritt 1: Identifiziere die Fragedomäne**
+Dateien werden **kumulativ** geladen: Ebene 1 ist immer die Basis. Jede höhere Ebene wird zusätzlich zu allen vorherigen Ebenen geladen. Die höchste benötigte Ebene bestimmt den Gesamtumfang der geladenen Dateien.
 
-```python
-# 1. Grundlegende Datensatz-Informationen
-if "Proband" or "Subjekt" or "S01" to "S18" or "Session" in query:
-    view("references/auxiliary/dataset_core_v5_0.md")
+---
 
-# 2. Datenstruktur / Frame-Synchronisation
-elif "Frame" or "Synchronisation" or "CSV" or "Zeile" or "Datenformat" in query:
-    view("references/auxiliary/data_structure_v5_0.md")
+### EBENE 1 — FOUNDATION (IMMER LADEN)
 
-# 3. Lagerlayout / Physische Umgebung
-elif "Lager" or "Regal" or "Gasse" or "Aisle" or "Zone" or "Compartment" or "Location" in query:
-    view("references/auxiliary/warehouse_physical_v5_0.md")
+**Diese 5 Dateien werden bei jeder Query geladen:**
 
-# 4. Chunking-Logik (mit Validierung & Multi-Order)
-elif "Chunk" or "Trigger" or "T1" to "T13" or "Segment" or "Multi-Order S7/S8" in query:
-    view("references/auxiliary/chunking_v5_0.md")
+| Datei | Inhalt |
+|-------|--------|
+| `references/core/labels_207_v5_0.md` | Label-Definitionen CL001-CL207 |
+| `references/core/validation_rules_v5_0.md` | Frame-Level Validierungsregeln |
+| `references/auxiliary/dataset_core_v5_0.md` | Probanden S01-S18, Sessions |
+| `references/auxiliary/semantics_v5_0.md` | Label-Semantik & Abhängigkeiten |
+| `references/auxiliary/data_structure_v5_0.md` | Frame-Struktur (30 fps), CSV-Format |
 
-# 5. Semantik / Abhängigkeiten
-elif "Semantik" or "Abhängigkeit" or "Bedeutung" or "Zusammenhang" in query:
-    view("references/auxiliary/semantics_v5_0.md")
+**Trigger:** Jede Query (keine Bedingung)
 
-# 6. Label-Definitionen
-elif "Label" or "CL" or "CC" or "Kategorie" or "Klassifikation" in query:
-    view("references/core/labels_207_v5_0.md")
+---
 
-# 7. Artikel-Stammdaten
-elif "Artikel" or "Order 2904" or "Order 2905" or "Order 2906" or "Gewicht" in query:
-    view("references/core/articles_inventory_v5_0.md")
+### EBENE 2 — SZENARIO-ERKENNUNG (+ Ebene 1)
 
-# 8. Szenarioerkennung (Ground Truth v3.0)
-elif "Szenario" or "S1" to "S8" or "Erkennung" or "Ground Truth" or "5-Schritt" in query:
-    view("references/core/ground_truth_central_v5_0.md")
+**Zusätzlich laden, wenn einer der folgenden Begriffe vorkommt:**
 
-# 9. Category Activation Matrices
-elif "Category Activation" or "Szenario-Matrix" or "IT-System-Mapping" in query:
-    view("references/core/category_activation_matrix_v5_0.md")
+`Szenario` · `S1` bis `S8` · `Ground Truth` · `5-Schritt` · `Erkennung` · `Chunk` · `Trigger` · `T1` bis `T13` · `Segment` · `Multi-Order` · `Category Activation` · `Szenario-Matrix` · `IT-System-Mapping`
 
-# 10. Frame-Level Validierungsregeln (NEU v5.0)
-elif "Master-Slave" or "Label-Kombination" or "Frame-Validierung" or "Validierungsregel" in query:
-    view("references/core/validation_rules_v5_0.md")
+| Datei | Inhalt |
+|-------|--------|
+| `references/core/ground_truth_central_v5_0.md` | 5-Schritt Decision-Logik, S1-S8 |
+| `references/auxiliary/chunking_v5_1.md` | Trigger T1-T13, Multi-Order ⚠️ |
+| `references/core/category_activation_matrix_v5_0.md` | Szenario-Label-Mappings |
 
-# 11. REFA / Zeitarten
-elif "REFA" or "Zeitart" or "t_MH" or "Erholung" or "Verteilzeit" or "Auftragszeit" in query:
-    view("references/processes/refa_analytics_v5_0.md")
+> ⚠️ **Hinweis Chunking-Datei:** `chunking_v5_0.md` ist leer (Encoding-Fehler). Der Inhalt wurde in `chunking_v5_1.md` (1.212 Zeilen, vollständig repariert) überführt. Immer `chunking_v5_1.md` verwenden.
 
-# 12. MTM-Codes
-elif "MTM" or "TMU" or "Reach" or "Grasp" or "Move" or "Grundbewegung" in query:
-    view("references/processes/mtm_codes_v5_0.md")
+---
 
-# 13. Prozess-Hierarchie
-elif "Prozess-Hierarchie" or "High-Level" or "Mid-Level" or "Low-Level" or "CC08/CC09/CC10" in query:
-    view("references/processes/process_hierarchy_v5_0.md")
+### EBENE 3 — REFA-ZEITANALYSE (+ Ebene 1+2)
 
-# 14. BPMN-Validierung & Prozessanalyse (Hauptlogik)
-elif "BPMN" or "Validierung" or "Abweichung" or "IST SOLL" or "Conformity" or "Sequenzfehler" in query:
-    view("references/processes/bpmn_validation_v5_0.md")
+**Zusätzlich laden, wenn einer der folgenden Begriffe vorkommt:**
 
-# 15. BPMN-Validierung Quick Start (Tutorial)
-elif "BPMN Quick Start" or "BPMN Tutorial" or "BPMN Anwendung" in query:
-    view("references/processes/bpmn_validation_quickstart_v5_0.md")
+`REFA` · `Zeitart` · `t_MH` · `t_MN` · `t_R` · `Erholung` · `Verteilzeit` · `Auftragszeit` · `Prozess-Hierarchie` · `High-Level` · `Mid-Level` · `Low-Level` · `CC08` · `CC09` · `CC10`
 
-# 16. Query-Patterns (Skill-Anwendung)
-elif "Query Pattern" or "Wie frage ich" or "Beispiel-Fragen" in query:
-    view("assets/query_patterns_v5_0.md")
+| Datei | Inhalt |
+|-------|--------|
+| `references/processes/refa_analytics_v5_0.md` | Zeitarten $t_{MH}$, $t_{MN}$, $t_{v}$, $t_{R}$ |
+| `references/processes/process_hierarchy_v5_0.md` | High/Mid/Low-Level Prozess-Mapping |
 
-# 17. Report-Templates
-elif "Report Template" or "Bericht-Vorlage" or "Ausgabeformat" in query:
-    if "BPMN" in query:
-        view("assets/bpmn_validation_report_template_v5_0.md")
-    else:
-        view("assets/scenario_report_template_v5_0.md")
+---
 
-# 18. v5.0 Dokumentation
-elif "CHANGELOG" or "Was ist neu" or "Version 5.0" in query:
-    view("docs/CHANGELOG_v5_0.md")
+### EBENE 4 — MTM-ANALYSE (+ Ebene 1+2+3)
 
-elif "Migration" or "Upgrade" or "v4" in query:
-    view("docs/MIGRATION_v5_0.md")
+**Zusätzlich laden, wenn einer der folgenden Begriffe vorkommt:**
 
-elif "Struktur" or "Dateiübersicht" or "Dependencies" in query:
-    view("docs/STRUCTURE_v5_0.md")
+`MTM` · `TMU` · `Reach` · `Grasp` · `Move` · `Turn` · `Apply Pressure` · `Grundbewegung` · `Basisbewegung` · `MTM-1`
 
-elif "README" or "Quick Start" or "Einstieg" in query:
-    view("docs/README_v5_0.md")
+| Datei | Inhalt |
+|-------|--------|
+| `references/processes/mtm_codes_v5_0.md` | MTM-1 Grundbewegungen & TMU-Werte |
 
-# 19. Fallback
-else:
-    view("references/auxiliary/dataset_core_v5_0.md")
-```
+---
 
-**Schritt 2: Präzise antworten**
+### EBENE 5 — BPMN-PROZESSVALIDIERUNG (+ Ebene 1+2+3+4)
+
+**Zusätzlich laden, wenn einer der folgenden Begriffe vorkommt:**
+
+`BPMN` · `Validierung` · `IST/SOLL` · `IST SOLL` · `Conformity` · `Sequenzfehler` · `Abweichung` · `Prozessanalyse` · `Figure A2` bis `Figure A7` · `Error-Handling` · `CL135`
+
+| Datei | Inhalt |
+|-------|--------|
+| `references/processes/bpmn_validation_v5_0.md` | Vollständige BPMN-Validierungslogik (1.623 Zeilen) |
+| `references/processes/bpmn_validation_quickstart_v5_0.md` | BPMN-Validierung Tutorial |
+
+---
+
+### OPTIONAL — DOMAIN-SPEZIFISCH (bei Bedarf)
+
+**Zusätzlich laden, wenn einer der folgenden Begriffe vorkommt:**
+
+`Lager` · `Regal` · `Gasse` · `Aisle` · `Zone` · `Compartment` · `Location` · `Teleportation` · `Artikel` · `Order 2904` · `Order 2905` · `Order 2906` · `Gewicht` · `Gewichtsklasse`
+
+| Datei | Inhalt |
+|-------|--------|
+| `references/auxiliary/warehouse_physical_v5_0.md` | OMNI Warehouse Layout, Aisles 1-5 |
+| `references/core/articles_inventory_v5_0.md` | 74 Artikel-Stammdaten |
+
+---
+
+### Ebenen-Mapping nach Query-Typ (Beispiele)
+
+| Query | Benötigte Ebenen |
+|-------|-----------------|
+| "Welche Labels gehören zu CC04?" | E1 |
+| "Erkläre die Differenzierung S1 vs S7" | E1 + E2 |
+| "REFA-Zeitarten für Szenario S3" | E1 + E2 + E3 |
+| "MTM-Codes für Picking-Aktivität" | E1 + E2 + E3 + E4 |
+| "IST/SOLL-Vergleich für Proband S05, Szenario S2" | E1 + E2 + E3 + E4 + E5 |
+| "Wo liegt Artikel 2904-042?" | E1 + OPT |
+
+---
+
+**Antwort-Grundsatz:**
 
 - Nur dokumentierte Fakten verwenden
 - Label-IDs korrekt zitieren (z.B. "CL115")
 - Fachbegriffe korrekt verwenden (z.B. "Master-Slave", "$t_{MN}$")
 - Quelle angeben (z.B. "Gemäß Regel V-B1 in references/core/validation_rules_v5_0.md...")
 - Bei Unsicherheit: **"Diese Information ist nicht in den Skill-Dateien dokumentiert"**
+
+---
+
+## Agentischer Analyse-Workflow
+
+Bei jeder Query diese 5 Schritte durchlaufen:
+
+**1. Intent-Analyse**
+Erkenne aus der Nutzer-Frage, welche Ebene(n) benötigt werden:
+- Nur Labels/Validierung/Datensatz-Grundfragen → Ebene 1
+- Szenario-Erkennung, Chunking, Ground Truth → + Ebene 2
+- REFA-Berechnung, Prozess-Hierarchie → + Ebene 3
+- MTM-Analyse → + Ebene 4
+- BPMN-Validierung, IST/SOLL → + Ebene 5
+- Lager-/Artikel-Fragen → + Optional
+
+**2. Datei-Auswahl**
+Dateien in dieser Reihenfolge laden:
+1. Zuerst alle Ebene-1-Dateien (Foundation — immer)
+2. Dann spezifische Ebenen (2, 3, 4, 5) nach Bedarf
+3. Dann optionale Domain-Dateien falls Trigger erkannt
+
+**3. Analyse**
+Dateien lesen, Struktur parsen, relevante Abschnitte extrahieren. Nur dokumentierte Fakten verwenden — keine Halluzinationen.
+
+**4. Antwort**
+Strukturierte Antwort mit direkten Zitaten aus Dateien und Angabe von Regel-IDs, Abschnittsreferenzen und BPMN-Figuren.
+
+**5. Iterativ**
+Wenn Query mehrdeutig ist oder mehrere Interpretationen möglich sind → Rückfrage stellen, bevor Dateien geladen werden. Beispiel: *"Meinst du Szenario S3 (Single Pick) oder S4 (Storage)?"*
+
+---
+
+## Pflicht-Output-Format
+
+Nach jeder Analyse am Anfang der Antwort ausgeben:
+
+```
+EBENE: [1 | 1+2 | 1+2+3 | 1+2+3+4 | 1+2+3+4+5 | +OPT]
+DATEIEN: [Datei1, Datei2, ...]
+TOKENS_GESCHÄTZT: [ca. X Tokens]
+KONFIDENZ: [XX%]
+```
+
+**Konfidenz-Skala:**
+- 95-100%: Direkt dokumentiert, eindeutig referenzierbar
+- 80-94%: Aus mehreren Quellen abgeleitet, konsistent
+- 60-79%: Indirekte Ableitung, Quellenangabe erforderlich
+- < 60%: Unzureichend dokumentiert → explizit als solches kennzeichnen
 
 ---
 
@@ -287,26 +344,28 @@ Unterscheide klar zwischen dem, was annotiert ist (DaRa), und dem, was methodisc
 
 ## Dateiübersicht v5.0
 
+Legende: `[E1]` = Ebene 1 (Foundation) · `[E2]` = Ebene 2 · `[E3]` = Ebene 3 · `[E4]` = Ebene 4 · `[E5]` = Ebene 5 · `[OPT]` = Optional
+
 ### CORE-DATEIEN (5)
-1. **references/core/labels_207_v5_0.md** — Vollständiges Label-Inventar (CL001-CL207)
-2. **references/core/articles_inventory_v5_0.md** — 74 Artikel-Stammdaten
-3. **references/core/category_activation_matrix_v5_0.md** — Szenario-Label-Mappings
-4. **references/core/ground_truth_central_v5_0.md** — Ground Truth v3.0
-5. **references/core/validation_rules_v5_0.md** ⭐ NEU — Frame-Level Validierungsregeln
+1. `[E1]` **references/core/labels_207_v5_0.md** — Vollständiges Label-Inventar (CL001-CL207)
+2. `[OPT]` **references/core/articles_inventory_v5_0.md** — 74 Artikel-Stammdaten
+3. `[E2]` **references/core/category_activation_matrix_v5_0.md** — Szenario-Label-Mappings
+4. `[E2]` **references/core/ground_truth_central_v5_0.md** — Ground Truth v3.0
+5. `[E1]` **references/core/validation_rules_v5_0.md** ⭐ NEU — Frame-Level Validierungsregeln
 
 ### AUXILIARY-DATEIEN (5)
-6. **references/auxiliary/chunking_v5_0.md** — Chunking-System & Trigger T1-T13
-7. **references/auxiliary/data_structure_v5_0.md** — Frame-Struktur (30 fps)
-8. **references/auxiliary/dataset_core_v5_0.md** — Dataset-Kerndokumentation
-9. **references/auxiliary/semantics_v5_0.md** — Semantische Grunddefinitionen
-10. **references/auxiliary/warehouse_physical_v5_0.md** — OMNI Warehouse Layout
+6. `[E2]` **references/auxiliary/chunking_v5_1.md** — Chunking-System & Trigger T1-T13 ⚠️ *(reparierte Version; chunking_v5_0.md ist leer)*
+7. `[E1]` **references/auxiliary/data_structure_v5_0.md** — Frame-Struktur (30 fps)
+8. `[E1]` **references/auxiliary/dataset_core_v5_0.md** — Dataset-Kerndokumentation
+9. `[E1]` **references/auxiliary/semantics_v5_0.md** — Semantische Grunddefinitionen
+10. `[OPT]` **references/auxiliary/warehouse_physical_v5_0.md** — OMNI Warehouse Layout
 
 ### PROCESSES-DATEIEN (5)
-11. **references/processes/bpmn_validation_v5_0.md** ⭐ NEU — Vollständige BPMN-Validierungslogik
-12. **references/processes/bpmn_validation_quickstart_v5_0.md** — BPMN-Validierung Tutorial
-13. **references/processes/process_hierarchy_v5_0.md** — Prozess-Hierarchie (CC08/09/10)
-14. **references/processes/refa_analytics_v5_0.md** — REFA-Zeitarten-Mapping
-15. **references/processes/mtm_codes_v5_0.md** — MTM-1 Grundbewegungen
+11. `[E5]` **references/processes/bpmn_validation_v5_0.md** ⭐ NEU — Vollständige BPMN-Validierungslogik
+12. `[E5]` **references/processes/bpmn_validation_quickstart_v5_0.md** — BPMN-Validierung Tutorial
+13. `[E3]` **references/processes/process_hierarchy_v5_0.md** — Prozess-Hierarchie (CC08/09/10)
+14. `[E3]` **references/processes/refa_analytics_v5_0.md** — REFA-Zeitarten-Mapping
+15. `[E4]` **references/processes/mtm_codes_v5_0.md** — MTM-1 Grundbewegungen
 
 ### ASSETS-DATEIEN (3)
 16. **assets/query_patterns_v5_0.md** — Query-Routing-Logik
