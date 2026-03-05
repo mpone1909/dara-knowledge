@@ -9,15 +9,15 @@ references:
   - core_ground_truth_central_v5_0.md
 ---
 
-# DaRa Dataset â€“ BPMN Validation & Detailed Process Analysis
+# DaRa Dataset – BPMN Validation & Detailed Process Analysis
 
-**VollstÃ¤ndige Validierungs- und Analyselogik fÃ¼r BPMN-konforme Prozessvalidierung mit detaillierten Prozessflows aus Abbildungen A2-A7**
+**Vollständige Validierungs- und Analyselogik für BPMN-konforme Prozessvalidierung mit detaillierten Prozessflows aus Abbildungen A2-A7**
 
 **Version:** 5.0  
 **Erstellt:** 05.02.2026  
 **Quelle:** BPMN_PROZESSE_DARA.pdf (Figures A2-A7) + NotebookLM-Extraktionen  
 **Skill-Version:** dara-dataset-expert v5.0  
-**Status:** Finalisiert âœ…
+**Status:** Finalisiert ✅
 
 ---
 
@@ -25,7 +25,7 @@ references:
 
 ### HAUPTTEILE
 1. [Einleitung & Zweck](#1-einleitung--zweck)
-2. [Validierungsregeln â€“ Komplett](#2-validierungsregeln)
+2. [Validierungsregeln – Komplett](#2-validierungsregeln)
    - 2.1: Sequenz-Validierung (FSM) + Detaillierte Prozessflows
    - 2.2: Tool-Validierung
    - 2.3: Location-Validierung
@@ -38,10 +38,10 @@ references:
 7. [Verwendungshinweise](#7-verwendungshinweise)
 
 ### NEU IN v5.0
-- âœ… Detailed Process Flows (Section 2.1.3): Exakte Activity-Sequenzen aus Figures A2-A7
-- âœ… Scenario-Routing Matrix (Section 2.1.4): S1-S8 Mapping mit Prozess-Pfaden
-- âœ… Error-Handling Details (Section 2.1.5): CL135 Aktivierungsbedingungen pro Prozess
-- âœ… Cross-Process Consistency (Section 2.1.6): Identische vs. unterschiedliche AktivitÃ¤ten
+- ✅ Detailed Process Flows (Section 2.1.3): Exakte Activity-Sequenzen aus Figures A2-A7
+- ✅ Scenario-Routing Matrix (Section 2.1.4): S1-S8 Mapping mit Prozess-Pfaden
+- ✅ Error-Handling Details (Section 2.1.5): CL135 Aktivierungsbedingungen pro Prozess
+- ✅ Cross-Process Consistency (Section 2.1.6): Identische vs. unterschiedliche Aktivitäten
 
 ---
 
@@ -49,29 +49,29 @@ references:
 
 ### 1.1 Scope
 
-Diese Datei definiert die **vollstÃ¤ndige Validierungslogik** zur PrÃ¼fung von DaRa-DatensÃ¤tzen gegen die idealisierten BPMN-Prozessmodelle (Figures 11, A2-A7). Sie ermÃ¶glicht:
+Diese Datei definiert die **vollständige Validierungslogik** zur Prüfung von DaRa-Datensätzen gegen die idealisierten BPMN-Prozessmodelle (Figures 11, A2-A7). Sie ermöglicht:
 
-- **Sequenzvalidierung:** Sind CC09-ProzessÃ¼bergÃ¤nge BPMN-konform?
-- **Detaillierte ProzessflÃ¼sse:** Exakte Activity-Boxen, Gateways, ÃœbergÃ¤nge pro Prozess (neu in v5.0)
-- **Szenario-Routing:** Welche Prozess-Flows gehÃ¶ren zu S1-S8? (neu in v5.0)
+- **Sequenzvalidierung:** Sind CC09-Prozessübergänge BPMN-konform?
+- **Detaillierte Prozessflüsse:** Exakte Activity-Boxen, Gateways, Übergänge pro Prozess (neu in v5.0)
+- **Szenario-Routing:** Welche Prozess-Flows gehören zu S1-S8? (neu in v5.0)
 - **Error-Handling:** Wann wird CL135 aktiviert? Unter welchen Bedingungen? (neu in v5.0)
 - **Tool-Validierung:** Sind Pflicht-Tools bei entsprechenden CC10-Labels aktiv?
-- **Location-Validierung:** Entsprechen CC11-Transitions den erwarteten rÃ¤umlichen Pfaden?
+- **Location-Validierung:** Entsprechen CC11-Transitions den erwarteten räumlichen Pfaden?
 - **Multi-Order-Validierung:** Sind Order-Co-Activations biologisch plausibel?
 - **CL134-Priorisierung:** Wird Waiting als Global Interrupt behandelt?
-- **BPMN-Generierung:** Visualisierung tatsÃ¤chlich durchgefÃ¼hrter Prozesse
+- **BPMN-Generierung:** Visualisierung tatsächlich durchgeführter Prozesse
 - **Abweichungsreporting:** Strukturierte Fehlerberichte mit Severity-Klassifikation
 
 ### 1.2 Validierungs-Philosophie
 
 **Hybrid-Ansatz:**
-- **Frame-Level:** Tool-Validierung, Location-Transitions (prÃ¤zise Fehlerlokalisation)
-- **Chunk-Level:** Sequenz-Validierung (ProzessstabilitÃ¤t innerhalb Chunks)
+- **Frame-Level:** Tool-Validierung, Location-Transitions (präzise Fehlerlokalisation)
+- **Chunk-Level:** Sequenz-Validierung (Prozessstabilität innerhalb Chunks)
 
 **Severity-Klassifikation:**
-- **CRITICAL:** Fundamentale BPMN-Logik verletzt (z.B. unmÃ¶gliche Sequenz)
-- **WARNING:** UngewÃ¶hnlich, aber nicht ausgeschlossen (z.B. seltene Pfade)
-- **INFO:** Abweichung ohne direkten Fehler (z.B. lÃ¤ngere Wartezeiten)
+- **CRITICAL:** Fundamentale BPMN-Logik verletzt (z.B. unmögliche Sequenz)
+- **WARNING:** Ungewöhnlich, aber nicht ausgeschlossen (z.B. seltene Pfade)
+- **INFO:** Abweichung ohne direkten Fehler (z.B. längere Wartezeiten)
 
 ### 1.3 Anwendungsbereich
 
@@ -86,7 +86,7 @@ Diese Datei definiert die **vollstÃ¤ndige Validierungslogik** zur PrÃ¼fung v
 
 ### 2.1 SEQUENZ-VALIDIERUNG (FSM)
 
-#### 2.1.1 Finite State Machine fÃ¼r CC09
+#### 2.1.1 Finite State Machine für CC09
 
 Die BPMN-Logik definiert erlaubte Transitionen zwischen Mid-Level-Prozessen (CC09):
 
@@ -94,69 +94,69 @@ Die BPMN-Logik definiert erlaubte Transitionen zwischen Mid-Level-Prozessen (CC0
 VALID_CC09_TRANSITIONS = {
     # Preparing Order (CL114)
     CL114: [
-        CL115,  # â†’ Picking Travel Time (Retrieval-Pfad)
-        CL117,  # â†’ Unpacking (Storage-Pfad)
-        CL121,  # â†’ Finalizing Order (direkter Abschluss, selten)
+        CL115,  # → Picking Travel Time (Retrieval-Pfad)
+        CL117,  # → Unpacking (Storage-Pfad)
+        CL121,  # → Finalizing Order (direkter Abschluss, selten)
     ],
     
     # Picking Travel Time (CL115)
     CL115: [
-        CL115,  # â†’ Loop (weitere Positionen)
-        CL116,  # â†’ Picking Pick Time (Hauptpfad)
+        CL115,  # → Loop (weitere Positionen)
+        CL116,  # → Picking Pick Time (Hauptpfad)
     ],
     
     # Picking Pick Time (CL116)
     CL116: [
-        CL116,  # â†’ Loop (weitere Items am selben Regal)
-        CL115,  # â†’ Picking Travel Time (nÃ¤chste Position)
-        CL118,  # â†’ Packing (optionaler Pfad)
-        CL121,  # â†’ Finalizing Order (alle Positionen komplett)
+        CL116,  # → Loop (weitere Items am selben Regal)
+        CL115,  # → Picking Travel Time (nächste Position)
+        CL118,  # → Packing (optionaler Pfad)
+        CL121,  # → Finalizing Order (alle Positionen komplett)
     ],
     
     # Unpacking (CL117)
     CL117: [
-        CL117,  # â†’ Loop (weitere Kartons)
-        CL119,  # â†’ Storing Travel Time (Hauptpfad)
+        CL117,  # → Loop (weitere Kartons)
+        CL119,  # → Storing Travel Time (Hauptpfad)
     ],
     
     # Packing (CL118)
     CL118: [
-        CL118,  # â†’ Loop (weitere Kartons)
-        CL115,  # â†’ Picking Travel Time (zurÃ¼ck zu Picking, Multi-Order)
-        CL121,  # â†’ Finalizing Order (Abschluss)
+        CL118,  # → Loop (weitere Kartons)
+        CL115,  # → Picking Travel Time (zurück zu Picking, Multi-Order)
+        CL121,  # → Finalizing Order (Abschluss)
     ],
     
     # Storing Travel Time (CL119)
     CL119: [
-        CL119,  # â†’ Loop (weitere Positionen)
-        CL120,  # â†’ Storing Store Time (Hauptpfad)
+        CL119,  # → Loop (weitere Positionen)
+        CL120,  # → Storing Store Time (Hauptpfad)
     ],
     
     # Storing Store Time (CL120)
     CL120: [
-        CL120,  # â†’ Loop (weitere Items am selben Regal)
-        CL119,  # â†’ Storing Travel Time (nÃ¤chste Position)
-        CL121,  # â†’ Finalizing Order (alle Positionen komplett)
+        CL120,  # → Loop (weitere Items am selben Regal)
+        CL119,  # → Storing Travel Time (nächste Position)
+        CL121,  # → Finalizing Order (alle Positionen komplett)
     ],
     
     # Finalizing Order (CL121)
     CL121: [
-        CL114,  # â†’ Preparing Order (neue Order, Multi-Order-Szenarien)
-        None,   # â†’ END (keine weiteren Orders)
+        CL114,  # → Preparing Order (neue Order, Multi-Order-Szenarien)
+        None,   # → END (keine weiteren Orders)
     ],
     
     # Another Mid-Level Process (CL122)
     CL122: [
-        CL122,  # â†’ Loop (unbekannter Prozess)
-        CL114,  # â†’ Preparing Order (RÃ¼ckkehr zu Standard)
-        CL121,  # â†’ Finalizing Order
+        CL122,  # → Loop (unbekannter Prozess)
+        CL114,  # → Preparing Order (Rückkehr zu Standard)
+        CL121,  # → Finalizing Order
     ],
     
     # Process Unknown (CL123)
     CL123: [
-        CL123,  # â†’ Loop (weiterhin unklar)
-        CL114,  # â†’ Preparing Order (Klarheit erreicht)
-        CL121,  # â†’ Finalizing Order
+        CL123,  # → Loop (weiterhin unklar)
+        CL114,  # → Preparing Order (Klarheit erreicht)
+        CL121,  # → Finalizing Order
     ],
 }
 ```
@@ -169,7 +169,7 @@ RETRIEVAL_EXPECTED_SEQUENCE = [
     CL114,  # Preparing Order
     CL115,  # Picking Travel Time (mehrfach)
     CL116,  # Picking Pick Time (mehrfach)
-    CL118,  # Packing (optional, hauptsÃ¤chlich S1, S3, S7)
+    CL118,  # Packing (optional, hauptsächlich S1, S3, S7)
     CL121,  # Finalizing Order
 ]
 ```
@@ -194,17 +194,17 @@ STORAGE_EXPECTED_SEQUENCE = [
 **Exakte Activity-Sequenz:**
 ```
 Start Preparing Order
-  â†“
+  ↓
 Collecting Order and Hardware
-  â†“
+  ↓
 [GATEWAY 1: "Does the subject already have a cart?"]
-  â”œâ”€ YES: weiter zu Gateway 2
-  â””â”€ NO: Collecting Cart â†’ weiter zu Gateway 2
-  â†“
+  ├─ YES: weiter zu Gateway 2
+  └─ NO: Collecting Cart → weiter zu Gateway 2
+  ↓
 [GATEWAY 2: "Retrieval or Storage?"]
-  â”œâ”€ Retrieval: Collecting Empty Cardboard Boxes
-  â””â”€ Storage: Collecting Packed Cardboard Boxes
-  â†“
+  ├─ Retrieval: Collecting Empty Cardboard Boxes
+  └─ Storage: Collecting Packed Cardboard Boxes
+  ↓
 End Preparing Order
 ```
 
@@ -220,36 +220,36 @@ End Preparing Order
 
 ---
 
-##### CL115/CL116 | Picking â€“ Travel Time & Pick Time (Figure A3)
+##### CL115/CL116 | Picking – Travel Time & Pick Time (Figure A3)
 
 **Exakte Activity-Sequenz:**
 ```
 Start Picking
-  â†“
+  ↓
 [GATEWAY 1: "Is the cart on the base?"]
-  â”œâ”€ YES: weiter
-  â””â”€ NO: Transporting a Cart to the Base
-  â†“
+  ├─ YES: weiter
+  └─ NO: Transporting a Cart to the Base
+  ↓
 Moving to the Next Position
-  â†“
+  ↓
 [GATEWAY 2: "Information on the next position complete?"]
-  â”œâ”€ YES: weiter
-  â””â”€ NO: Reporting and Clarifying the Incident â†’ Loop to Moving to the Next Position
-  â†“
+  ├─ YES: weiter
+  └─ NO: Reporting and Clarifying the Incident → Loop to Moving to the Next Position
+  ↓
 [GATEWAY 3: "Items can be picked?" (Item is in stock, not damaged, ...)]
-  â”œâ”€ YES: weiter zu Picking Pick Time
-  â””â”€ NO: Reporting and Clarifying the Incident â†’ Loop to Moving to the Next Position
-  â†“
+  ├─ YES: weiter zu Picking Pick Time
+  └─ NO: Reporting and Clarifying the Incident → Loop to Moving to the Next Position
+  ↓
 [PICKING - PICK TIME PHASE]
 Retrieving Items
-  â†“
+  ↓
 Moving to a Cart
-  â†“
+  ↓
 Placing Cardboard Box/Item in a Cart
-  â†“
+  ↓
 [GATEWAY 4: "Has the order been completed?"]
-  â”œâ”€ YES: End Picking
-  â””â”€ NO: Loop back to Moving to the Next Position
+  ├─ YES: End Picking
+  └─ NO: Loop back to Moving to the Next Position
 ```
 
 **CC10 Labels (Travel Time - CL115):**
@@ -263,10 +263,10 @@ Placing Cardboard Box/Item in a Cart
 - CL151: Placing Cardboard Box/Item in a Cart
 
 **Error-Handling (CL135):**
-- AuslÃ¶ser 1: "Information on the next position complete?" = NO (Listenfehler)
-- AuslÃ¶ser 2: "Items can be picked?" = NO (Item fehlt oder beschÃ¤digt)
-- Konsequenz: Ãœbersprungene AktivitÃ¤ten: CL139, CL140, CL151
-- Loop-Ziel: ZurÃ¼ck zu CL137 (Moving to the Next Position)
+- Auslöser 1: "Information on the next position complete?" = NO (Listenfehler)
+- Auslöser 2: "Items can be picked?" = NO (Item fehlt oder beschädigt)
+- Konsequenz: Übersprungene Aktivitäten: CL139, CL140, CL151
+- Loop-Ziel: Zurück zu CL137 (Moving to the Next Position)
 
 ---
 
@@ -275,30 +275,30 @@ Placing Cardboard Box/Item in a Cart
 **Exakte Activity-Sequenz:**
 ```
 Start Packing
-  â†“
+  ↓
 Transporting to the Packaging/Sorting Area
-  â†“
+  ↓
 Placing Cardboard Box/Item on a Table
-  â†“
+  ↓
 Removing Elastic Band
-  â†“
+  ↓
 Sorting
-  â†“
+  ↓
 Filling Cardboard Box with Filling Material
-  â†“
+  ↓
 Printing Shipping Label and Return Slip
-  â†“
+  ↓
 Preparing or Adding Return Label
-  â†“
+  ↓
 Attaching Shipping Label
-  â†“
+  ↓
 Sealing Cardboard Box
-  â†“
+  ↓
 Placing Cardboard Box/Item in a Cart
-  â†“
+  ↓
 [GATEWAY: "More unpacked boxes available?"]
-  â”œâ”€ YES: Loop back to Transporting
-  â””â”€ NO: End Packing
+  ├─ YES: Loop back to Transporting
+  └─ NO: End Packing
 ```
 
 **CC10 Labels:**
@@ -322,24 +322,24 @@ Placing Cardboard Box/Item in a Cart
 **Exakte Activity-Sequenz:**
 ```
 Start Unpacking
-  â†“
+  ↓
 Transporting to the Packaging/Sorting Area
-  â†“
+  ↓
 Placing Cardboard Box/Item on a Table
-  â†“
+  ↓
 Opening Cardboard Box
-  â†“
+  ↓
 Disposing of Filling Material or Shipping Label
-  â†“
+  ↓
 Sorting
-  â†“
+  ↓
 Tying Elastic Band Around Cardboard
-  â†“
+  ↓
 Placing Cardboard Box/Item in a Cart
-  â†“
+  ↓
 [GATEWAY: "More unpacked boxes available?"]
-  â”œâ”€ YES: Loop back to Transporting
-  â””â”€ NO: End Unpacking
+  ├─ YES: Loop back to Transporting
+  └─ NO: End Unpacking
 ```
 
 **CC10 Labels:**
@@ -352,41 +352,41 @@ Placing Cardboard Box/Item in a Cart
 - CL151: Placing Cardboard Box/Item in a Cart
 
 **Reverse-Struktur zu Packing:**
-- Packing: Removing Elastic Band (CL149) â†’ Filling (CL145) â†’ Sealing (CL150)
-- Unpacking: Opening (CL142) â†’ Disposing (CL143) â†’ Tying Elastic Band (CL152)
+- Packing: Removing Elastic Band (CL149) → Filling (CL145) → Sealing (CL150)
+- Unpacking: Opening (CL142) → Disposing (CL143) → Tying Elastic Band (CL152)
 
 ---
 
-##### CL119/CL120 | Storing â€“ Travel Time & Store Time (Figure A6)
+##### CL119/CL120 | Storing – Travel Time & Store Time (Figure A6)
 
 **Exakte Activity-Sequenz:**
 ```
 Start Storing
-  â†“
+  ↓
 [GATEWAY 1: "Is the cart on the base?"]
-  â”œâ”€ YES: weiter
-  â””â”€ NO: Transporting a Cart to the Base
-  â†“
+  ├─ YES: weiter
+  └─ NO: Transporting a Cart to the Base
+  ↓
 Moving to the Next Position
-  â†“
+  ↓
 [GATEWAY 2: "Information on the next position complete?"]
-  â”œâ”€ YES: weiter
-  â””â”€ NO: Reporting and Clarifying the Incident â†’ Loop back
-  â†“
+  ├─ YES: weiter
+  └─ NO: Reporting and Clarifying the Incident → Loop back
+  ↓
 [STORING - STORE TIME PHASE]
 Removing Cardboard Box/Item from the Cart
-  â†“
+  ↓
 Moving to a Cart [technisch: Bewegung vom Wagen zum Regal]
-  â†“
+  ↓
 Placing Items on a Rack
-  â†“
+  ↓
 [GATEWAY 3: "Items can be placed?"]
-  â”œâ”€ YES: weiter
-  â””â”€ NO: Reporting and Clarifying the Incident â†’ Loop back
-  â†“
+  ├─ YES: weiter
+  └─ NO: Reporting and Clarifying the Incident → Loop back
+  ↓
 [GATEWAY 4: "Has the order been completed?"]
-  â”œâ”€ YES: End Storing
-  â””â”€ NO: Loop back to Moving to the Next Position
+  ├─ YES: End Storing
+  └─ NO: Loop back to Moving to the Next Position
 ```
 
 **CC10 Labels (Travel Time - CL119):**
@@ -396,14 +396,14 @@ Placing Items on a Rack
 
 **CC10 Labels (Store Time - CL120):**
 - CL136: Removing Cardboard Box/Item from the Cart
-- CL140: Moving to a Cart [generisches Label fÃ¼r Regal-Bewegung]
+- CL140: Moving to a Cart [generisches Label für Regal-Bewegung]
 - CL138: Placing Items on a Rack
 
 **Error-Handling (CL135) - UNTERSCHIED zu Picking:**
-- AuslÃ¶ser 1: "Information on the next position complete?" = NO (Fehler in Liste)
-- AuslÃ¶ser 2: "Items can be placed?" = NO (Regal voll/besetzt, nicht: Item fehlt)
-- Konsequenz: Ã„hnlich Picking, aber semantisch unterschiedlicher Fehlergrund
-- Loop-Ziel: ZurÃ¼ck zu Picking Travel Time oder Storing Travel Time
+- Auslöser 1: "Information on the next position complete?" = NO (Fehler in Liste)
+- Auslöser 2: "Items can be placed?" = NO (Regal voll/besetzt, nicht: Item fehlt)
+- Konsequenz: Ähnlich Picking, aber semantisch unterschiedlicher Fehlergrund
+- Loop-Ziel: Zurück zu Picking Travel Time oder Storing Travel Time
 
 ---
 
@@ -412,15 +412,15 @@ Placing Items on a Rack
 **Exakte Activity-Sequenz:**
 ```
 Start Finalizing Order
-  â†“
+  ↓
 [GATEWAY: "Retrieval or Storage?"]
-  â”œâ”€ Retrieval: Handing Over Packed Cardboard Boxes
-  â””â”€ Storage: Returning Empty Cardboard Boxes
-  â†“
+  ├─ Retrieval: Handing Over Packed Cardboard Boxes
+  └─ Storage: Returning Empty Cardboard Boxes
+  ↓
 Returning Cart
-  â†“
+  ↓
 Returning Hardware
-  â†“
+  ↓
 End Finalizing Order
 ```
 
@@ -438,26 +438,26 @@ End Finalizing Order
 
 | Szenario | Bezeichnung | CC09 Sequenz | Figure-Paths | Besonderheit |
 |----------|-------------|-------------|--------------|-------------|
-| **S1** | Retrieval (1 Order, Intentional Error) | CL114 â†’ CL115 â†’ CL116 â†’ CL118 â†’ CL121 | A2(Retrieval) â†’ A3(Error) â†’ A4 â†’ A7(Retrieval) | CL135 aktiviert in A3 (Picking Error) |
-| **S2** | Retrieval (1 Order, Standard) | CL114 â†’ CL115 â†’ CL116 â†’ CL121 | A2(Retrieval) â†’ A3(Perfect) â†’ A7(Retrieval) | Kein Packing, direkter Abschluss |
-| **S3** | Retrieval (1 Order, Intentional Error) | CL114 â†’ CL115 â†’ CL116 â†’ CL118 â†’ CL121 | A2(Retrieval) â†’ A3(Error) â†’ A4 â†’ A7(Retrieval) | Ã„hnlich S1, aber mÃ¶glicherweise unterschiedlicher Error-Typ |
-| **S4** | Storage (1 Order) | CL114 â†’ CL117 â†’ CL119 â†’ CL120 â†’ CL121 | A2(Storage) â†’ A5 â†’ A6 â†’ A7(Storage) | Unpacking vor Storing |
-| **S5** | Storage (1 Order, mit Error) | CL114 â†’ CL117 â†’ CL119 â†’ CL120 â†’ CL121 | A2(Storage) â†’ A5 â†’ A6(mit Error/CL135) â†’ A7(Storage) | CL135 in Storing (A6) aktiviert |
-| **S6** | Storage (1 Order) | CL114 â†’ CL117 â†’ CL119 â†’ CL120 â†’ CL121 | A2(Storage) â†’ A5 â†’ A6 â†’ A7(Storage) | Ã„hnlich S4, evtl. unterschiedliche KomplexitÃ¤t |
-| **S7** | Retrieval (2 Orders, Perfect) | [CL114 â†’ CL115 â†’ CL116 â†’ CL118]Ã—2 â†’ CL121 | A2Ã—2(Retrieval) â†’ A3Ã—2(Perfect) â†’ A4Ã—2 â†’ A7Ã—2(Retrieval) | Multi-Order: Doppelte Sequenz |
-| **S8** | Storage (2 Orders, Perfect) | [CL114 â†’ CL117 â†’ CL119 â†’ CL120]Ã—2 â†’ CL121 | A2Ã—2(Storage) â†’ A5Ã—2 â†’ A6Ã—2 â†’ A7Ã—2(Storage) | Multi-Order: Doppelte Sequenz |
+| **S1** | Retrieval (1 Order, Intentional Error) | CL114 → CL115 → CL116 → CL118 → CL121 | A2(Retrieval) → A3(Error) → A4 → A7(Retrieval) | CL135 aktiviert in A3 (Picking Error) |
+| **S2** | Retrieval (1 Order, Standard) | CL114 → CL115 → CL116 → CL121 | A2(Retrieval) → A3(Perfect) → A7(Retrieval) | Kein Packing, direkter Abschluss |
+| **S3** | Retrieval (1 Order, Intentional Error) | CL114 → CL115 → CL116 → CL118 → CL121 | A2(Retrieval) → A3(Error) → A4 → A7(Retrieval) | Ähnlich S1, aber möglicherweise unterschiedlicher Error-Typ |
+| **S4** | Storage (1 Order) | CL114 → CL117 → CL119 → CL120 → CL121 | A2(Storage) → A5 → A6 → A7(Storage) | Unpacking vor Storing |
+| **S5** | Storage (1 Order, mit Error) | CL114 → CL117 → CL119 → CL120 → CL121 | A2(Storage) → A5 → A6(mit Error/CL135) → A7(Storage) | CL135 in Storing (A6) aktiviert |
+| **S6** | Storage (1 Order) | CL114 → CL117 → CL119 → CL120 → CL121 | A2(Storage) → A5 → A6 → A7(Storage) | Ähnlich S4, evtl. unterschiedliche Komplexität |
+| **S7** | Retrieval (2 Orders, Perfect) | [CL114 → CL115 → CL116 → CL118]×2 → CL121 | A2×2(Retrieval) → A3×2(Perfect) → A4×2 → A7×2(Retrieval) | Multi-Order: Doppelte Sequenz |
+| **S8** | Storage (2 Orders, Perfect) | [CL114 → CL117 → CL119 → CL120]×2 → CL121 | A2×2(Storage) → A5×2 → A6×2 → A7×2(Storage) | Multi-Order: Doppelte Sequenz |
 
 **Szenario-Entscheidungen (Figure A2):**
 
 ```
 Figure A2 Gateway: "Retrieval or Storage?"
-â”œâ”€ RETRIEVAL-Pfad (Collecting Empty Cardboard Boxes):
-â”‚  â””â”€ Szenarien: S1, S2, S3, S7
-â”‚  â””â”€ Folge: Picking (A3) â†’ ggf. Packing (A4) â†’ Finalizing Retrieval (A7)
-â”‚
-â””â”€ STORAGE-Pfad (Collecting Packed Cardboard Boxes):
-   â””â”€ Szenarien: S4, S5, S6, S8
-   â””â”€ Folge: Unpacking (A5) â†’ Storing (A6) â†’ Finalizing Storage (A7)
+├─ RETRIEVAL-Pfad (Collecting Empty Cardboard Boxes):
+│  └─ Szenarien: S1, S2, S3, S7
+│  └─ Folge: Picking (A3) → ggf. Packing (A4) → Finalizing Retrieval (A7)
+│
+└─ STORAGE-Pfad (Collecting Packed Cardboard Boxes):
+   └─ Szenarien: S4, S5, S6, S8
+   └─ Folge: Unpacking (A5) → Storing (A6) → Finalizing Storage (A7)
 ```
 
 ---
@@ -470,29 +470,29 @@ Figure A2 Gateway: "Retrieval or Storage?"
 
 **Wo wird CL135 aktiviert?**
 
-1. **Picking (Figure A3) â€“ Szenario S1, S3:**
+1. **Picking (Figure A3) – Szenario S1, S3:**
    - **Gateway:** "Information on the next position complete?" = NO
    - **Bedeutung:** Fehler in der Pick-Liste (fehlende Information)
    - **Gateway:** "Items can be picked?" = NO
-   - **Bedeutung:** Item nicht verfÃ¼gbar (fehlt, beschÃ¤digt, falsche Menge)
+   - **Bedeutung:** Item nicht verfügbar (fehlt, beschädigt, falsche Menge)
    - **Konsequenz:** 
-     - Ãœbersprungene AktivitÃ¤ten: CL139 (Retrieving), CL140 (Moving), CL151 (Placing)
-     - Loop-Ziel: ZurÃ¼ck zu CL137 (Moving to the Next Position)
+     - Übersprungene Aktivitäten: CL139 (Retrieving), CL140 (Moving), CL151 (Placing)
+     - Loop-Ziel: Zurück zu CL137 (Moving to the Next Position)
    - **Prozess-Spezifik:** Der Fehler hindert die **ENTNAHME** aus dem Regal
 
-2. **Storing (Figure A6) â€“ Szenario S5:**
+2. **Storing (Figure A6) – Szenario S5:**
    - **Gateway:** "Information on the next position complete?" = NO
    - **Bedeutung:** Fehler in der Einlagerungs-Liste
    - **Gateway:** "Items can be placed?" = NO
-   - **Bedeutung:** Regalfach besetzt, voll oder beschÃ¤digt (nicht: Item-Problem)
+   - **Bedeutung:** Regalfach besetzt, voll oder beschädigt (nicht: Item-Problem)
    - **Konsequenz:**
-     - Ãœbersprungene AktivitÃ¤ten: CL138 (Placing Items on Rack)
-     - Loop-Ziel: ZurÃ¼ck zu CL119 (Storing Travel Time) oder CL137
+     - Übersprungene Aktivitäten: CL138 (Placing Items on Rack)
+     - Loop-Ziel: Zurück zu CL119 (Storing Travel Time) oder CL137
    - **Prozess-Spezifik:** Der Fehler hindert die **ABLAGE** ins Regal
 
 3. **Nicht in Packing oder Unpacking:**
-   - Figure A4 (Packing): Keine Error-Gateways, nur Loop fÃ¼r mehrere Kartons
-   - Figure A5 (Unpacking): Keine Error-Gateways, nur Loop fÃ¼r mehrere Kartons
+   - Figure A4 (Packing): Keine Error-Gateways, nur Loop für mehrere Kartons
+   - Figure A5 (Unpacking): Keine Error-Gateways, nur Loop für mehrere Kartons
 
 **Vergleich: Picking vs. Storing Error-Handling**
 
@@ -508,44 +508,44 @@ Figure A2 Gateway: "Retrieval or Storage?"
 
 #### 2.1.6 CROSS-PROCESS CONSISTENCY
 
-**NEW IN v5.0:** Analyse identischer vs. unterschiedlicher AktivitÃ¤ten
+**NEW IN v5.0:** Analyse identischer vs. unterschiedlicher Aktivitäten
 
 **Identische Activity-Boxen (gleicher Name, gleiche semantische Bedeutung):**
 
-| Label | AktivitÃ¤t | Picking (A3) | Storing (A6) | Bedeutung |
+| Label | Aktivität | Picking (A3) | Storing (A6) | Bedeutung |
 |-------|-----------|------|------|-----------|
-| CL128 | Transporting a Cart to the Base | âœ… Ja | âœ… Ja | Transport Wagen zum Startpunkt (identisch) |
-| CL137 | Moving to the Next Position | âœ… Ja | âœ… Ja | Bewegung zur nÃ¤chsten Position (identisch) |
-| CL135 | Reporting and Clarifying the Incident | âœ… Ja | âœ… Ja | Fehlerbehandlung (identisch) |
-| CL151 | Placing Cardboard Box/Item in a Cart | âœ… (Picking) | âš ï¸ (Storing bei RÃ¼ckkehr) | Ablage im Wagen |
-| CL144 | Sorting | âš ï¸ Nur Vergleich | âš ï¸ Nur Vergleich | Ware sortieren (beide Packing/Unpacking) |
+| CL128 | Transporting a Cart to the Base | ✅ Ja | ✅ Ja | Transport Wagen zum Startpunkt (identisch) |
+| CL137 | Moving to the Next Position | ✅ Ja | ✅ Ja | Bewegung zur nächsten Position (identisch) |
+| CL135 | Reporting and Clarifying the Incident | ✅ Ja | ✅ Ja | Fehlerbehandlung (identisch) |
+| CL151 | Placing Cardboard Box/Item in a Cart | ✅ (Picking) | ⚠️ (Storing bei Rückkehr) | Ablage im Wagen |
+| CL144 | Sorting | ⚠️ Nur Vergleich | ⚠️ Nur Vergleich | Ware sortieren (beide Packing/Unpacking) |
 
-**GegenstÃ¼ck-AktivitÃ¤ten (logische Umkehrungen):**
+**Gegenstück-Aktivitäten (logische Umkehrungen):**
 
 | Packing (A4, CL118) | Unpacking (A5, CL117) | Relation |
 |-----------------|-------------------|----------|
-| Opening Cardboard Box (CL142) | Sealing Cardboard Box (CL150) | **GegenstÃ¼ck (REVERSE)** |
-| Removing Elastic Band (CL149) | Tying Elastic Band Around Cardboard (CL152) | **GegenstÃ¼ck (REVERSE)** |
-| Filling Cardboard Box (CL145) | Disposing of Filling Material (CL143) | **GegenstÃ¼ck (REVERSE)** |
-| Printing Shipping Label (CL146) | [Kein GegenstÃ¼ck: Label wird gelÃ¶scht] | **Einseitig** |
-| Attaching Shipping Label (CL148) | [Kein GegenstÃ¼ck: Label wird entfernt in CL143] | **Einseitig** |
+| Opening Cardboard Box (CL142) | Sealing Cardboard Box (CL150) | **Gegenstück (REVERSE)** |
+| Removing Elastic Band (CL149) | Tying Elastic Band Around Cardboard (CL152) | **Gegenstück (REVERSE)** |
+| Filling Cardboard Box (CL145) | Disposing of Filling Material (CL143) | **Gegenstück (REVERSE)** |
+| Printing Shipping Label (CL146) | [Kein Gegenstück: Label wird gelöscht] | **Einseitig** |
+| Attaching Shipping Label (CL148) | [Kein Gegenstück: Label wird entfernt in CL143] | **Einseitig** |
 
 **Anomalien und Besonderheiten:**
 
-1. **"Moving to a Cart" (CL140) â€“ Semantische AmbiguitÃ¤t:**
+1. **"Moving to a Cart" (CL140) – Semantische Ambiguität:**
    - In **Picking (A3):** Logisch = Bewegung VOM Regal ZUM Wagen (mit Ware in der Hand)
    - In **Storing (A6):** Label sagt "to Cart", aber physisch = VOM Wagen ZUM Regal
-   - **Status:** âš ï¸ Generisches Label, das flexibel interpretiert wird
+   - **Status:** ⚠️ Generisches Label, das flexibel interpretiert wird
 
-2. **"Sorting" (CL144) â€“ KontextabhÃ¤ngig:**
+2. **"Sorting" (CL144) – Kontextabhängig:**
    - In **Packing (A4):** Ware wird AUS dem Wagen IN den Versandkarton sortiert (Outbound)
-   - In **Unpacking (A5):** Ware wird AUS dem Versandkarton entnommen und fÃ¼r Einlagerung sortiert (Inbound)
-   - **Status:** âœ… Label ist korrekt, aber semantik ist kontextabhÃ¤ngig
+   - In **Unpacking (A5):** Ware wird AUS dem Versandkarton entnommen und für Einlagerung sortiert (Inbound)
+   - **Status:** ✅ Label ist korrekt, aber semantik ist kontextabhängig
 
-3. **"Transporting to Packaging/Sorting Area" (CL129) â€“ Unterschiedliche Quellen:**
+3. **"Transporting to Packaging/Sorting Area" (CL129) – Unterschiedliche Quellen:**
    - In **Packing (A4):** Transport VON der Picking-Station zum Packtisch
    - In **Unpacking (A5):** Transport VON Retouren-Wareneingang zum Packtisch
-   - **Status:** âœ… Label ist korrekt, Quellen unterscheiden sich
+   - **Status:** ✅ Label ist korrekt, Quellen unterscheiden sich
 
 ---
 
@@ -636,16 +636,16 @@ MANDATORY_TOOLS = {
 ```python
 def validate_tool_requirements(df):
     """
-    PrÃ¼ft, ob Pflicht-Tools bei entsprechenden CC10-Labels aktiv sind.
+    Prüft, ob Pflicht-Tools bei entsprechenden CC10-Labels aktiv sind.
     
-    Frame-Level-Validierung: Jedes Frame mit tool-abhÃ¤ngigem CC10 wird geprÃ¼ft.
+    Frame-Level-Validierung: Jedes Frame mit tool-abhängigem CC10 wird geprüft.
     """
     violations = []
     
     for idx, row in df.iterrows():
         cc10 = row['CC10']
         
-        # PrÃ¼fe, ob CC10 Tool-Anforderungen hat
+        # Prüfe, ob CC10 Tool-Anforderungen hat
         if cc10 in MANDATORY_TOOLS:
             required_tools = MANDATORY_TOOLS[cc10]
             
@@ -655,7 +655,7 @@ def validate_tool_requirements(df):
             # Sammle alle aktiven Tools aus CC05 (Right Hand)
             right_tools = [col for col in df.columns if col.startswith('CL0') and 65 <= int(col[2:5]) <= 99 and row[col] == 1]
             
-            # PrÃ¼fe, ob mindestens eines der erforderlichen Tools aktiv ist
+            # Prüfe, ob mindestens eines der erforderlichen Tools aktiv ist
             left_match = any(tool in left_tools for tool in required_tools["Left"])
             right_match = any(tool in right_tools for tool in required_tools["Right"])
             
@@ -682,7 +682,7 @@ def validate_tool_requirements(df):
 
 #### 2.3.1 Erwartete Location-Transitions
 
-Bestimmte CC10-Prozesse erfordern spezifische rÃ¤umliche Transitionen (CC11 Human Location):
+Bestimmte CC10-Prozesse erfordern spezifische räumliche Transitionen (CC11 Human Location):
 
 ```python
 EXPECTED_LOCATION_TRANSITIONS = {
@@ -690,7 +690,7 @@ EXPECTED_LOCATION_TRANSITIONS = {
     CL124: {
         "Start": [CL155],  # Office
         "End": [CL155, CL156, CL157],  # Office oder Cart Area
-        "Path": ["Office â†’ Cart Area oder Office"],
+        "Path": ["Office → Cart Area oder Office"],
         "Process": "Preparing Order (CL114)",
     },
     
@@ -706,7 +706,7 @@ EXPECTED_LOCATION_TRANSITIONS = {
     CL126: {
         "Start": [CL155, CL156],  # Office, Cart Area
         "End": [CL157, CL158],  # Cardboard Box Area
-        "Path": ["Office â†’ Cardboard Area"],
+        "Path": ["Office → Cardboard Area"],
         "Process": "Preparing Order (CL114 - Retrieval)",
     },
     
@@ -714,7 +714,7 @@ EXPECTED_LOCATION_TRANSITIONS = {
     CL128: {
         "Start": [CL155, CL156, CL157],  # Office, Cart Area, Cardboard Area
         "End": [CL161, CL162, CL163],  # Aisles (picking/storing base)
-        "Path": ["Office/Cart/Cardboard â†’ Base (Aisle Start)"],
+        "Path": ["Office/Cart/Cardboard → Base (Aisle Start)"],
         "Process": "Picking (CL115) or Storing (CL119)",
     },
     
@@ -746,7 +746,7 @@ EXPECTED_LOCATION_TRANSITIONS = {
     CL141: {
         "Start": [CL161, CL162, CL163, CL164, CL165, CL166, CL167],  # Aisles (from picking)
         "End": [CL153],  # Packing Table
-        "Path": ["Aisle â†’ Packing Table"],
+        "Path": ["Aisle → Packing Table"],
         "Process": "Packing (CL118)",
     },
     
@@ -767,8 +767,8 @@ EXPECTED_LOCATION_TRANSITIONS = {
 def validate_location_transitions(df):
     """
     Frame-Level-Validierung mit Transition-Detection:
-    - Erkennt Location-Ã„nderungen
-    - Vergleicht gegen erwartete Pfade fÃ¼r aktives CC10
+    - Erkennt Location-Änderungen
+    - Vergleicht gegen erwartete Pfade für aktives CC10
     """
     violations = []
     
@@ -777,15 +777,15 @@ def validate_location_transitions(df):
         curr_location = df.iloc[i]['CC11']
         cc10 = df.iloc[i]['CC10']
         
-        # Nur prÃ¼fen bei Location-Ã„nderung
+        # Nur prüfen bei Location-Änderung
         if prev_location == curr_location:
             continue
         
-        # PrÃ¼fe, ob CC10 Location-Erwartungen hat
+        # Prüfe, ob CC10 Location-Erwartungen hat
         if cc10 in EXPECTED_LOCATION_TRANSITIONS:
             expected = EXPECTED_LOCATION_TRANSITIONS[cc10]
             
-            # PrÃ¼fe Start-Location
+            # Prüfe Start-Location
             if prev_location not in expected["Start"]:
                 violations.append({
                     "frame": df.iloc[i]['frame'],
@@ -800,7 +800,7 @@ def validate_location_transitions(df):
                     "description": f"Invalid start location for {expected['Process']}: Expected {expected['Start']}, got {prev_location}"
                 })
             
-            # PrÃ¼fe End-Location
+            # Prüfe End-Location
             if curr_location not in expected["End"]:
                 violations.append({
                     "frame": df.iloc[i]['frame'],
@@ -823,27 +823,27 @@ def validate_location_transitions(df):
 ```python
 def detect_teleportations(df, max_distance=2):
     """
-    Erkennt unrealistische Location-SprÃ¼nge (Teleportation).
+    Erkennt unrealistische Location-Sprünge (Teleportation).
     
-    Hintergrund: Worker kÃ¶nnen nicht sofort von Office (CL155) zu Aisle 5 (CL176) springen.
-    Erwartung: Locations sollten Ã¼ber Pfade (CL161-CL167) verbunden sein.
+    Hintergrund: Worker können nicht sofort von Office (CL155) zu Aisle 5 (CL176) springen.
+    Erwartung: Locations sollten über Pfade (CL161-CL167) verbunden sein.
     """
     violations = []
     
-    # Definition rÃ¤umlicher Nachbarschaften
+    # Definition räumlicher Nachbarschaften
     ADJACENT_LOCATIONS = {
-        CL155: [CL156, CL157],  # Office â†’ Cart Area, Cardboard Area
-        CL156: [CL155, CL157, CL161],  # Cart Area â†’ Office, Cardboard, Aisle1
-        CL157: [CL155, CL156, CL161],  # Cardboard â†’ Office, Cart, Aisle1
-        CL161: [CL156, CL157, CL162, CL153],  # Aisle1 â†’ Cart, Cardboard, Aisle2, Packing
-        CL162: [CL161, CL163, CL153],  # Aisle2 â†’ Aisle1, Aisle3, Packing
-        CL163: [CL162, CL164, CL153],  # Aisle3 â†’ ...
+        CL155: [CL156, CL157],  # Office → Cart Area, Cardboard Area
+        CL156: [CL155, CL157, CL161],  # Cart Area → Office, Cardboard, Aisle1
+        CL157: [CL155, CL156, CL161],  # Cardboard → Office, Cart, Aisle1
+        CL161: [CL156, CL157, CL162, CL153],  # Aisle1 → Cart, Cardboard, Aisle2, Packing
+        CL162: [CL161, CL163, CL153],  # Aisle2 → Aisle1, Aisle3, Packing
+        CL163: [CL162, CL164, CL153],  # Aisle3 → ...
         CL164: [CL163, CL165, CL153],
-        CL165: [CL164, CL166, CL154],  # Aisles â†’ Unpacking
+        CL165: [CL164, CL166, CL154],  # Aisles → Unpacking
         CL166: [CL165, CL167, CL154],
-        CL167: [CL166, CL154],  # Last Aisle â†’ Unpacking
-        CL153: [CL161, CL162, CL163, CL164],  # Packing Table â†” Aisles
-        CL154: [CL165, CL166, CL167],  # Unpacking Table â†” Aisles
+        CL167: [CL166, CL154],  # Last Aisle → Unpacking
+        CL153: [CL161, CL162, CL163, CL164],  # Packing Table ↔ Aisles
+        CL154: [CL165, CL166, CL167],  # Unpacking Table ↔ Aisles
     }
     
     for i in range(1, len(df)):
@@ -853,7 +853,7 @@ def detect_teleportations(df, max_distance=2):
         if prev_loc == curr_loc:
             continue
         
-        # PrÃ¼fe Nachbarschaft
+        # Prüfe Nachbarschaft
         if prev_loc in ADJACENT_LOCATIONS:
             if curr_loc not in ADJACENT_LOCATIONS[prev_loc]:
                 violations.append({
@@ -862,7 +862,7 @@ def detect_teleportations(df, max_distance=2):
                     "severity": "CRITICAL",
                     "prev_location": prev_loc,
                     "curr_location": curr_loc,
-                    "description": f"Unrealistic location jump: {prev_loc} â†’ {curr_loc}"
+                    "description": f"Unrealistic location jump: {prev_loc} → {curr_loc}"
                 })
     
     return violations
@@ -877,24 +877,24 @@ def detect_teleportations(df, max_distance=2):
 ```python
 def validate_multi_order_co_activation(df, scenario):
     """
-    PrÃ¼ft, ob Multiple Orders biologisch plausibel und korrekt aktiviert sind.
+    Prüft, ob Multiple Orders biologisch plausibel und korrekt aktiviert sind.
     
     Multi-Order-Szenarien: S7 (Retrieval, 2 Orders) und S8 (Storage, 2 Orders)
     """
     violations = []
     
     if scenario in ["S7", "S8"]:
-        # Erwartung: Zwei vollstÃ¤ndige Order-Sequenzen sollten sequenziell ablaufen
-        # NICHT parallel oder Ã¼berlappend
+        # Erwartung: Zwei vollständige Order-Sequenzen sollten sequenziell ablaufen
+        # NICHT parallel oder überlappend
         
-        # Pseudocode: PrÃ¼fe CC09-Chunks auf Order-Struktur
+        # Pseudocode: Prüfe CC09-Chunks auf Order-Struktur
         chunks = df.groupby('chunk_id')
         order_count = 0
         
         for chunk_id, chunk_df in chunks:
             cc09_set = set(chunk_df['CC09'].unique())
             
-            # Erkennung neuer Order: Ãœbergang zu CL114 (Preparing Order) nach CL121
+            # Erkennung neuer Order: Übergang zu CL114 (Preparing Order) nach CL121
             if CL121 in cc09_set and CL114 in cc09_set:
                 order_count += 1
         
@@ -930,7 +930,7 @@ CL134 (Waiting) wird als **Global Interrupt** behandelt:
 ```python
 def validate_cl134_global_interrupt(df):
     """
-    PrÃ¼ft, ob CL134 (Waiting) mit hÃ¶chster PrioritÃ¤t behandelt wird.
+    Prüft, ob CL134 (Waiting) mit höchster Priorität behandelt wird.
     
     Wenn CL134 aktiv ist, sollte kein anderes CC10-Label gleichzeitig aktiv sein.
     """
@@ -938,7 +938,7 @@ def validate_cl134_global_interrupt(df):
     
     for idx, row in df.iterrows():
         if row['CC10'] == CL134:
-            # PrÃ¼fe, ob andere CC10-Labels gleichzeitig aktiv sind
+            # Prüfe, ob andere CC10-Labels gleichzeitig aktiv sind
             # (Dies sollte nicht vorkommen)
             if len(row[row.startswith('CL')].sum()) > 1:
                 violations.append({
@@ -957,7 +957,7 @@ def validate_cl134_global_interrupt(df):
 
 ## 3. BPMN-GENERIERUNG
 
-### 3.1 JSON-Schema fÃ¼r BPMN-Graphen
+### 3.1 JSON-Schema für BPMN-Graphen
 
 #### 3.1.1 Node-Typen
 
@@ -966,14 +966,14 @@ def validate_cl134_global_interrupt(df):
   "nodeTypes": {
     "startEvent": "Rundes Start-Symbol",
     "endEvent": "Rundes End-Symbol",
-    "task": "Rechteckige AktivitÃ¤t (CC09 Mid-Level Process)",
-    "exclusiveGateway": "RautenfÃ¶rmiger XOR-Gateway (Entscheidungspunkt)",
-    "parallelGateway": "RautenfÃ¶rmiger AND-Gateway (Parallele Pfade)"
+    "task": "Rechteckige Aktivität (CC09 Mid-Level Process)",
+    "exclusiveGateway": "Rautenförmiger XOR-Gateway (Entscheidungspunkt)",
+    "parallelGateway": "Rautenförmiger AND-Gateway (Parallele Pfade)"
   }
 }
 ```
 
-#### 3.1.2 VollstÃ¤ndiges Schema
+#### 3.1.2 Vollständiges Schema
 
 ```json
 {
@@ -1112,7 +1112,7 @@ def validate_cl134_global_interrupt(df):
     },
     "deviations": {
       "type": "array",
-      "description": "VollstÃ¤ndige Liste aller Abweichungen vom idealen BPMN",
+      "description": "Vollständige Liste aller Abweichungen vom idealen BPMN",
       "items": {
         "type": "object",
         "required": ["frame", "type", "severity", "description"],
@@ -1161,7 +1161,7 @@ def validate_cl134_global_interrupt(df):
 ```python
 def generate_bpmn_from_data(df, subject_id, scenario, session):
     """
-    Generiert BPMN-JSON-Struktur aus tatsÃ¤chlichen Prozessdaten.
+    Generiert BPMN-JSON-Struktur aus tatsächlichen Prozessdaten.
     
     Parameters:
     - df: DataFrame mit Columns ['frame', 'CC09', 'CC10', 'chunk_id', ...]
@@ -1170,7 +1170,7 @@ def generate_bpmn_from_data(df, subject_id, scenario, session):
     - session: Session-Nummer (1-6)
     
     Returns:
-    - VollstÃ¤ndige BPMN-JSON-Struktur
+    - Vollständige BPMN-JSON-Struktur
     """
     
     # Initialisiere BPMN-Struktur
@@ -1254,7 +1254,7 @@ def generate_bpmn_from_data(df, subject_id, scenario, session):
     return bpmn
 
 def get_label_name(label_code):
-    """Gibt den Klarnamen fÃ¼r ein Label zurÃ¼ck."""
+    """Gibt den Klarnamen für ein Label zurück."""
     LABEL_NAMES = {
         "CL114": "Preparing Order",
         "CL115": "Picking - Travel Time",
@@ -1330,10 +1330,10 @@ def generate_mermaid_from_bpmn(bpmn_json):
 ```python
 def compare_bpmn_ist_soll(ist_bpmn, scenario):
     """
-    Vergleicht tatsÃ¤chlich durchgefÃ¼hrten Prozess (IST) mit idealem BPMN (SOLL).
+    Vergleicht tatsächlich durchgeführten Prozess (IST) mit idealem BPMN (SOLL).
     
     Returns:
-    - Diff-Struktur mit fehlenden/zusÃ¤tzlichen Nodes und Sequenzabweichungen
+    - Diff-Struktur mit fehlenden/zusätzlichen Nodes und Sequenzabweichungen
     """
     # SOLL-Sequenzen aus Section 2.1.2
     SOLL_SEQUENCES = {
@@ -1382,7 +1382,7 @@ def compare_bpmn_ist_soll(ist_bpmn, scenario):
 ### 4.1 Severity-Klassifikation
 
 - **CRITICAL:** Fundamentale BPMN-Logik verletzt
-- **WARNING:** UngewÃ¶hnlich, aber nicht ausgeschlossen
+- **WARNING:** Ungewöhnlich, aber nicht ausgeschlossen
 - **INFO:** Abweichung ohne direkten Fehler
 
 ### 4.2 Violation-Typ-Katalog
@@ -1407,10 +1407,10 @@ def compare_bpmn_ist_soll(ist_bpmn, scenario):
 ### 5.1 Single-Subject-Validierung
 
 ```python
-# Lade Daten fÃ¼r Subject S14, Scenario S1, Session 3
+# Lade Daten für Subject S14, Scenario S1, Session 3
 df = load_proband_data("S14", "S1", session=3)
 
-# FÃ¼hre alle Validierungen durch
+# Führe alle Validierungen durch
 violations = []
 violations.extend(validate_cc09_sequence(df, chunk_level=True))
 violations.extend(validate_tool_requirements(df))
@@ -1459,14 +1459,14 @@ for subject_id in ["S01", "S02", ..., "S18"]:
 ```python
 def validate_sequence_probabilistic(df, confidence=0.95):
     """
-    Probabilistische Validierung basierend auf HÃ¤ufigkeit beobachteter ÃœbergÃ¤nge.
+    Probabilistische Validierung basierend auf Häufigkeit beobachteter Übergänge.
     
-    Nutzt Markov-Chain-Analyse Ã¼ber alle Probanden.
+    Nutzt Markov-Chain-Analyse über alle Probanden.
     """
     # Build transition matrix
     transition_matrix = build_transition_matrix(df)
     
-    # PrÃ¼fe, ob ÃœbergÃ¤nge unter Confidence-Threshold fallen
+    # Prüfe, ob Übergänge unter Confidence-Threshold fallen
     violations = []
     for i in range(len(df) - 1):
         from_cc09 = df.iloc[i]['CC09']
@@ -1495,7 +1495,7 @@ def visualize_bpmn_diff(ist_bpmn, soll_bpmn):
     """
     Visualisiert Unterschiede zwischen IST und SOLL mittels Farbcodierung.
     
-    - GrÃ¼n: Matches SOLL
+    - Grün: Matches SOLL
     - Rot: Extra Nodes (nicht in SOLL)
     - Orange: Missing Nodes (erwartet, aber nicht in IST)
     """
@@ -1541,9 +1541,9 @@ def visualize_bpmn_diff(ist_bpmn, soll_bpmn):
 ```python
 def generate_error_hypothesis(violation):
     """
-    Generiert automatische Hypothesen fÃ¼r Abweichungsursachen.
+    Generiert automatische Hypothesen für Abweichungsursachen.
     
-    Nutzt regelbasierte Heuristiken + LLM-UnterstÃ¼tzung.
+    Nutzt regelbasierte Heuristiken + LLM-Unterstützung.
     """
     hypotheses = []
     
@@ -1551,12 +1551,12 @@ def generate_error_hypothesis(violation):
         prev = violation["prev_cc09"]
         curr = violation["curr_cc09"]
         
-        # Heuristik 1: Retrieval â†’ Storage Sprung
+        # Heuristik 1: Retrieval → Storage Sprung
         if prev in ["CL115", "CL116"] and curr in ["CL119", "CL120"]:
             hypotheses.append({
                 "hypothesis": "Proband hat versehentlich zu Storage-Prozess gewechselt",
                 "likelihood": "MEDIUM",
-                "evidence": "UngÃ¼ltige Transition von Retrieval zu Storage"
+                "evidence": "Ungültige Transition von Retrieval zu Storage"
             })
             hypotheses.append({
                 "hypothesis": "Annotation-Fehler: Frame sollte anderes CC09 haben",
@@ -1567,7 +1567,7 @@ def generate_error_hypothesis(violation):
         # Heuristik 2: Fehlende Zwischenschritte
         if prev == "CL115" and curr == "CL121":
             hypotheses.append({
-                "hypothesis": "Picking wurde abgebrochen (z.B. Item nicht verfÃ¼gbar)",
+                "hypothesis": "Picking wurde abgebrochen (z.B. Item nicht verfügbar)",
                 "likelihood": "HIGH",
                 "evidence": "Direct Finalize ohne Pick Time"
             })
@@ -1591,11 +1591,11 @@ def generate_error_hypothesis(violation):
 
 ## 7. VERWENDUNGSHINWEISE
 
-**Diese Datei nutzen fÃ¼r:**
-- VollstÃ¤ndige BPMN-Validierung von Probandendaten
+**Diese Datei nutzen für:**
+- Vollständige BPMN-Validierung von Probandendaten
 - Generierung von IST-BPMN-Graphen
 - Abweichungsanalyse und Fehlerreporting
-- Vergleich zwischen idealem und tatsÃ¤chlichem Prozess
+- Vergleich zwischen idealem und tatsächlichem Prozess
 - Detaillierte Prozessflow-Analyse (Figures A2-A7)
 - Szenario-spezifische Validierung (S1-S8)
 - Error-Handling-Logik und CL135-Bedingungen
@@ -1616,7 +1616,7 @@ def generate_error_hypothesis(violation):
 
 **Version:** 5.0  
 **Erstellt:** 05.02.2026  
-**Status:** finalisiert âœ…  
+**Status:** finalisiert ✅  
 **Autor:** Phase 2+3 Analyse, Umsetzung & NotebookLM Integration  
 **BPMN-Quelle:** Figures A2-A7 aus BPMN_PROZESSE_DARA.pdf  
-**NÃ¤chste Phase:** Phase 4 (Konsolidierungsanalyse)
+**Nächste Phase:** Phase 4 (Konsolidierungsanalyse)

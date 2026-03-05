@@ -6,9 +6,9 @@ source: "DaRa Dataset Description + Documentation (authoritative PDF)"
 description: "Complete inventory of all 207 labels (CL001-CL207) with definitions, examples, and annotation context. Structured by 12 class categories (CC01-CC12). Validation rules and hard constraints documented in validation_rules_v5.0.md."
 ---
 
-# core_labels_207_v5.0.md â€” Complete Label Inventory
+# core_labels_207_v5.0.md — Complete Label Inventory
 
-**DaRa Dataset Expert Skill â€” Phase 2+3 Output**  
+**DaRa Dataset Expert Skill — Phase 2+3 Output**  
 **Scope:** 207 Labels across 12 Categories  
 **Format:** Label-Definition Hub (Validation Logic in validation_rules_v5.0.md)
 
@@ -34,7 +34,7 @@ description: "Complete inventory of all 207 labels (CL001-CL207) with definition
 
 ---
 
-## 2. ÃœBERBLICK: KATEGORISIERUNG
+## 2. ÜBERBLICK: KATEGORISIERUNG
 
 ### Type Definitionen (Details: see validation_rules_v5.0.md)
 
@@ -46,7 +46,7 @@ description: "Complete inventory of all 207 labels (CL001-CL207) with definition
 
 ---
 
-[CC01-CC12 LABELS FOLGEN HIER â€” SEE PART 2]
+[CC01-CC12 LABELS FOLGEN HIER — SEE PART 2]
 
 ---
 
@@ -56,7 +56,7 @@ description: "Complete inventory of all 207 labels (CL001-CL207) with definition
 
 1. **Cardinality:** See category_activation_matrix_v5.0.md for Min/Max rules per scenario
 2. **Type Details:** See validation_rules_v5.0.md for Single/Multi/Required/Hierarchical rules
-3. **Constraints:** See validation_rules_v5.0.md for hard-constraints (especially CC09â†’CC10, CC06â†”CC07)
+3. **Constraints:** See validation_rules_v5.0.md for hard-constraints (especially CC09→CC10, CC06↔CC07)
 4. **Query Patterns:** See assets_query_patterns_v5.0.md for search terms and examples
 5. **Scenario Binding:** See validation_rules_v5.0.md for scenario-specific label activation
 
@@ -238,10 +238,10 @@ Video obscured, unclear location, unidentifiable position.
 
 ---
 
-## 14. CC12 â€” LOCATION - CART (27 Labels)
+## 14. CC12 — LOCATION - CART (27 Labels)
 
 **Type:** Hierarchical Multi-Select (1-4 labels)  
-**Structure:** Level 1 (Main Area) â†’ Level 2 (Sub-Area) â†’ Level 3 (Position) â†’ Level 4 (Beacon)  
+**Structure:** Level 1 (Main Area) → Level 2 (Sub-Area) → Level 3 (Position) → Level 4 (Beacon)  
 **Scope:** All scenarios (S1-S8)  
 **Special:** CL181 (Beacon Transition Multi-Frame) has special combinatorics with beacon locations  
 **Note:** Beacon-based location system. Parallel to CC11 (Human Location). See validation_rules_v5.0.md for drill-down and beacon transition logic.
@@ -346,12 +346,12 @@ Cart location in administrative area (beacon-based). Support zone for cart.
 Cart location on path connecting areas (beacon-based). Requires drill-down to specify path type. **Mirrors CL161 (Path) structure.**
 
 **Annotation Context:**
-- Type: Hierarchical Level 1 (Main Area) â€” requires Level 2 specification
+- Type: Hierarchical Level 1 (Main Area) — requires Level 2 specification
 - Parent: None (top level)
-- Children: **REQUIRED** â€” must select one of path types (Office, Cross-Aisle, Aisle paths)
+- Children: **REQUIRED** — must select one of path types (Office, Cross-Aisle, Aisle paths)
 - Beacon: Path beacon location(s)
 - Scenario: All (S1-S8)
-- Drill-Down Rule: If CL188 â†’ must choose path type
+- Drill-Down Rule: If CL188 → must choose path type
 
 **Related Labels:** CL161 (Human Path), CL189-CL190, CL191-CL207 (Path sub-types for cart)
 
@@ -363,12 +363,12 @@ Cart location on path connecting areas (beacon-based). Requires drill-down to sp
 Cart location on cross-aisle transition (beacon-based). **Mirrors CL162 (Cross Aisle Path) structure.** Requires further drill-down to specify which aisle transition.
 
 **Annotation Context:**
-- Type: Hierarchical Level 1 (Main Area) â€” requires Level 2 specification
+- Type: Hierarchical Level 1 (Main Area) — requires Level 2 specification
 - Parent: None (top level)
-- Children: **REQUIRED** â€” must select which aisle transition (similar to CL168-CL171)
+- Children: **REQUIRED** — must select which aisle transition (similar to CL168-CL171)
 - Beacon: Cross-aisle beacon location(s)
 - Scenario: All (S1-S8)
-- Drill-Down Rule: If CL189 â†’ must choose aisle transition
+- Drill-Down Rule: If CL189 → must choose aisle transition
 
 **Related Labels:** CL162 (Human Cross-Aisle Path), CL188, CL190, CL191-CL207 (specifics)
 
@@ -380,12 +380,12 @@ Cart location on cross-aisle transition (beacon-based). **Mirrors CL162 (Cross A
 Cart location in aisle system (beacon-based). **Mirrors CL163 (Aisle Path) structure.** Requires drill-down to specify aisle AND position.
 
 **Annotation Context:**
-- Type: Hierarchical Level 1 (Main Area) â€” requires Level 2 AND Level 3 specification
+- Type: Hierarchical Level 1 (Main Area) — requires Level 2 AND Level 3 specification
 - Parent: None (top level)
-- Children: **REQUIRED** â€” must select aisle number AND position (Front/Back)
+- Children: **REQUIRED** — must select aisle number AND position (Front/Back)
 - Beacon: Aisle beacon location(s)
 - Scenario: All (S1-S8)
-- Drill-Down Rule: If CL190 â†’ must choose Aisle AND Position
+- Drill-Down Rule: If CL190 → must choose Aisle AND Position
 
 **Related Labels:** CL163 (Human Aisle Path), CL188-CL189, CL191-CL207 (specifics)
 
@@ -445,7 +445,7 @@ Cart path on cross-aisle transition beacon. Mirror of CL165.
 **Annotation Context:**
 - Type: Hierarchical Level 2 (Parent: CL188)
 - Parent: CL188 (Path for cart)
-- Children: **OPTIONAL** â€” can specify which aisle transition (CL195-CL198)
+- Children: **OPTIONAL** — can specify which aisle transition (CL195-CL198)
 - Scenario: All (S1-S8)
 
 **Related Labels:** CL165 (Human: Path Cross-Aisle), CL191, CL193-CL194
@@ -460,7 +460,7 @@ Cart path within aisle system beacon. Mirror of CL166.
 **Annotation Context:**
 - Type: Hierarchical Level 2 (Parent: CL188)
 - Parent: CL188 (Path for cart)
-- Children: **OPTIONAL** â€” can specify aisle number (CL199-CL203) and position (CL204-CL205)
+- Children: **OPTIONAL** — can specify aisle number (CL199-CL203) and position (CL204-CL205)
 - Scenario: All (S1-S8)
 
 **Related Labels:** CL166 (Human: Path Aisle), CL191-CL192, CL194
@@ -687,7 +687,7 @@ Video obscured, unclear beacon reading, unidentifiable cart position.
 
 1. **Cardinality:** See category_activation_matrix_v5.0.md for Min/Max rules per scenario
 2. **Type Details:** See validation_rules_v5.0.md for Single/Multi/Required/Hierarchical rules
-3. **Constraints:** See validation_rules_v5.0.md for hard-constraints (especially CC09â†’CC10, CC06â†”CC07)
+3. **Constraints:** See validation_rules_v5.0.md for hard-constraints (especially CC09→CC10, CC06↔CC07)
 4. **Query Patterns:** See assets_query_patterns_v5.0.md for search terms and examples
 5. **Scenario Binding:** See validation_rules_v5.0.md for scenario-specific label activation
 

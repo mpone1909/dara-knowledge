@@ -6,40 +6,40 @@ source: "frame_validation_rules.md v4.5.1 (27.01.2026) + DaRa-Dokumentation (Not
 dependencies: ["core_labels_207_v5_0.md", "core_category_activation_matrix_v5_0.md", "core_ground_truth_central_v5_0.md"]
 ---
 
-# core_validation_rules_v5_0.md â€” Frame-Level Validierungsregeln
+# core_validation_rules_v5_0.md — Frame-Level Validierungsregeln
 
-**Zentrale Sammlung aller Frame-Level Validierungsregeln fÃ¼r den DaRa-Datensatz**
+**Zentrale Sammlung aller Frame-Level Validierungsregeln für den DaRa-Datensatz**
 
 **Skill-Version:** 5.0 (05.02.2026)  
-**Fokus:** Frame-Level Validierung (Label-Kombinationen, Master-Slave-AbhÃ¤ngigkeiten, Fehlerbehandlung)  
+**Fokus:** Frame-Level Validierung (Label-Kombinationen, Master-Slave-Abhängigkeiten, Fehlerbehandlung)  
 **Szenario-Level Validierung:** Siehe `core_ground_truth_central_v5_0.md` (5-Schritt-Logik)
 
 ---
 
 ## ðŸ“š INHALTSVERZEICHNIS
 
-1. [Master-Slave-AbhÃ¤ngigkeiten](#1-master-slave-abhÃ¤ngigkeiten)
+1. [Master-Slave-Abhängigkeiten](#1-master-slave-abhängigkeiten)
 2. [Label-Kombinationsregeln](#2-label-kombinationsregeln)
 3. [Spezielle Validierungen](#3-spezielle-validierungen)
 4. [Anwendungshinweise](#4-anwendungshinweise)
-5. [Ã„nderungshistorie](#5-Ã¤nderungshistorie)
+5. [Änderungshistorie](#5-änderungshistorie)
 6. [BPMN-Prozess-Mappings (Anhang)](#anhang-bpmn-prozess-mappings)
 
 ---
 
-## 1. MASTER-SLAVE-ABHÃ„NGIGKEITEN
+## 1. MASTER-SLAVE-ABHÄNGIGKEITEN
 
-Master-Slave-AbhÃ¤ngigkeiten definieren, dass eine Ã¼bergeordnete Kategorie die AuswahlmÃ¶glichkeiten fÃ¼r nachgelagerte Kategorien einschrÃ¤nkt oder erzwingt.
+Master-Slave-Abhängigkeiten definieren, dass eine übergeordnete Kategorie die Auswahlmöglichkeiten für nachgelagerte Kategorien einschränkt oder erzwingt.
 
-### 1.1 CC01 (Main Activity) â†’ Master fÃ¼r CC02â€“CC05
+### 1.1 CC01 (Main Activity) → Master für CC02–CC05
 
 **CC01 bestimmt den globalen Zustand des Probanden und seine Bewegungskomponenten.**
 
-**Regel V-B1: Hierarchische Master-Slave-AbhÃ¤ngigkeit**
+**Regel V-B1: Hierarchische Master-Slave-Abhängigkeit**
 
 ```python
 # CC01 ist Master; CC02-CC05 sind Slaves
-# Die Sub-AktivitÃ¤ten (CC02-CC05) mÃ¼ssen semantisch zu CC01 passen
+# Die Sub-Aktivitäten (CC02-CC05) müssen semantisch zu CC01 passen
 
 # Beispiel: Wenn CC01 = Walking (CL011)
 if CC01 == 'CL011':  # Walking
@@ -47,8 +47,8 @@ if CC01 == 'CL011':  # Walking
     assert CC02 == 'CL016'  # Walking erfordert Beinbewegung
     
     # Walking ist NICHT kompatibel mit:
-    # - CC02 = Standing Still (CL018) âŒ
-    # - CC02 = Squat (CL017) âŒ
+    # - CC02 = Standing Still (CL018) ❌
+    # - CC02 = Squat (CL017) ❌
 
 # Beispiel: Wenn CC01 = Standing Still (CL001)
 if CC01 == 'CL001':
@@ -56,13 +56,13 @@ if CC01 == 'CL001':
     assert CC02 == 'CL016'
 ```
 
-**CC01 PrioritÃ¤ts-Hierarchie bei Konflikten:**
+**CC01 Prioritäts-Hierarchie bei Konflikten:**
 
-Bei theoretischen Mehrdeutigkeiten oder simultanen AktivitÃ¤ten gilt folgende explizite PrioritÃ¤tsordnung (hÃ¶chste â†’ niedrigste):
+Bei theoretischen Mehrdeutigkeiten oder simultanen Aktivitäten gilt folgende explizite Prioritätsordnung (höchste → niedrigste):
 
 ```python
 CC01_PRIORITY_HIERARCHY = [
-    ('CL001', 'Synchronization', 1),           # HÃ¶chste PrioritÃ¤t
+    ('CL001', 'Synchronization', 1),           # Höchste Priorität
     ('CL002', 'Confirming with Pen', 2),
     ('CL003', 'Confirming with Screen', 3),
     ('CL004', 'Confirming with Button', 4),
@@ -76,42 +76,42 @@ CC01_PRIORITY_HIERARCHY = [
     ('CL012', 'Standing', 12),
     ('CL013', 'Sitting', 13),
     ('CL014', 'Another Main Activity', 14),
-    ('CL015', 'Main Activity Unknown', 15),   # Niedrigste PrioritÃ¤t
+    ('CL015', 'Main Activity Unknown', 15),   # Niedrigste Priorität
 ]
 
 def resolve_cc01_conflict(active_labels_cc01):
     """
-    Wenn mehrere CC01-Labels gleichzeitig aktiv wÃ¤ren (sollte nicht vorkommen),
-    wÃ¤hle das Label mit der hÃ¶chsten PrioritÃ¤t.
+    Wenn mehrere CC01-Labels gleichzeitig aktiv wären (sollte nicht vorkommen),
+    wähle das Label mit der höchsten Priorität.
     """
     for label, name, priority in CC01_PRIORITY_HIERARCHY:
         if label in active_labels_cc01:
-            return label  # Gibt das erste (hÃ¶chste PrioritÃ¤t) zurÃ¼ck
+            return label  # Gibt das erste (höchste Priorität) zurück
 ```
 
 **Praktische Beispiele:**
 
-| Situation | CC01 priorisiert | BegrÃ¼ndung |
+| Situation | CC01 priorisiert | Begründung |
 |-----------|------------------|-----------|
-| Gehen + Wagen schieben | CL007 (Pushing Cart) | Pushing hat hÃ¶here PrioritÃ¤t als Walking |
-| Gehen + Scannen | CL005 (Scanning) | Scanning hat hÃ¶here PrioritÃ¤t als Walking |
-| Stehen + BestÃ¤tigung am PDT | CL003 (Confirming) | Confirming hat hÃ¶here PrioritÃ¤t als Standing |
-| Greifen wÃ¤hrend Gehen | CL008/CL009/CL010 (Handling) | Handling hat hÃ¶here PrioritÃ¤t als Walking |
+| Gehen + Wagen schieben | CL007 (Pushing Cart) | Pushing hat höhere Priorität als Walking |
+| Gehen + Scannen | CL005 (Scanning) | Scanning hat höhere Priorität als Walking |
+| Stehen + Bestätigung am PDT | CL003 (Confirming) | Confirming hat höhere Priorität als Standing |
+| Greifen während Gehen | CL008/CL009/CL010 (Handling) | Handling hat höhere Priorität als Walking |
 
 **Technische Umsetzung:**
 
-Die DaRa-Annotationstool (SARA) implementiert diese AbhÃ¤ngigkeiten als **Dependencies**:
-- Bestimmte Labels in CC01 erzwingen oder verbieten bestimmte Labels in CC02â€“CC05
-- Beispiel: Walking (CL011) in CC01 erzwingt Gait Cycle (CL016) in CC02 und schlieÃŸt Standing Still (CL018) aus
-- QualitÃ¤tssicherung: Annotatoren von CC02â€“CC05 fungieren gleichzeitig als Revisoren fÃ¼r CC01
+Die DaRa-Annotationstool (SARA) implementiert diese Abhängigkeiten als **Dependencies**:
+- Bestimmte Labels in CC01 erzwingen oder verbieten bestimmte Labels in CC02–CC05
+- Beispiel: Walking (CL011) in CC01 erzwingt Gait Cycle (CL016) in CC02 und schließt Standing Still (CL018) aus
+- Qualitätssicherung: Annotatoren von CC02–CC05 fungieren gleichzeitig als Revisoren für CC01
 
 ---
 
-### 1.2 CC08 (High-Level Process) â†’ Master fÃ¼r CC09 (Mid-Level Process)
+### 1.2 CC08 (High-Level Process) → Master für CC09 (Mid-Level Process)
 
 **CC08 definiert den Grobprozess (Retrieval vs. Storage) und bestimmt, welche Mid-Level-Prozesse (CC09) erlaubt sind.**
 
-**Regel V-B2: Prozess-Hierarchie High-Level â†’ Mid-Level**
+**Regel V-B2: Prozess-Hierarchie High-Level → Mid-Level**
 
 ```python
 def validate_cc09_from_cc08(cc08_active, cc09_active):
@@ -134,11 +134,11 @@ def validate_cc09_from_cc08(cc08_active, cc09_active):
             f"Storage: CC09={cc09_active} erlaubt, muss in {STORAGE_CC09} sein"
     
     elif cc08_active == 'CL112':  # Another Process
-        # Keine EinschrÃ¤nkung fÃ¼r "Another"
+        # Keine Einschränkung für "Another"
         return True
     
     elif cc08_active == 'CL113':  # Process Unknown
-        # Keine EinschrÃ¤nkung fÃ¼r "Unknown"
+        # Keine Einschränkung für "Unknown"
         return True
 ```
 
@@ -152,16 +152,16 @@ def validate_cc09_from_cc08(cc08_active, cc09_active):
 | **CL113** | Process Unknown | CL122, CL123 |
 
 **Gemeinsame Labels (beide Prozesse):**
-- **CL114** (Preparing Order): Start im BÃ¼ro, Vorbereitung (beide Prozesse)
-- **CL121** (Finalizing Order): Abschluss und Hardware-RÃ¼ckgabe (beide Prozesse)
+- **CL114** (Preparing Order): Start im Büro, Vorbereitung (beide Prozesse)
+- **CL121** (Finalizing Order): Abschluss und Hardware-Rückgabe (beide Prozesse)
 
 ---
 
-### 1.3 CC09 (Mid-Level Process) â†’ Master fÃ¼r CC10 (Low-Level Process)
+### 1.3 CC09 (Mid-Level Process) → Master für CC10 (Low-Level Process)
 
 **CC09 definiert den Mittelstufen-Prozess (z.B. Picking - Travel Time vs. Picking - Pick Time) und bestimmt, welche Low-Level-Prozesse (CC10) innerhalb dieses Schritts erlaubt sind.**
 
-**Regel V-B3: Prozess-Hierarchie Mid-Level â†’ Low-Level (BPMN-basiert)**
+**Regel V-B3: Prozess-Hierarchie Mid-Level → Low-Level (BPMN-basiert)**
 
 ```python
 def validate_cc10_from_cc09(cc09_active, cc10_active):
@@ -192,14 +192,14 @@ def validate_cc10_from_cc09(cc09_active, cc10_active):
         return True  # Unbekanntes CC09, keine Validierung
 ```
 
-**BPMN-Mapping Ãœbersicht:**
+**BPMN-Mapping Übersicht:**
 
-Siehe **Anhang: BPMN-Prozess-Mappings** fÃ¼r detaillierte Tabellen mit:
+Siehe **Anhang: BPMN-Prozess-Mappings** für detaillierte Tabellen mit:
 - Jeder CC09-Phase und ihren erlaubten CC10-Labels
-- Bedingungen und ÃœbergÃ¤nge
+- Bedingungen und Übergänge
 - Fehlbehandlung (CL135-Reporting)
 
-**Wichtig:** CL135 (Reporting and Clarifying the Incident) ist ein **aktiver Low-Level-Prozessschritt**, der in Travel-Phasen (CL115, CL119) auftreten kann, wenn Fehler geklÃ¤rt werden mÃ¼ssen. Dies ist **nicht** eine Fehlerklassifikation, sondern ein normaler Prozessprozessschritt.
+**Wichtig:** CL135 (Reporting and Clarifying the Incident) ist ein **aktiver Low-Level-Prozessschritt**, der in Travel-Phasen (CL115, CL119) auftreten kann, wenn Fehler geklärt werden müssen. Dies ist **nicht** eine Fehlerklassifikation, sondern ein normaler Prozessprozessschritt.
 
 ---
 
@@ -207,7 +207,7 @@ Siehe **Anhang: BPMN-Prozess-Mappings** fÃ¼r detaillierte Tabellen mit:
 
 ### 2.1 Single-Label-Prinzip
 
-**Diese Kategorien dÃ¼rfen pro Frame nur GENAU EIN aktives Label haben:**
+**Diese Kategorien dürfen pro Frame nur GENAU EIN aktives Label haben:**
 
 ```python
 SINGLE_LABEL_CATEGORIES = ['CC01', 'CC02', 'CC07', 'CC08', 'CC09', 'CC10']
@@ -219,18 +219,18 @@ for category in SINGLE_LABEL_CATEGORIES:
 ```
 
 **Multi-Label erlaubt (mit spezifischen Regeln):**
-- **CC03 (Torso)** â€“ Max 2 Labels: 1 Beugung + optional Rotation (CL027)
-- **CC04 (Left Hand)** â€“ Exakt 4 Labels: Position + Movement + Object + Tool (Pflicht)
-- **CC05 (Right Hand)** â€“ Exakt 4 Labels: Position + Movement + Object + Tool (Pflicht)
-- **CC06 (Order)** â€“ 1-2 Labels: Single-Order normal, Multi-Order nur S7/S8
-- **CC11 (Location Human)** â€“ Max 3 Labels: hierarchische Struktur
-- **CC12 (Location Cart)** â€“ Max 4 Labels: hierarchische Struktur + Transition
+- **CC03 (Torso)** – Max 2 Labels: 1 Beugung + optional Rotation (CL027)
+- **CC04 (Left Hand)** – Exakt 4 Labels: Position + Movement + Object + Tool (Pflicht)
+- **CC05 (Right Hand)** – Exakt 4 Labels: Position + Movement + Object + Tool (Pflicht)
+- **CC06 (Order)** – 1-2 Labels: Single-Order normal, Multi-Order nur S7/S8
+- **CC11 (Location Human)** – Max 3 Labels: hierarchische Struktur
+- **CC12 (Location Cart)** – Max 4 Labels: hierarchische Struktur + Transition
 
 ---
 
 ### 2.2 Multi-Label Kombinationsregeln
 
-#### CC03 (Torso) â€“ Additiv Kombinierbar
+#### CC03 (Torso) – Additiv Kombinierbar
 
 **Regel V-B4: Torso-Beugung und Rotation**
 
@@ -245,13 +245,13 @@ def validate_cc03_torso(active_labels_cc03):
     BENDING_LABELS = ['CL024', 'CL025', 'CL026', 'CL028', 'CL029']
     ROTATION_LABEL = 'CL027'
     
-    # ZÃ¤hle Beugungslabels
+    # Zähle Beugungslabels
     bending_active = [l for l in active_labels_cc03 if l in BENDING_LABELS]
     has_rotation = ROTATION_LABEL in active_labels_cc03
     
     # Regel 1: Exakt 1 Beugunglabel (Pflicht)
     assert len(bending_active) == 1, \
-        f"CC03 benÃ¶tigt exakt 1 Beugungslabel, hat {len(bending_active)}"
+        f"CC03 benötigt exakt 1 Beugungslabel, hat {len(bending_active)}"
     
     # Regel 2: Max 1 Rotationslabel (optional)
     if has_rotation:
@@ -266,23 +266,23 @@ def validate_cc03_torso(active_labels_cc03):
 
 | Beugung | Rotation | Erlaubt? | Beispiel |
 |---------|----------|----------|----------|
-| CL024 (No Bending) | â€” | âœ… | Aufrechte Haltung |
-| CL024 (No Bending) | CL027 (Rotation) | âœ… | Aufrecht + Drehung |
-| CL025 (Slightly Bending) | â€” | âœ… | Leichte Beugung |
-| CL025 (Slightly Bending) | CL027 (Rotation) | âœ… | Beugung + Drehung |
-| CL025 (Slightly) | CL026 (Strongly) | âŒ | Zwei Beugungslabels gleichzeitig |
+| CL024 (No Bending) | — | ✅ | Aufrechte Haltung |
+| CL024 (No Bending) | CL027 (Rotation) | ✅ | Aufrecht + Drehung |
+| CL025 (Slightly Bending) | — | ✅ | Leichte Beugung |
+| CL025 (Slightly Bending) | CL027 (Rotation) | ✅ | Beugung + Drehung |
+| CL025 (Slightly) | CL026 (Strongly) | ❌ | Zwei Beugungslabels gleichzeitig |
 
 ---
 
-#### CC04/CC05 (Hands) â€“ Hierarchische Pflicht (Exakt 4 Dimensionen)
+#### CC04/CC05 (Hands) – Hierarchische Pflicht (Exakt 4 Dimensionen)
 
-**Regel V-B5: Hand-Labels benÃ¶tigen immer exakt 4 Untergruppen**
+**Regel V-B5: Hand-Labels benötigen immer exakt 4 Untergruppen**
 
 ```python
 def validate_hand_labels(hand_labels, hand_side):
     """
     CC04 (Left Hand) und CC05 (Right Hand) sind hierarchisch strukturiert.
-    FÃ¼r jedes Zeitfenster mÃ¼ssen exakt 4 Untergruppen definiert sein:
+    Für jedes Zeitfenster müssen exakt 4 Untergruppen definiert sein:
     1. Primary Position (Wo befindet sich die Hand?)
     2. Type of Movement (Was tut die Hand?)
     3. Object (Welches Objekt wird gehandhabt?)
@@ -310,7 +310,7 @@ def validate_hand_labels(hand_labels, hand_side):
         },
     }
     
-    # PrÃ¼fe jede Untergruppe
+    # Prüfe jede Untergruppe
     for dimension, label_ranges in HAND_STRUCTURE.items():
         hand_labels_in_dimension = [l for l in hand_labels if l in label_ranges[hand_side]]
         assert len(hand_labels_in_dimension) == 1, \
@@ -323,18 +323,18 @@ def validate_hand_labels(hand_labels, hand_side):
 
 **Beispiele:**
 
-| Kombination | GÃ¼ltig? | Grund |
+| Kombination | Gültig? | Grund |
 |------------|---------|-------|
-| CL030 (Up) + CL033 (Reaching) + CL040 (Items) + CL058 (PDT) | âœ… | 4 Dimensionen |
-| CL030 + CL033 + CL040 | âŒ | Fehlt Tool (nur 3) |
-| CL030 + CL031 + CL033 + CL040 + CL058 | âŒ | 2 Position-Labels (5 insgesamt) |
-| CL030 + CL034 (Grasping) + CL040 + CL058 | âœ… | 4 Dimensionen |
+| CL030 (Up) + CL033 (Reaching) + CL040 (Items) + CL058 (PDT) | ✅ | 4 Dimensionen |
+| CL030 + CL033 + CL040 | ❌ | Fehlt Tool (nur 3) |
+| CL030 + CL031 + CL033 + CL040 + CL058 | ❌ | 2 Position-Labels (5 insgesamt) |
+| CL030 + CL034 (Grasping) + CL040 + CL058 | ✅ | 4 Dimensionen |
 
 ---
 
-#### CC06 (Order) â€“ Multi-Order nur in S7/S8
+#### CC06 (Order) – Multi-Order nur in S7/S8
 
-**Regel V-B6: Order-Labels szenario-abhÃ¤ngig**
+**Regel V-B6: Order-Labels szenario-abhängig**
 
 ```python
 def validate_cc06_orders(scenario, active_orders):
@@ -352,7 +352,7 @@ def validate_cc06_orders(scenario, active_orders):
     elif scenario in ['S7', 'S8']:
         # Multi-Order: Exakt CL100 (2904) + CL101 (2905)
         assert active_orders == {'CL100', 'CL101'}, \
-            f"{scenario} (Multi-Order): benÃ¶tigt CL100+CL101, hat {active_orders}"
+            f"{scenario} (Multi-Order): benötigt CL100+CL101, hat {active_orders}"
     
     # Exklusiv-Regeln
     # CL103 (No Order) und CL104 (Unknown) sind exklusiv mit anderen Orders
@@ -364,7 +364,7 @@ def validate_cc06_orders(scenario, active_orders):
 
 ---
 
-#### CC11 (Location Human) â€“ Hierarchische Struktur (Max 3)
+#### CC11 (Location Human) – Hierarchische Struktur (Max 3)
 
 **Regel V-B7: Location Human hierarchisch**
 
@@ -383,7 +383,7 @@ def validate_cc11_location_human(active_labels_cc11):
         'Level 3 - Position': ['CL177', 'CL178'],  # Front, Back
     }
     
-    # ZÃ¤hle Labels pro Level
+    # Zähle Labels pro Level
     level1_count = len([l for l in active_labels_cc11 if l in LOCATION_HIERARCHY['Level 1 - Main Area']])
     level2_count = len([l for l in active_labels_cc11 if l in LOCATION_HIERARCHY['Level 2 - Sub-Area']])
     level3_count = len([l for l in active_labels_cc11 if l in LOCATION_HIERARCHY['Level 3 - Position']])
@@ -399,32 +399,32 @@ def validate_cc11_location_human(active_labels_cc11):
 
 **Beispiele:**
 
-| Kombination | GÃ¼ltig? | Beschreibung |
+| Kombination | Gültig? | Beschreibung |
 |------------|---------|-------------|
-| CL163 + CL172 + CL177 | âœ… | Aisle Path + Aisle 1 + Front |
-| CL155 | âœ… | Office alleine (simple) |
-| CL163 + CL172 | âœ… | Aisle Path + Aisle 1 (ohne Position) |
-| CL155 + CL156 | âŒ | 2 Main Areas gleichzeitig |
-| CL163 + CL172 + CL173 + CL177 | âŒ | 4 Labels (zu viele) |
+| CL163 + CL172 + CL177 | ✅ | Aisle Path + Aisle 1 + Front |
+| CL155 | ✅ | Office alleine (simple) |
+| CL163 + CL172 | ✅ | Aisle Path + Aisle 1 (ohne Position) |
+| CL155 + CL156 | ❌ | 2 Main Areas gleichzeitig |
+| CL163 + CL172 + CL173 + CL177 | ❌ | 4 Labels (zu viele) |
 
 ---
 
-#### CC12 (Location Cart) â€“ Mit Transition (Max 4)
+#### CC12 (Location Cart) – Mit Transition (Max 4)
 
 **Regel V-B8: Location Cart hierarchisch + Transition**
 
 ```python
 def validate_cc12_location_cart(active_labels_cc12):
     """
-    CC12 (Location - Cart) ist wie CC11 strukturiert, aber mit zusÃ¤tzlichem
-    Transition-Label (CL181) fÃ¼r Zonenwechsel:
+    CC12 (Location - Cart) ist wie CC11 strukturiert, aber mit zusätzlichem
+    Transition-Label (CL181) für Zonenwechsel:
     
     Max 3 normale Labels (wie CC11) + optional 1 Transition = Max 4 gesamt
     """
     
     TRANSITION_LABEL = 'CL181'
     
-    # Entferne Transition temporÃ¤r
+    # Entferne Transition temporär
     has_transition = TRANSITION_LABEL in active_labels_cc12
     normal_labels = [l for l in active_labels_cc12 if l != TRANSITION_LABEL]
     
@@ -441,23 +441,23 @@ def validate_cc12_location_cart(active_labels_cc12):
             f"CC12 ohne Transition: max 3, hat {len(active_labels_cc12)}"
 ```
 
-**CL181 (Transition between Areas) â€” Spezialfall:**
+**CL181 (Transition between Areas) — Spezialfall:**
 
-Das Transition-Label markiert den Zeitraum, in dem der Wagen eine Zone-Grenzlinie Ã¼berquert (von ersten Rad bis letztes Rad). Dies dient der Fehleranalyse von Sensor-Rauschen und Indoor-Lokalisierung.
+Das Transition-Label markiert den Zeitraum, in dem der Wagen eine Zone-Grenzlinie überquert (von ersten Rad bis letztes Rad). Dies dient der Fehleranalyse von Sensor-Rauschen und Indoor-Lokalisierung.
 
 **Beispiele:**
 
-| Kombination | GÃ¼ltig? | Beschreibung |
+| Kombination | Gültig? | Beschreibung |
 |------------|---------|-------------|
-| CL190 (Aisle) + CL201 (Aisle 3) + CL204 (Front) + CL181 (Transition) | âœ… | 4 Labels mit Transition |
-| CL190 + CL201 + CL204 | âœ… | 3 Labels ohne Transition |
-| CL181 + CL155 (Path) | âœ… | Transition wÃ¤hrend Ãœbergang zur anderen Zone |
+| CL190 (Aisle) + CL201 (Aisle 3) + CL204 (Front) + CL181 (Transition) | ✅ | 4 Labels mit Transition |
+| CL190 + CL201 + CL204 | ✅ | 3 Labels ohne Transition |
+| CL181 + CL155 (Path) | ✅ | Transition während Übergang zur anderen Zone |
 
 ---
 
 ## 3. SPEZIELLE VALIDIERUNGEN
 
-### 3.1 CC09-Konsistenz (Prozess-ExklusivitÃ¤t)
+### 3.1 CC09-Konsistenz (Prozess-Exklusivität)
 
 **Regel V-P1: CC09-Labels sind prozess-spezifisch**
 
@@ -465,7 +465,7 @@ Das Transition-Label markiert den Zeitraum, in dem der Wagen eine Zone-Grenzlini
 def validate_cc09_consistency(scenario, cc09_active):
     """
     Bestimmte CC09-Labels sind nur in bestimmten Prozessen erlaubt.
-    Dies ist eine Konsistenz-PrÃ¼fung zusÃ¤tzlich zu V-B2.
+    Dies ist eine Konsistenz-Prüfung zusätzlich zu V-B2.
     """
     
     # Retrieval-spezifische CC09-Labels
@@ -486,33 +486,33 @@ def validate_cc09_consistency(scenario, cc09_active):
     
     # Szenario Other: Beliebig oder spezielle Labels
     else:
-        pass  # Keine EinschrÃ¤nkung fÃ¼r "Other"
+        pass  # Keine Einschränkung für "Other"
 ```
 
 **Wichtig:** CL114 (Preparing) und CL121 (Finalizing) sind **gemeinsam** in beiden Prozessen, da beide Retrieval und Storage mit Preparation/Finalization beginnen/enden.
 
 ---
 
-### 3.2 Error-Flag Konsistenz (CL135 â€” Reporting and Clarifying Incident)
+### 3.2 Error-Flag Konsistenz (CL135 — Reporting and Clarifying Incident)
 
 **Regel V-E1': CL135-Aktivierung szenario-spezifisch**
 
-**WICHTIG:** CL135 ist **NICHT** ein â€žError-Flag", sondern ein **aktiver Low-Level-Prozessschritt** (CC10), der verwendet wird, wenn ein Fehler geklÃ¤rt werden muss.
+**WICHTIG:** CL135 ist **NICHT** ein „Error-Flag", sondern ein **aktiver Low-Level-Prozessschritt** (CC10), der verwendet wird, wenn ein Fehler geklärt werden muss.
 
 ```python
 def validate_cl135_activation(scenario, has_cl135_in_travel_phase):
     """
     CL135 (Reporting and Clarifying the Incident) ist ein CC10-Label,
     das in Travel-Phasen (CL115, CL119) verwendet wird, wenn Fehler
-    geklÃ¤rt werden mÃ¼ssen (Weg BÃ¼ro â†’ KlÃ¤rung â†’ RÃ¼ckweg).
+    geklärt werden müssen (Weg Büro → Klärung → Rückweg).
     
     Aktivierungs-Regeln nach Szenario-Fehler-Status:
     """
     
     # S1-S3: Retrieval mit INTENTIONAL ERRORS (geplante Fehler)
     if scenario in ['S1', 'S2', 'S3']:
-        # Fehler sind absichtlich eingebaut (falsche LagerplÃ¤tze, fehlende Materialien)
-        # Probanden mÃ¼ssen diese klÃ¤ren â†’ CL135 wird erwartet
+        # Fehler sind absichtlich eingebaut (falsche Lagerplätze, fehlende Materialien)
+        # Probanden müssen diese klären → CL135 wird erwartet
         if has_planned_error_in_scenario:
             assert has_cl135_in_travel_phase, \
                 f"{scenario}: Geplanter Fehler vorhanden, aber CL135 nicht aktiviert in Travel-Phase"
@@ -520,14 +520,14 @@ def validate_cl135_activation(scenario, has_cl135_in_travel_phase):
     # S7-S8: Perfect Run (fehlerfrei)
     elif scenario in ['S7', 'S8']:
         # Keine geplanten Fehler, Perfect Run
-        # CL135 sollte NOT vorkommen (auÃŸer ungeplante Proband-Fehler)
+        # CL135 sollte NOT vorkommen (außer ungeplante Proband-Fehler)
         if has_cl135_in_travel_phase:
             # Warnung: Ungeplanter Fehler in Perfect Run erkannt
             return 'WARNING_UNEXPECTED_ERROR_IN_PERFECT_RUN'
     
-    # S4-S6: Storage (Fehler-Status in Quellen nicht explizit erwÃ¤hnt)
+    # S4-S6: Storage (Fehler-Status in Quellen nicht explizit erwähnt)
     elif scenario in ['S4', 'S5', 'S6']:
-        # Konservativ: CL135 mÃ¶glich, aber nicht erzwungen
+        # Konservativ: CL135 möglich, aber nicht erzwungen
         return 'NEUTRAL'
     
     # Other: Organisatorische Zeit (zwischen Szenarien)
@@ -541,8 +541,8 @@ def validate_cl135_activation(scenario, has_cl135_in_travel_phase):
 **Wichtig:** 
 
 1. **S1-S3 haben intentional errors:**
-   - S1: Falsche LagerplÃ¤tze
-   - S2: (Additional error zu bestÃ¤tigen)
+   - S1: Falsche Lagerplätze
+   - S2: (Additional error zu bestätigen)
    - S3: Fehlende Materialien, Mengenabweichungen
 
 2. **S7-S8 sind Perfect Runs:**
@@ -551,8 +551,8 @@ def validate_cl135_activation(scenario, has_cl135_in_travel_phase):
 
 3. **CL135 ist CC10-Prozessschritt:**
    - Nicht "Error-Flag" oder Kategorisierung
-   - Umfasst: Weg zum BÃ¼ro + KlÃ¤rungszeit + RÃ¼ckweg
-   - Tritt auf wÃ¤hrend Travel-Phasen (CL115, CL119) auf
+   - Umfasst: Weg zum Büro + Klärungszeit + Rückweg
+   - Tritt auf während Travel-Phasen (CL115, CL119) auf
 
 ---
 
@@ -563,7 +563,7 @@ def validate_cl135_activation(scenario, has_cl135_in_travel_phase):
 ```python
 def validate_frame(frame, scenario):
     """
-    VollstÃ¤ndige Frame-Level-Validierung in korrekter Reihenfolge
+    Vollständige Frame-Level-Validierung in korrekter Reihenfolge
     """
     # 1. Master-Slave Dependencies
     validate_cc01_master(frame)  # V-B1
@@ -596,40 +596,40 @@ def validate_frame(frame, scenario):
 | **core_category_activation_matrix_v5_0.md** | Cardinality | Wie viele Labels pro Kategorie pro Szenario? |
 
 **Workflow:**
-1. **Frame-Validierung** (core_validation_rules_v5_0.md) â†’ Ist der Frame selbst konsistent?
-2. **Szenario-Zuordnung** (core_ground_truth_central_v5_0.md) â†’ Welches Szenario hat der Frame?
-3. **Szenario-Validierung** (core_ground_truth_central_v5_0.md) â†’ Passt das Szenario zur Ground Truth?
+1. **Frame-Validierung** (core_validation_rules_v5_0.md) → Ist der Frame selbst konsistent?
+2. **Szenario-Zuordnung** (core_ground_truth_central_v5_0.md) → Welches Szenario hat der Frame?
+3. **Szenario-Validierung** (core_ground_truth_central_v5_0.md) → Passt das Szenario zur Ground Truth?
 
 ---
 
-## 5. Ã„NDERUNGSHISTORIE
+## 5. ÄNDERUNGSHISTORIE
 
 ### v5.0 (05.02.2026)
 
 **Neuerstellen auf Basis DaRa-Quellen + frame_validation_rules.md v4.5.1**
 
-**Ã„nderungen gegenÃ¼ber v4.5.1:**
-- âœ… V-B1 bis V-B3 Ã¼bernommen (alle Master-Slave-AbhÃ¤ngigkeiten validiert)
-- âœ… V-B4 bis V-B8 Ã¼bernommen (Multi-Label-Regeln validiert)
-- âœ… V-P1 Ã¼bernommen (Prozess-ExklusivitÃ¤t validiert)
-- âŒ V-E1 komplett Ã¼berarbeitet:
+**Änderungen gegenüber v4.5.1:**
+- ✅ V-B1 bis V-B3 übernommen (alle Master-Slave-Abhängigkeiten validiert)
+- ✅ V-B4 bis V-B8 übernommen (Multi-Label-Regeln validiert)
+- ✅ V-P1 übernommen (Prozess-Exklusivität validiert)
+- ❌ V-E1 komplett überarbeitet:
   - **FEHLER BEHOBEN:** S1-S3 haben intentional errors, sind NICHT fehlerfrei
-  - **KLÃ„RUNG:** CL135 ist "Reporting and Clarifying Incident", NICHT "Error-Flag"
-  - **KLÃ„RUNG:** "Other" ist organisatorische Zeit, NICHT Error-Szenario
+  - **KLÄRUNG:** CL135 ist "Reporting and Clarifying Incident", NICHT "Error-Flag"
+  - **KLÄRUNG:** "Other" ist organisatorische Zeit, NICHT Error-Szenario
   - Neue Regel V-E1' mit szenario-spezifischen Aktivierungen
-- âœ… BPMN-Prozess-Mappings als Anhang hinzugefÃ¼gt (V-B3 Details)
-- âœ… Alle Referenzen auf _v5_0-Versionen aktualisiert
-- âœ… Epistemische Validierung durch NotebookLM + DaRa-Quellen durchgefÃ¼hrt
+- ✅ BPMN-Prozess-Mappings als Anhang hinzugefügt (V-B3 Details)
+- ✅ Alle Referenzen auf _v5_0-Versionen aktualisiert
+- ✅ Epistemische Validierung durch NotebookLM + DaRa-Quellen durchgeführt
 
 ### v4.5.1 (27.01.2026, deprecated)
 - Original frame_validation_rules.md
-- **Hinweis:** EnthÃ¤lt Fehler in V-E1 (siehe Ã„nderungshistorie v5.0)
+- **Hinweis:** Enthält Fehler in V-E1 (siehe Änderungshistorie v5.0)
 
 ---
 
 ## ANHANG: BPMN-Prozess-Mappings
 
-### CC09 â†’ CC10 Mapping (BPMN-basiert)
+### CC09 → CC10 Mapping (BPMN-basiert)
 
 Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) und Low-Level (CC10) Prozessen basierend auf den BPMN-Diagrammen der DaRa-Dokumentation.
 
@@ -639,10 +639,10 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 
 | CC09 Phase | Erlaubte CC10-Labels | Beschreibung |
 |-----------|----------------------|-------------|
-| **CL114** | CL135 (Reporting) | KlÃ¤rung, falls Fehler beim Vorbereiten |
-| | CL134 (Waiting) | Warten auf Hardware/Wagen-VerfÃ¼gbarkeit |
+| **CL114** | CL135 (Reporting) | Klärung, falls Fehler beim Vorbereiten |
+| | CL134 (Waiting) | Warten auf Hardware/Wagen-Verfügbarkeit |
 
-**Prozessfluss:** BÃ¼ro â†’ Wagen holen â†’ Material sammeln (ggfs. KlÃ¤rung bei Problemen)
+**Prozessfluss:** Büro → Wagen holen → Material sammeln (ggfs. Klärung bei Problemen)
 
 ---
 
@@ -652,10 +652,10 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 |-----------|----------------------|-------------|
 | **CL115** | CL137 (Moving to Next Position) | Fortbewegung zwischen Positionen/Regalgang |
 | | CL128 (Transporting Cart to Base) | Wagen zur Basis transportieren |
-| | CL135 (Reporting and Clarifying) | KlÃ¤rung bei Fehler (falsche LagerplÃ¤tze, fehlende Artikel) |
+| | CL135 (Reporting and Clarifying) | Klärung bei Fehler (falsche Lagerplätze, fehlende Artikel) |
 | | CL134 (Waiting) | Warten (z.B. auf Regal-Zugang) |
 
-**Prozessfluss:** Bewegung zwischen KommissionierplÃ¤tzen, ggfs. Fehlerbehebung
+**Prozessfluss:** Bewegung zwischen Kommissionierplätzen, ggfs. Fehlerbehebung
 
 ---
 
@@ -667,7 +667,7 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 | | CL151 (Placing Cardboard Box/Item in Cart) | Ablage in Wagen |
 | | CL134 (Waiting) | Warten auf Regal-Freiheit |
 
-**Prozessfluss:** Artikel greifen â†’ in Wagen ablegen
+**Prozessfluss:** Artikel greifen → in Wagen ablegen
 
 ---
 
@@ -675,12 +675,12 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 
 | CC09 Phase | Erlaubte CC10-Labels | Beschreibung |
 |-----------|----------------------|-------------|
-| **CL118** | CL144 (Opening Cardboard Box) | Box Ã¶ffnen |
-| | CL145 (Filling Cardboard Box with Filling Material) | FÃ¼llmaterial einfÃ¼gen |
+| **CL118** | CL144 (Opening Cardboard Box) | Box öffnen |
+| | CL145 (Filling Cardboard Box with Filling Material) | Füllmaterial einfügen |
 | | CL150 (Sealing Cardboard Box) | Box versiegeln/kleben |
 | | CL134 (Waiting) | Warten auf Material/Box |
 
-**Prozessfluss:** Pack-AktivitÃ¤ten am Packtisch (nur bei Retrieval, da Pick & Pack)
+**Prozessfluss:** Pack-Aktivitäten am Packtisch (nur bei Retrieval, da Pick & Pack)
 
 ---
 
@@ -688,10 +688,10 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 
 | CC09 Phase | Erlaubte CC10-Labels | Beschreibung |
 |-----------|----------------------|-------------|
-| **CL121** | CL135 (Reporting) | KlÃ¤rung bei Problemen beim Abschluss |
+| **CL121** | CL135 (Reporting) | Klärung bei Problemen beim Abschluss |
 | | CL134 (Waiting) | Warten auf Versand-Freigabe |
 
-**Prozessfluss:** Abgabe Pakete, RÃ¼ckgabe Hardware
+**Prozessfluss:** Abgabe Pakete, Rückgabe Hardware
 
 ---
 
@@ -707,7 +707,7 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 
 | CC09 Phase | Erlaubte CC10-Labels | Beschreibung |
 |-----------|----------------------|-------------|
-| **CL117** | CL135 (Reporting) | KlÃ¤rung bei Abweichungen |
+| **CL117** | CL135 (Reporting) | Klärung bei Abweichungen |
 | | CL134 (Waiting) | Warten auf Material/Box |
 
 **Prozessfluss:** Artikel auspacken, sortieren, kennzeichnen
@@ -720,7 +720,7 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 |-----------|----------------------|-------------|
 | **CL119** | CL137 (Moving to Next Position) | Fortbewegung zum Lagerplatz |
 | | CL128 (Transporting Cart to Base) | Wagen zur Basis transportieren |
-| | CL135 (Reporting and Clarifying) | KlÃ¤rung bei Fehler (falsche Positionen) |
+| | CL135 (Reporting and Clarifying) | Klärung bei Fehler (falsche Positionen) |
 | | CL134 (Waiting) | Warten auf Regal-Zugang |
 
 **Prozessfluss:** Bewegung zum Einlagerungsplatz, ggfs. Fehlerbehebung
@@ -766,22 +766,22 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 
 **Diese BPMN-Mappings basieren auf:**
 - Anhang A.2 der DaRa-Datensatzbeschreibung (BPMN-Diagramme)
-- Annotationsrichtlinien fÃ¼r Prozess-Kategorien
+- Annotationsrichtlinien für Prozess-Kategorien
 - Praktische Prozessbeobachtungen aus Pilotierung
 
 **Verwendung:**
-- FÃ¼r V-B3 Validierung: PrÃ¼fe, ob CC10 in erlaubten Labels fÃ¼r aktuelles CC09 liegt
-- FÃ¼r BPMN-Visualisierung: Siehe `processes_bpmn_visualization_v5_0.md` (falls verfÃ¼gbar)
+- Für V-B3 Validierung: Prüfe, ob CC10 in erlaubten Labels für aktuelles CC09 liegt
+- Für BPMN-Visualisierung: Siehe `processes_bpmn_visualization_v5_0.md` (falls verfügbar)
 
 ---
 
 ## REFERENZEN
 
 **Verwandte Dateien (v5.0):**
-- `core_labels_207_v5_0.md` â€” VollstÃ¤ndige Label-Definitionen (CL001-CL207)
-- `core_category_activation_matrix_v5_0.md` â€” Min/Max-Aktivierungsmatrix pro Szenario
-- `core_ground_truth_central_v5_0.md` â€” 5-Schritt-Logik fÃ¼r Szenario-Erkennung
-- `processes_bpmn_validation_v5_0.md` â€” BPMN-Validierung und Sequenz-Logik
+- `core_labels_207_v5_0.md` — Vollständige Label-Definitionen (CL001-CL207)
+- `core_category_activation_matrix_v5_0.md` — Min/Max-Aktivierungsmatrix pro Szenario
+- `core_ground_truth_central_v5_0.md` — 5-Schritt-Logik für Szenario-Erkennung
+- `processes_bpmn_validation_v5_0.md` — BPMN-Validierung und Sequenz-Logik
 
 **Externe Quellen:**
 - DaRa Dataset Description (Authoritative PDF)
@@ -791,7 +791,7 @@ Die folgenden Tabellen zeigen das explizite Mapping zwischen Mid-Level (CC09) un
 ---
 
 **Datei-Version:** 5.0  
-**Status:** finalisiert âœ…  
+**Status:** finalisiert ✅  
 **Validierung:** Quellen-Klarstellung durch NotebookLM abgeschlossen  
 **Autor:** Phase 2+3 Analyse & Umsetzung (05.02.2026)  
-**NÃ¤chste Phase:** Phase 4 (Konsolidierungsanalyse)
+**Nächste Phase:** Phase 4 (Konsolidierungsanalyse)

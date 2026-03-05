@@ -6,9 +6,9 @@ status: finalisiert
 source: DaRa Dataset Description (verified 2026-01-22)
 ---
 
-# DaRa Dataset â€“ Artikel-Stammdaten
+# DaRa Dataset – Artikel-Stammdaten
 
-**Quelle:** DaRa Dataset Description; letzte ÃœberprÃ¼fung 22.01.2026  
+**Quelle:** DaRa Dataset Description; letzte Überprüfung 22.01.2026  
 **Version:** 5.0 (04.02.2026)
 
 ---
@@ -17,15 +17,15 @@ source: DaRa Dataset Description (verified 2026-01-22)
 
 | Klasse | Gewichtsbereich | Volumen | DaRa-Label | Beispiele |
 |--------|-----------------|---------|------------|-----------|
-| **Small [S]** | â‰¤ 50g | â‰¤ 100 cmÂ³ | CL036/CL071 "Handy Unit" | M5 Mutter (~1g), Unterlegscheiben, Bits |
-| **Medium [M]** | 50-800g | 100-6000 cmÂ³ | CL036/CL071 "Handy Unit" | Softshell-Jacke (700g), Handschuhe, NotizbÃ¼cher |
-| **Large [L]** | > 800g | > 6000 cmÂ³ | CL035/CL070 "Bulky Unit" | Handbeil (800-1290g), Palmenerde (5149g) |
+| **Small [S]** | ≤ 50g | ≤ 100 cm³ | CL036/CL071 "Handy Unit" | M5 Mutter (~1g), Unterlegscheiben, Bits |
+| **Medium [M]** | 50-800g | 100-6000 cm³ | CL036/CL071 "Handy Unit" | Softshell-Jacke (700g), Handschuhe, Notizbücher |
+| **Large [L]** | > 800g | > 6000 cm³ | CL035/CL070 "Bulky Unit" | Handbeil (800-1290g), Palmenerde (5149g) |
 
 **Gewichtsspektrum:** 0,4g (Kleinteile) bis 5149g (Palmenerde)
 
 ---
 
-## 2. Order 2904 (CL100) â€“ 15 Positionen
+## 2. Order 2904 (CL100) – 15 Positionen
 
 | Pos | Lagerort | Artikel-ID | Artikelbezeichnung | Menge | Gewicht | Klasse | Gasse |
 |-----|----------|------------|--------------------|-------|---------|--------|-------|
@@ -46,12 +46,12 @@ source: DaRa Dataset Description (verified 2026-01-22)
 | 15 | R8.3.1.A | 4000090292 | Isotonic Sports Drink | 5 | ~500g | Medium [M] | 5 |
 
 **Besonderheiten Order 2904:**
-- Pos 1, 2: Kleinteile mit hoher StÃ¼ckzahl (20+10)
+- Pos 1, 2: Kleinteile mit hoher Stückzahl (20+10)
 - Pos 14: Schwerster Artikel im Datensatz (5149g, Ebene 1 = Bodenebene)
 
 ---
 
-## 3. Order 2905 (CL101) â€“ 15 Positionen
+## 3. Order 2905 (CL101) – 15 Positionen
 
 | Pos | Lagerort | Artikel-ID | Artikelbezeichnung | Menge | Gewicht | Klasse | Gasse |
 |-----|----------|------------|--------------------|-------|---------|--------|-------|
@@ -72,12 +72,12 @@ source: DaRa Dataset Description (verified 2026-01-22)
 | 15 | R8.3.1.A | 4000090292 | Isotonic Sports Drink | 3 | ~500g | Medium [M] | 5 |
 
 **Besonderheiten Order 2905:**
-- Pos 1, 2: Kleinteile mit hoher StÃ¼ckzahl (20+10)
+- Pos 1, 2: Kleinteile mit hoher Stückzahl (20+10)
 - Pos 13: Schwerer Artikel (1000g, Ebene 1 = Bodenebene)
 
 ---
 
-## 4. Order 2906 (CL102) â€“ 15 Positionen
+## 4. Order 2906 (CL102) – 15 Positionen
 
 | Pos | Lagerort | Artikel-ID | Artikelbezeichnung | Menge | Gewicht | Klasse | Gasse |
 |-----|----------|------------|--------------------|-------|---------|--------|-------|
@@ -98,7 +98,7 @@ source: DaRa Dataset Description (verified 2026-01-22)
 | 15 | R8.2.2.A | 4000815508 | Hand Axe Rhenish, 1200g | 1 | ~1290g | Large [L] | 5 |
 
 **Besonderheiten Order 2906:**
-- Pos 1, 2: Kleinteile mit hoher StÃ¼ckzahl (20+10)
+- Pos 1, 2: Kleinteile mit hoher Stückzahl (20+10)
 - Pos 15: Schwerer Artikel (1290g)
 
 ---
@@ -108,26 +108,26 @@ source: DaRa Dataset Description (verified 2026-01-22)
 **Kombination:** CL100 + CL101  
 **Gesamtpositionen:** 30 (15 + 15)  
 **Besonderheiten:**
-- 4 Positionen mit Kleinteilen hoher StÃ¼ckzahl (Order 2904 Pos 1+2, Order 2905 Pos 1+2)
+- 4 Positionen mit Kleinteilen hoher Stückzahl (Order 2904 Pos 1+2, Order 2905 Pos 1+2)
 - 2 schwere Artikel: Palmenerde (5149g, Order 2904 Pos 14) + Handbeil 1000g (Order 2905 Pos 13)
 - Gassen-Abdeckung: Alle 5 Gassen (1-5)
 
 ---
 
-## 6. Storage Compartment ID â€“ Logik
+## 6. Storage Compartment ID – Logik
 
 **Format:** R<Komplex>.<Regal>.<Ebene>.<Fach>
 
 **Beispiel:** R1.2.7.A
 - **R1** = Regalkomplex 1 (Gasse 1)
 - **2** = Regal 2 innerhalb Komplex
-- **7** = Ebene 7 (von unten nach oben gezÃ¤hlt)
+- **7** = Ebene 7 (von unten nach oben gezählt)
 - **A** = Fach A (linkstes Fach, von links nach rechts)
 
 **Wichtige Konventionen:**
-- Ebene 1 = Bodenebene (bestÃ¤tigt durch Artikel wie Palmenerde R7.3.1.A, Handbeil R7.2.1.A)
+- Ebene 1 = Bodenebene (bestätigt durch Artikel wie Palmenerde R7.3.1.A, Handbeil R7.2.1.A)
 - Buchstabe A = Erstes Fach von links
-- ZÃ¤hlrichtung: Ebenen von unten nach oben, FÃ¤cher von links nach rechts
+- Zählrichtung: Ebenen von unten nach oben, Fächer von links nach rechts
 
 ---
 
@@ -137,26 +137,26 @@ source: DaRa Dataset Description (verified 2026-01-22)
 |-------|--------------|----------------|---------------------------|------------------|
 | **Aisle 1** | R1 | 6 | Small [S] | Muttern, Unterlegscheiben, Schrauben |
 | **Aisle 2** | R2, R3 | 9 | Medium [M] | Textilien (Jacken, Handschuhe, Hoodies) |
-| **Aisle 3** | R4, R5 | 10 | Small [S] + Medium [M] | Bits, Werkzeuge, NotizbÃ¼cher |
-| **Aisle 4** | R6, R7 | 8 | Medium [M] + Large [L] | Handbeile, Palmenerde, BÃ¼gelsÃ¤ge |
-| **Aisle 5** | R8 | 2 | Medium [M] + Large [L] | Handbeil 1200g, SportgetrÃ¤nke |
+| **Aisle 3** | R4, R5 | 10 | Small [S] + Medium [M] | Bits, Werkzeuge, Notizbücher |
+| **Aisle 4** | R6, R7 | 8 | Medium [M] + Large [L] | Handbeile, Palmenerde, Bügelsäge |
+| **Aisle 5** | R8 | 2 | Medium [M] + Large [L] | Handbeil 1200g, Sportgetränke |
 
-**Gesamt:** 45 Positionen Ã¼ber 3 Orders verteilt (Tabellen 2904-2906). Mit Mehrfachnennungen wie "Hoody White, Size L" (in allen 3 Orders) und "Carrier Bag Grey" (in 2 Orders): ~74 einzelne Artikel-Vorkommen Ã¼ber alle Tabellenzeilen.
+**Gesamt:** 45 Positionen über 3 Orders verteilt (Tabellen 2904-2906). Mit Mehrfachnennungen wie "Hoody White, Size L" (in allen 3 Orders) und "Carrier Bag Grey" (in 2 Orders): ~74 einzelne Artikel-Vorkommen über alle Tabellenzeilen.
 
 ---
 
 ## Verwendungshinweise
 
-**Diese Datei nutzen fÃ¼r:**
+**Diese Datei nutzen für:**
 - Artikel-Lagerort-Mapping (Storage Compartment IDs)
 - Gewichtsklassen-Definitionen (Small/Medium/Large)
 - Order-Struktur (2904, 2905, 2906)
 - Multi-Order-Kombinationen (S7/S8)
 
 **Verwandte Dateien:**
-- [auxiliary_warehouse_physical_v5.0.md](auxiliary_warehouse_physical_v5.0.md) â€“ Lagerlayout und Zonen
-- [core_labels_207_v5.0.md](core_labels_207_v5.0.md) â€“ Object-Labels (CC04/CC05)
-- [core_ground_truth_central_v5.0.md](core_ground_truth_central_v5.0.md) â€“ Szenario-Order-Mapping
-- [processes_refa_analytics_v5.0.md](processes_refa_analytics_v5.0.md) â€“ Erholungszeit nach Lastklasse
+- [auxiliary_warehouse_physical_v5.0.md](auxiliary_warehouse_physical_v5.0.md) – Lagerlayout und Zonen
+- [core_labels_207_v5.0.md](core_labels_207_v5.0.md) – Object-Labels (CC04/CC05)
+- [core_ground_truth_central_v5.0.md](core_ground_truth_central_v5.0.md) – Szenario-Order-Mapping
+- [processes_refa_analytics_v5.0.md](processes_refa_analytics_v5.0.md) – Erholungszeit nach Lastklasse
 
 ---

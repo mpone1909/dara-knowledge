@@ -4,7 +4,7 @@ status: finalisiert
 created: 2026-02-04
 ---
 
-# BPMN-Validierung â€“ Quick Start Guide
+# BPMN-Validierung – Quick Start Guide
 
 **Praktischer Leitfaden zur Verwendung der BPMN-Validierungslogik**
 
@@ -28,7 +28,7 @@ Dieser Guide zeigt, wie die BPMN-Validierungslogik praktisch angewendet wird, um
 
 ### Erforderliche Daten
 
-- **CSV-Dateien** fÃ¼r Subject (z.B. S14):
+- **CSV-Dateien** für Subject (z.B. S14):
   - `Revised_Annotation__CC01_Main_Activity__S14.csv`
   - `Revised_Annotation__CC09_MidLevel_Process__S14.csv`
   - `Revised_Annotation__CC10_LowLevel_Process__S14.csv`
@@ -65,7 +65,7 @@ df['frame'] = range(len(df))
 df['chunk_id'] = assign_chunks(df)  # Chunk-Detection-Algorithmus
 ```
 
-### Schritt 2: Validierung durchfÃ¼hren
+### Schritt 2: Validierung durchführen
 
 ```python
 # Importiere Validierungsfunktionen (aus bpmn_validation_v5.0.md)
@@ -113,7 +113,7 @@ bpmn_json = generate_bpmn_from_data(
     session=1
 )
 
-# FÃ¼ge Violations hinzu
+# Füge Violations hinzu
 bpmn_json["deviations"] = violations
 
 # Generiere Mermaid-Code
@@ -151,8 +151,8 @@ print(f"Sequence Deviations: {diff['sequence_deviations']}")
 **Frage:** *"Wie gut entspricht Subject S14 in Szenario S1 dem idealen BPMN?"*
 
 **Workflow:**
-1. Lade Daten fÃ¼r S14, Szenario S1
-2. FÃ¼hre alle Validierungen durch
+1. Lade Daten für S14, Szenario S1
+2. Führe alle Validierungen durch
 3. Berechne Conformity Score
 4. Generiere Report
 
@@ -168,7 +168,7 @@ Info Violations: 5
 
 ### Szenario 2: Vergleich mehrerer Szenarien
 
-**Frage:** *"In welchem Szenario hat S14 die hÃ¶chste BPMN-KonformitÃ¤t?"*
+**Frage:** *"In welchem Szenario hat S14 die höchste BPMN-Konformität?"*
 
 **Workflow:**
 ```python
@@ -228,7 +228,7 @@ Frame 6789: CL146 (Printing) - Missing Computer
 
 ### Szenario 4: Location-Teleportation-Detection
 
-**Frage:** *"Gibt es unrealistische Location-SprÃ¼nge in S14?"*
+**Frage:** *"Gibt es unrealistische Location-Sprünge in S14?"*
 
 **Workflow:**
 ```python
@@ -236,20 +236,20 @@ df = load_subject_data("S14", scenario="S1")
 teleportations = detect_teleportations(df, max_distance=2)
 
 for t in teleportations:
-    print(f"Frame {t['frame']}: {t['prev_location']} â†’ {t['curr_location']}")
+    print(f"Frame {t['frame']}: {t['prev_location']} → {t['curr_location']}")
     print(f"  Distance: {t['max_distance']}, Severity: {t['severity']}")
 ```
 
 **Erwartetes Ergebnis:**
 ```
-Frame 1234: CL155 (Office) â†’ CL176 (Aisle 5)
+Frame 1234: CL155 (Office) → CL176 (Aisle 5)
   Distance: 2, Severity: CRITICAL
-  â†’ Unrealistic jump, should pass through paths
+  → Unrealistic jump, should pass through paths
 ```
 
 ---
 
-### Szenario 5: Multi-Order-Loop-PrÃ¼fung (S7/S8)
+### Szenario 5: Multi-Order-Loop-Prüfung (S7/S8)
 
 **Frage:** *"Hat S14 in Szenario S7 den erwarteten Order-Loop?"*
 
@@ -259,16 +259,16 @@ df = load_subject_data("S14", scenario="S7")
 loop_violations = validate_multi_order_loops(df, scenario="S7")
 
 if len(loop_violations) == 0:
-    print("âœ… Multi-Order loop detected correctly")
+    print("✅ Multi-Order loop detected correctly")
 else:
     for v in loop_violations:
-        print(f"âŒ {v['description']}")
+        print(f"❌ {v['description']}")
 ```
 
 **Erwartetes Ergebnis:**
 ```
-âœ… Multi-Order loop detected correctly
-Loop Transition: Frame 15000 (CL121 â†’ CL114)
+✅ Multi-Order loop detected correctly
+Loop Transition: Frame 15000 (CL121 → CL114)
 Order 1 (CL100): Frames 1000-14999
 Order 2 (CL101): Frames 15000-30000
 ```
@@ -308,7 +308,7 @@ mermaid_chart_tool.render(diff_mermaid)
 ```
 
 **Farbcodierung:**
-- ðŸŸ¢ GrÃ¼n: Korrekte Nodes (in SOLL, im IST vorhanden)
+- ðŸŸ¢ Grün: Korrekte Nodes (in SOLL, im IST vorhanden)
 - ðŸŸ  Orange: Extra Nodes (nicht in SOLL, im IST vorhanden)
 - ðŸ”´ Rot (gestrichelt): Fehlende Nodes (in SOLL, im IST nicht vorhanden)
 
@@ -350,7 +350,7 @@ with open('S14_S1_Report.md', 'w') as f:
 
 ## ðŸ” FEHLERSUCHE
 
-### HÃ¤ufige Probleme
+### Häufige Probleme
 
 #### Problem 1: Zu viele CRITICAL Violations
 
@@ -366,10 +366,10 @@ for v in critical_violations:
 print(violation_types)
 ```
 
-**MÃ¶gliche Ursachen:**
-- **sequence_violation:** Chunk-Detection-Algorithmus fehlerhaft â†’ ÃœberprÃ¼fe Chunk-Grenzen
-- **tool_violation:** Tool-Labels unter-annotiert â†’ PrÃ¼fe CC04/CC05 Annotationen
-- **teleportation:** Location-Graph unvollstÃ¤ndig â†’ Erweitere Location-Transitions
+**Mögliche Ursachen:**
+- **sequence_violation:** Chunk-Detection-Algorithmus fehlerhaft → Überprüfe Chunk-Grenzen
+- **tool_violation:** Tool-Labels unter-annotiert → Prüfe CC04/CC05 Annotationen
+- **teleportation:** Location-Graph unvollständig → Erweitere Location-Transitions
 
 ---
 
@@ -383,9 +383,9 @@ print(f"IST Sequence: {ist_sequence}")
 print(f"SOLL Sequence: {soll_sequence}")
 ```
 
-**MÃ¶gliche Ursachen:**
-- **Falsches Szenario:** S1 geladen, aber S4 erwartet â†’ PrÃ¼fe Szenario-Zuordnung
-- **CC09-Labels fehlerhaft:** Alle CL123 (Unknown) â†’ PrÃ¼fe AnnotationsqualitÃ¤t
+**Mögliche Ursachen:**
+- **Falsches Szenario:** S1 geladen, aber S4 erwartet → Prüfe Szenario-Zuordnung
+- **CC09-Labels fehlerhaft:** Alle CL123 (Unknown) → Prüfe Annotationsqualität
 
 ---
 
@@ -395,30 +395,30 @@ print(f"SOLL Sequence: {soll_sequence}")
 
 **Diagnose:**
 ```python
-# PrÃ¼fe Mermaid-Syntax manuell
+# Prüfe Mermaid-Syntax manuell
 print(mermaid_code[:500])  # Erste 500 Zeichen
 ```
 
-**MÃ¶gliche Ursachen:**
+**Mögliche Ursachen:**
 - **Sonderzeichen in Labels:** Entferne/escape Sonderzeichen
-- **UngÃ¼ltige Node-IDs:** Node-IDs mÃ¼ssen alphanumerisch sein
+- **Ungültige Node-IDs:** Node-IDs müssen alphanumerisch sein
 
 ---
 
-## ðŸ“š WEITERFÃœHRENDE RESSOURCEN
+## ðŸ“š WEITERFÜHRENDE RESSOURCEN
 
 ### Skill-Dokumentation
 
-- **`bpmn_validation_v5.0.md`** â€“ VollstÃ¤ndige Validierungslogik (700+ Zeilen)
-- **`bpmn_validation_report_template_v5.0.md`** â€“ Report-Template
-- **`CHANGELOG_v5.0.md`** â€“ Alle Ã„nderungen in v4.2
-- **`process_hierarchy_v5.0.md`** â€“ Prozess-Kontext
-- **`ground_truth_central_v5.0.md`** â€“ Szenario-Erwartungen
+- **`bpmn_validation_v5.0.md`** – Vollständige Validierungslogik (700+ Zeilen)
+- **`bpmn_validation_report_template_v5.0.md`** – Report-Template
+- **`CHANGELOG_v5.0.md`** – Alle Änderungen in v4.2
+- **`process_hierarchy_v5.0.md`** – Prozess-Kontext
+- **`ground_truth_central_v5.0.md`** – Szenario-Erwartungen
 
 ### Externe Quellen
 
-- **`BPMN_PROZESSE_DARA.pdf`** â€“ Ideale BPMN-Modelle (Figures 11, A2-A7)
-- **DaRa Dataset Description** â€“ Offizielle Label-Definitionen
+- **`BPMN_PROZESSE_DARA.pdf`** – Ideale BPMN-Modelle (Figures 11, A2-A7)
+- **DaRa Dataset Description** – Offizielle Label-Definitionen
 
 ---
 
@@ -428,23 +428,23 @@ print(mermaid_code[:500])  # Erste 500 Zeichen
 
 Bevor BPMN-Validierung:
 ```python
-# PrÃ¼fe Chunk-Grenzen
+# Prüfe Chunk-Grenzen
 chunk_stats = df.groupby('chunk_id')['CC09'].nunique()
 unstable_chunks = chunk_stats[chunk_stats > 2]
 
 if len(unstable_chunks) > 10:
-    print("âš ï¸ Warning: Viele instabile Chunks, Chunk-Detection Ã¼berprÃ¼fen!")
+    print("⚠️ Warning: Viele instabile Chunks, Chunk-Detection überprüfen!")
 ```
 
 ### Tipp 2: Severity-Levels strategisch nutzen
 
 ```python
-# Filtere nach Severity fÃ¼r PrioritÃ¤ten
+# Filtere nach Severity für Prioritäten
 critical = [v for v in violations if v["severity"] == "CRITICAL"]
 print(f"Fix these {len(critical)} CRITICAL issues first!")
 ```
 
-### Tipp 3: Batch-Processing fÃ¼r mehrere Probanden
+### Tipp 3: Batch-Processing für mehrere Probanden
 
 ```python
 subjects = ["S01", "S02", ..., "S18"]
@@ -464,10 +464,10 @@ print(f"Best Subject: {sorted_subjects[0]} with {results[sorted_subjects[0]]} vi
 
 ## ðŸŽ“ LERNPFAD
 
-### Stufe 1: Basis (AnfÃ¤nger)
+### Stufe 1: Basis (Anfänger)
 
 1. Verstehe BPMN-Grundlagen (Figures 11, A2-A7)
-2. FÃ¼hre Single-Subject-Validierung durch
+2. Führe Single-Subject-Validierung durch
 3. Interpretiere Conformity Score
 
 ### Stufe 2: Erweitert (Fortgeschritten)
@@ -489,15 +489,15 @@ print(f"Best Subject: {sorted_subjects[0]} with {results[sorted_subjects[0]]} vi
 
 **Fragen zur Verwendung:**
 - Siehe `bpmn_validation_v5.0.md` Sektion 5 (Verwendungsbeispiele)
-- Siehe `CHANGELOG_v5.0.md` fÃ¼r Feature-Details
+- Siehe `CHANGELOG_v5.0.md` für Feature-Details
 
 **Fehlerreports:**
 - Dokumentiere: Violation-Typ, Frame, Scenario, Subject
-- FÃ¼ge hinzu: Erwartetes vs. TatsÃ¤chliches Verhalten
+- Füge hinzu: Erwartetes vs. Tatsächliches Verhalten
 
 **Feature-Requests:**
 - Beschreibe Use-Case detailliert
-- Beispiel-Daten (falls mÃ¶glich)
+- Beispiel-Daten (falls möglich)
 
 ---
 
@@ -505,13 +505,13 @@ print(f"Best Subject: {sorted_subjects[0]} with {results[sorted_subjects[0]]} vi
 
 Dieser Guide zeigt die **praktische Anwendung** der BPMN-Validierungslogik:
 
-âœ… **5 Quick-Start-Schritte** (Daten laden â†’ Validieren â†’ BPMN generieren â†’ Vergleichen â†’ Visualisieren)  
-âœ… **5 Verwendungsszenarien** (Single-Subject, Multi-Scenario, Tool-Audit, Teleportation, Multi-Order)  
-âœ… **3 Visualisierungsmethoden** (JSON, Mermaid, Diff)  
-âœ… **3 Fehlersuche-Tipps** (Zu viele Violations, Score = 0%, Render-Fehler)  
-âœ… **3 Best Practices** (Chunk-Detection validieren, Severity nutzen, Batch-Processing)
+✅ **5 Quick-Start-Schritte** (Daten laden → Validieren → BPMN generieren → Vergleichen → Visualisieren)  
+✅ **5 Verwendungsszenarien** (Single-Subject, Multi-Scenario, Tool-Audit, Teleportation, Multi-Order)  
+✅ **3 Visualisierungsmethoden** (JSON, Mermaid, Diff)  
+✅ **3 Fehlersuche-Tipps** (Zu viele Violations, Score = 0%, Render-Fehler)  
+✅ **3 Best Practices** (Chunk-Detection validieren, Severity nutzen, Batch-Processing)
 
-**Start now:** Lade S14-Daten, fÃ¼hre Validierung durch, und erstelle dein erstes BPMN-Diagramm!
+**Start now:** Lade S14-Daten, führe Validierung durch, und erstelle dein erstes BPMN-Diagramm!
 
 ---
 
