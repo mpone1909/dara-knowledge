@@ -1,70 +1,88 @@
-# DaRa Dataset Expert (v6.1)
+# DaRa Dataset Expert (v6.3.0 | 2026-03-22)
 
-Faktenbasierte Wissensbasis für die Analyse intralogistischer Warehouse-Prozesse im DaRa-Datensatz.
-Der Skill bündelt **Szenarioerkennung**, **REFA/MTM-Methodik**, **BPMN-Validierung** und **standardisierte Report-Erstellung** in einer klaren 5-Phasen-Struktur.
+Faktenbasierte Wissensbasis fuer die Analyse intralogistischer Warehouse-Prozesse im DaRa-Datensatz.
+Der Skill buendelt Szenarioerkennung, REFA/MTM-Methodik, Process-Validierung (Phase 4) und standardisierte Report-Erstellung in einer 5-Phasen-Struktur.
 
 ## Kurzprofil
 
-- **Datensatzfokus:** 18 Probanden, 8 Szenarien (S1–S8), 12 Kategorien (CC01–CC12), 207 Labels (CL001–CL207)
-- **Analysepipeline:** Szenarioerkennung → REFA/MTM → BPMN-Validierung → Bericht
-- **Ausrichtung:** Dokumentations- und Analyse-Referenz (deskriptiv, nicht prädiktiv)
-- **Qualitätsprinzip:** Epistemische Integrität (nur dokumentierte Fakten, keine Annahmen)
+- Datensatzfokus: 18 Probanden, 8 Szenarien (S1-S8), 12 Kategorien (CC01-CC12), 207 Labels (CL001-CL207)
+- Analysepipeline: Szenarioerkennung -> REFA/MTM -> Process-Validierung -> Bericht
+- Ausrichtung: Dokumentations- und Analyse-Referenz (deskriptiv, nicht praediktiv)
+- Qualitaetsprinzip: Epistemische Integritaet (nur dokumentierte Fakten, keine Annahmen)
 
-## Repository-Struktur
+## Repository-Struktur (aktuell)
 
-### Kern-Dateien
+### Kern
 
-- `SKILL.md` — zentrale Skill-Definition, Scope, Navigationslogik
-- `CHANGELOG.md` — Versionshistorie und Änderungen
-- `phase1_scenario_recognition.md` — Szenarioerkennung (S1–S8, Decision-Logik)
-- `phase2_refa_analysis.md` — REFA-Zeitarten, Kennzahlen, Mapping
-- `phase3_mtm_analysis.md` — MTM-Codes, TMU, Bewegungsanalyse
-- `phase4_bpmn_validation.md` — IST/SOLL-Validierung, Fehlerlogik, BPMN-Flows
-- `phase5_report.md` — konsolidierte Berichtserstellung
+- SKILL.md
+- docs/CHANGELOG.md
+- references/processes/phase1_scenario_recognition.md
+- references/processes/phase2_refa_analysis.md
+- references/processes/phase3_mtm_analysis.md
+- references/processes/phase4_bpmn_validation.md
+- references/processes/phase5_report.md
 
-### Referenz-Dateien
+### Referenzen
 
-- `reference_labels.md` — Label-Katalog (CL001–CL207)
-- `reference_activation_rules.md` — Aktivierungs- und Kardinalitätsregeln
-- `reference_validation_rules.md` — Master-Slave- und Kombinationsregeln
-- `reference_chunking.md` — Trigger/Chunking-Logik
-- `reference_bpmn_flows.md` — detaillierte Prozessflüsse
-- `reference_dataset.md` — Datensatzstruktur und CSV-Konventionen
-- `reference_warehouse.md` — Lagerlayout und Zonen
-- `reference_articles.md` — Artikel-/Order-Referenzen
+- references/core/reference_labels.md
+- references/core/reference_activation_rules.md
+- references/core/reference_validation_rules.md
+- references/auxiliary/reference_chunking.md
+- references/processes/reference_bpmn_flows.md
+- references/core/reference_dataset.md
+- references/core/reference_warehouse.md
+- references/core/reference_articles.md
 
 ### Templates
 
-- `templates/scenario_report.md` — Vorlage für Szenario-Analysen
-- `templates/bpmn_report.md` — Vorlage für BPMN-Validierungsberichte
+- assets/templates/scenario_report.md
+- assets/templates/bpmn_report.md
+
+## Dateinamen und Versionsstaende
+
+Stand: 2026-03-22 (aus den jeweiligen Dateien gelesen)
+
+| Datei | Version |
+|:------|:--------|
+| SKILL.md | 6.3.0 |
+| docs/CHANGELOG.md | v6.3.0 als aktueller Release-Eintrag |
+| references/processes/phase1_scenario_recognition.md | 6.1.2 |
+| references/processes/phase2_refa_analysis.md | 6.2.0 |
+| references/processes/phase3_mtm_analysis.md | 6.2.3 |
+| references/processes/phase4_bpmn_validation.md | 6.1.3 |
+| references/processes/phase5_report.md | 6.2.0 |
+| references/core/reference_labels.md | 6.1.3 |
+| references/core/reference_activation_rules.md | keine explizite Versionszeile |
+| references/core/reference_validation_rules.md | 6.2.0 |
+| references/auxiliary/reference_chunking.md | 6.1.0 |
+| references/processes/reference_bpmn_flows.md | 6.0 |
+| references/core/reference_dataset.md | 6.1.3 |
+| references/core/reference_warehouse.md | 6.1.3 |
+| references/core/reference_articles.md | 6.2.0 |
+| assets/templates/scenario_report.md | keine explizite Versionszeile |
+| assets/templates/bpmn_report.md | keine explizite Versionszeile |
 
 ## Empfohlene Nutzung
 
-1. **Immer mit `SKILL.md` starten** (Scope + Dateinavigation)
-2. Für Analysen zuerst die passende **Phase-Datei** lesen
-3. Danach gezielt mit den **reference_*.md**-Dateien vertiefen
-4. Ergebnis im passenden **Template** strukturieren
+1. Immer mit SKILL.md starten (Scope und Dateinavigation).
+2. Fuer Analysen zuerst die passende Phase-Datei lesen.
+3. Danach gezielt mit den reference-Dateien vertiefen.
+4. Ergebnis im passenden Template strukturieren.
 
-## Für welchen Use Case geeignet?
-
-### Geeignet
+## Geeignete Use Cases
 
 - Fachliche Fragen zu Szenarien, Labels, Kategorien, Regeln und Prozesslogik
-- REFA-/MTM-basierte methodische Einordnung
-- BPMN-Konformitäts- und Sequenzvalidierung
+- REFA/MTM-basierte methodische Einordnung
+- Process-Konformitaets- und Sequenzvalidierung
 - Standardisierte Berichtsausgabe
 
-### Nicht geeignet
+## Nicht geeignet
 
-- Rohdatenverarbeitung großer CSV-Batches (separate Tooling-Pipeline empfohlen)
-- Modelltraining / Vorhersage
-- Bild-/Videoanalyse
-
-## Versionierung
-
-- Aktueller Hauptstand: **v6.1.x**
-- Historie und Detailänderungen: siehe `CHANGELOG.md`
+- Rohdatenverarbeitung grosser CSV-Batches (separate Tooling-Pipeline empfohlen)
+- Modelltraining oder Vorhersage
+- Bild- oder Videoanalyse
 
 ## Hinweis
 
-Diese Wissensbasis ist für **nachvollziehbare, quellennahe Analysen** ausgelegt. Wenn eine Information nicht in den Dateien dokumentiert ist, sollte sie als „nicht enthalten“ behandelt werden.
+Diese Wissensbasis ist fuer nachvollziehbare, quellennahe Analysen ausgelegt.
+Wenn eine Information nicht in den Dateien dokumentiert ist, ist sie als nicht enthalten zu behandeln.
