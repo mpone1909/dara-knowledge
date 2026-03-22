@@ -75,10 +75,10 @@ Stand: 2026-03-22 (aus den jeweiligen Dateien gelesen)
 - REFA/MTM-basierte methodische Einordnung
 - Process-Konformitaets- und Sequenzvalidierung
 - Standardisierte Berichtsausgabe
+- Verarbeitung grosser CSV-Dateien mit klaren, schrittweisen LLM-Anweisungen zur Analyselogik
 
 ## Nicht geeignet
 
-- Rohdatenverarbeitung grosser CSV-Batches (separate Tooling-Pipeline empfohlen)
 - Modelltraining oder Vorhersage
 - Bild- oder Videoanalyse
 
