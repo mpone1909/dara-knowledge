@@ -159,6 +159,8 @@ if len(active_labels_cc01) != 1:
 
 **Rolle:** Atomare Prozessschritte. CC09→CC10 Mapping siehe phase4_bpmn_validation.md (V-B3).
 
+**⚠️ Wichtig — Nicht-Exklusivität:** Low-Level-Prozesse (CC10) sind **nicht exklusiv** an einzelne Mid-Level-Prozesse (CC09) gebunden. Derselbe Low-Level-Prozess kann in verschiedenen Mid-Level-Kontexten auftreten. Beispiel: CL137 (Moving to Next Position) tritt sowohl in CL115 (Pick Travel) als auch in CL119 (Store Travel) auf. Das CC09→CC10-Mapping in phase4_bpmn_validation.md (V-B3) definiert erlaubte Kombinationen, aber keine Exklusivzuordnung.
+
 ---
 
 ## 3. MULTI-LABEL-KATEGORIEN MIT FESTER STRUKTUR
@@ -608,3 +610,5 @@ Frame in Szenario S4 (Storage, Order 2904):
 **Skill-Version:** 6.0
 **Erstellt:** 26.02.2026
 **Quellen:** reference_labels.md (autoritativ), DaRa Dataset Description
+
+<!-- VERIFICATION_TOKEN: DARA-ACTRL-3H9E-v630 -->

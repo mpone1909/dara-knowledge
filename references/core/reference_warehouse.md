@@ -1,8 +1,7 @@
 # Referenz: Warehouse-Layout - Fraunhofer IML Picking Lab
 
-**Version:** 6.1.4 (2026-03-05)
+**Version:** 6.1.3 (2026-03-05)
 **Quelle:** DaRa Dataset Description + DaRa Documentation
-**Änderungen v6.1.4:** Querverweis auf Session-/Probanden-/Cart-Zuordnung ergänzt (reference_dataset.md §2.1).
 **Änderungen v6.1.3:** Vollständige Planmaße (§2.5), Geometrische Kennwerte (§3.2),
 Regalkomplex-Regaltypen (§3.5), Compartment-Inventar (§5.1/5.2),
 Fachabmessungen (§6), erweiterte Infrastruktur/Sensorik (§7).
@@ -52,9 +51,6 @@ bekommt. Am Ende des Prozesses wird hier die Hardware zurückgegeben.
 
 **Cart Area (CL156/CL183):** Abstellbereich für Kommissionierwagen. Probanden
 holen sich hier ihren Wagen ab und bringen ihn am Ende zurück.
-Die Zuordnung von Proband zu physischer Cart-Nummer (55/56/57) ist in
-`reference_dataset.md` (Abschnitt 2.1) dokumentiert. Diese Cart-Nummer ist
-eine Wagen-ID; die frameweise Positionsannotation bleibt in CC12 (CL181–CL207).
 
 **Cardboard Box Area (CL157/CL184):** Lagerbereich für leere Kartons, die für
 den Kommissionierprozess benötigt werden. Nur in Retrieval-Szenarien besucht.
@@ -398,10 +394,11 @@ Additiv zum Haupt-Location-Label. Markiert Zeitraum vom ersten bis letzten Rad.
 
 | Datei | Inhalt |
 |:------|:-------|
-| `reference_dataset.md` | Sessions, Probanden und Session-/Probanden-/Cart-Zuordnung (§2.1) |
 | `reference_labels.md` | CC11/CC12 Label-Definitionen (CL155–CL207) |
 | `reference_articles.md` | Artikel-Lagerorte pro Order/Gasse, Gewichte |
 | `reference_validation_rules.md` | V-EC3 Location-Transition-Validierung |
 | `phase1_scenario_recognition.md` | Szenario- und Order-Mapping |
 | `phase3_mtm_analysis.md` | MTM-Berechnungen mit Walk-TMU und Reach-Varianten |
 | `phase4_bpmn_validation.md` | BPMN-Prozessschritte mit Location-Erwartungen |
+
+<!-- VERIFICATION_TOKEN: DARA-WHAUS-9L1B-v630 -->

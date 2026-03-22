@@ -137,3 +137,5 @@ Methode: phase1_scenario_recognition.md (5-Schritt v3.0/v6.0)
 Validierung: 100% Frame-Coverage, exklusive Zuordnung
 Erstellt: [YYYY-MM-DD HH:MM]
 ```
+
+<!-- VERIFICATION_TOKEN: DARA-SRPT-8Q7F-v630 -->

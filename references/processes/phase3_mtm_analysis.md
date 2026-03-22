@@ -1,15 +1,27 @@
 ---
-version: 6.2.2
+version: 6.2.3
 references:
   - reference_labels.md
   - reference_articles.md
   - reference_warehouse.md
   - phase1_scenario_recognition.md
+  - phase2_refa_analysis.md
+output_used_by:
+  - phase5_report.md
 ---
+
+<!-- PRE-ANSWER CHECKLIST (PAC) — Phase 3
+Before answering ANY question about this phase:
+[ ] I have read this file COMPLETELY using the Read tool
+[ ] I have read reference_labels.md
+[ ] I have read reference_warehouse.md (for distances)
+[ ] I have extracted the VERIFICATION_TOKEN from the end of this file
+[ ] I am citing specific MTM codes and TMU values from the tables
+-->
 
 # Phase 3: MTM-Analyse — Grundbewegungen und DaRa-Mapping
 
-**Version:** 6.2.2 (2026-03-05)
+**Version:** 6.2.3 (2026-03-05)
 **Basis:** MTM-1 Methodenlehre
 **Quelle:** PDF "Anatomisch-Biomechanische Bewegungsanalyse"
 **Änderungen v6.2.2 (gegenüber v6.2.1):**
@@ -448,3 +460,5 @@ CL124–CL126, CL132–CL133) NICHT enthalten.
 | `reference_warehouse.md` | Planmaße, Ebenen-Höhen, Fachtypen |
 | `reference_labels.md` | Label-Definitionen CC01–CC12 |
 | `phase2_refa_analysis.md` | REFA-Zeitarten, Erholungszuschläge |
+
+<!-- VERIFICATION_TOKEN: DARA-P3MTM-6A5F-v630 -->

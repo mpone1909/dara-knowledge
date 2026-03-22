@@ -1,9 +1,12 @@
+---
+version: 6.1.3
+---
+
 # Referenz: Dataset — Probanden, Sessions, Datenstruktur
 
-**Version:** 6.1.4 (2026-03-05)
+**Version:** 6.1.3 (2026-02-26)
 **Quelle:** DaRa Dataset Description (Stand 20.10.2025)
 **Rückführung v6.1.2:** CSV-Spaltenformat, SARA-Details und Inter-Rater-Reliability aus v5.0 ergänzt
-**Update v6.1.4:** Session-/Probanden-/Cart-Zuordnung (Cart Nummern 55/56/57) ergänzt
 
 ---
 
@@ -56,36 +59,13 @@
 | 5 | S13, S14, S15 |
 | 6 | S16, S17, S18 |
 
-### 2.1 Session-/Probanden-/Cart-Zuordnung
-
-Die Cart-Nummer ist die physische Wagen-ID je Proband innerhalb einer Session.
-
-| Session | SXY Bezeichnung | Cart Nummer |
-|:--------|:----------------|:------------|
-| 1 | S01 | 55 |
-| 1 | S02 | 57 |
-| 1 | S03 | 56 |
-| 2 | S04 | 57 |
-| 2 | S05 | 55 |
-| 2 | S06 | 56 |
-| 3 | S07 | 55 |
-| 3 | S08 | 57 |
-| 3 | S09 | 56 |
-| 4 | S10 | 57 |
-| 4 | S11 | 55 |
-| 4 | S12 | 56 |
-| 5 | S13 | 55 |
-| 5 | S14 | 57 |
-| 5 | S15 | 56 |
-| 6 | S16 | 57 |
-| 6 | S17 | 56 |
-| 6 | S18 | 55 |
-
 Aufzeichnung erfolgt synchron. Szenario-Reihenfolge war NICHT standardisiert
 (variierte zwischen Sessions). Wiederholungen möglich.
 
 **Nicht jeder Proband hat alle Szenarien S1–S8 durchlaufen.** Die Zuordnung
 variiert erheblich je nach Session-Ablauf und Order/Prozess-Pairing.
+
+**⚠️ Sessions enthalten mehrere Szenarien:** Eine einzelne Session enthält typischerweise mehrere aufeinanderfolgende Szenarien (z. B. S1 → S4 → S6). Die Szenarioübergänge sind **prozessgetrieben** — sie entstehen durch Wechsel im High-Level-Prozess (CC08: CL110 ↔ CL111 ↔ CL112) und sind in der Prozesssequenz direkt ablesbar. Für die Frame-genaue Erkennung dieser Übergänge → phase1_scenario_recognition.md.
 
 ---
 
@@ -133,11 +113,6 @@ Frame_Nummer  = Zeit_Sekunden × 30
 | CC12 | `Revised_Annotation__CC12_Location - Cart__S12.csv` |
 
 Probanden: S01–S18 (18 Probanden × 12 CCs = 216 CSV-Dateien total)
-
-**Hinweis zu CC12 vs. Cart Nummer:**
-
-- Die `Cart Nummer` (55/56/57) ist Session-Metadaten zur Identifikation des physischen Wagens pro Proband.
-- `CC12` enthält weiterhin die frameweise Wagenposition im Lager (CL181–CL207), nicht die Wagen-ID.
 
 ### 3.2 CSV-Spaltenformat (Detail)
 
@@ -341,4 +316,6 @@ Bewegungsmuster zeigen. Multi-Order (S7/S8) besonders herausfordernd.
 | `reference_warehouse.md` | Warehouse-Layout, Zonen | Räumliche Zuordnung |
 | `phase1_scenario_recognition.md` | Szenarioerkennung | Welches Szenario hat ein Frame? |
 | `phase2_refa_analysis.md` | REFA-Zeitanalyse | Zeitarten aus Frame-Daten |
-| `phase4_bpmn_validation.md` | BPMN-Prozessvalidierung | CC09→CC10 Mapping prüfen |
+| `phase4_bpmn_validation.md` | Process-Validierung | CC09→CC10 Mapping prüfen |
+
+<!-- VERIFICATION_TOKEN: DARA-DSET-4K6A-v630 -->

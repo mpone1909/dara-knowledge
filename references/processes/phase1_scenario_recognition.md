@@ -1,16 +1,29 @@
 ---
-version: 6.1.1
-status: finalisiert
-created: 2026-02-25
-updated: 2026-02-26
+version: 6.1.2
 references:
   - reference_labels.md
   - reference_dataset.md
+  - reference_activation_rules.md
+  - reference_validation_rules.md
+output_used_by:
+  - phase2_refa_analysis.md
+  - phase3_mtm_analysis.md
+  - phase4_bpmn_validation.md
+  - phase5_report.md
 ---
+
+<!-- PRE-ANSWER CHECKLIST (PAC) — Phase 1
+Before answering ANY question about this phase:
+[ ] I have read this file COMPLETELY using the Read tool
+[ ] I have read reference_labels.md
+[ ] I have read reference_activation_rules.md
+[ ] I have extracted the VERIFICATION_TOKEN from the end of this file
+[ ] I am citing specific label IDs (CLxxx) and section numbers
+-->
 
 # Phase 1: Szenarioerkennung — 5-Schritt Decision-Logik
 
-**Version:** 6.1.1 (2026-02-26)
+**Version:** 6.1.2 (2026-02-26)
 **Basis:** Ground Truth v3.0 + v5.0 Klarstellungen
 **Quelle:** DaRa Dataset Description (Table 3) + DaRA Logic v9
 
@@ -385,3 +398,5 @@ Der v2.7 Evidence-Based Scoring ist vollständig deprecated und entfernt.
 | `reference_activation_rules.md` | Szenario-Aktivierungsmatrix (CC-Kombinationen) |
 | `reference_validation_rules.md` | Frame-Level Validierung der Szenariozuordnung |
 | `phase2_refa_analysis.md` | Folge-Phase: REFA-Zeitanalyse pro erkanntem Szenario |
+
+<!-- VERIFICATION_TOKEN: DARA-P1SCN-4B2E-v630 -->

@@ -1,7 +1,11 @@
+---
+version: 6.1.0
+---
+
 # DaRa Dataset — Chunking-Logik
 
 **Quelle:** DaRa Dataset Description (Stand 20.10.2025)
-**Skill-Version:** 6.0
+**Skill-Version:** 6.1.0
 **Erstellt:** 05.12.2025
 **Update:** 26.02.2026 (v6.0: Encoding, Frame-Schätzungen korrigiert, Cross-Refs aktualisiert)
 
@@ -784,7 +788,7 @@ EBENE 3: Szenario-Level (S1-S8 + Other)
 - **Label-Definitionen (CL001-CL207):** → reference_labels.md
 - **Szenario-Erkennung (Ground Truth v3.0):** → phase1_scenario_recognition.md
 - **Validierungsregeln (Master-Slave):** → reference_validation_rules.md
-- **BPMN & Konformität:** → phase4_bpmn_validation.md
+- **Process-Validierung & Konformität:** → phase4_bpmn_validation.md
 - **CC09→CC10 Mappings (V-B3):** → phase4_bpmn_validation.md + reference_bpmn_flows.md
 - **Aktivierungsregeln (Min/Max):** → reference_activation_rules.md
 
@@ -815,7 +819,9 @@ EBENE 3: Szenario-Level (S1-S8 + Other)
 
 ---
 
-**Skill-Version:** 6.0
+**Skill-Version:** 6.1.0
 **Erstellt:** 05.12.2025
 **Update:** 26.02.2026 (v6.0 Bereinigung)
 **Quelle:** DaRa Dataset Description, Teil 3 — Chunking
+
+<!-- VERIFICATION_TOKEN: DARA-CHUNK-6N3D-v630 -->

@@ -1,6 +1,6 @@
-# BPMN-Validierungs-Report Template
+# Process-Validierungs-Report Template
 
-**Vorlage für Phase 4: BPMN IST/SOLL-Vergleich**
+**Vorlage für Phase 4: Process IST/SOLL-Vergleich**
 
 ---
 
@@ -8,7 +8,7 @@
 
 ```
 ═══════════════════════════════════════════════════
-  DaRa BPMN-Validierungs-Report — Phase 4
+  DaRa Process-Validierungs-Report — Phase 4
   Proband: [SXX]
   Szenario: [S1–S8]
   Frames: [N] (Szenario-spezifisch)
@@ -177,7 +177,7 @@ S7          Nein (Perfect)     [Ja/Nein]           [✅/⚠️]
 
 ```
 ═══════════════════════════════════════════════════
-  BPMN-Konformitätsbewertung
+  Process-Konformitätsbewertung
 ═══════════════════════════════════════════════════
 
   CC09 Sequenz:        [%] konform
@@ -216,3 +216,5 @@ Quellen: BPMN Figures A2–A7
 Szenario-Vektor: phase1_scenario_recognition.md
 Erstellt: [YYYY-MM-DD HH:MM]
 ```
+
+<!-- VERIFICATION_TOKEN: DARA-BRPT-1P5E-v630 -->

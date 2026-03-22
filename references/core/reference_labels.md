@@ -1,9 +1,5 @@
 ---
-version: 6.0
-status: finalisiert
-created: 2026-02-04
-updated: 2026-02-25
-source: "DaRa Dataset Description + Documentation (authoritative PDF)"
+version: 6.1.3
 ---
 
 # reference_labels.md — Vollständiges Label-Inventar
@@ -847,11 +843,11 @@ High-Level (CC08)
 
 ### For Annotators
 
-1. **Cardinality:** Siehe references/core/category_activation_matrix_v5_0.md für Min/Max-Regeln pro Szenario
-2. **Type Details:** Siehe references/core/validation_rules_v5_0.md für Single/Multi/Required/Hierarchical-Regeln
-3. **Constraints:** Siehe validation_rules_v5_0.md für Hard-Constraints (insbesondere CC09→CC10, CC06↔CC07)
-4. **Query Patterns:** Siehe assets/query_patterns_v5_0.md für Suchmuster und Beispiele
-5. **Scenario Binding:** Siehe validation_rules_v5_0.md für szenario-spezifische Label-Aktivierung
+1. **Cardinality:** Siehe references/core/reference_activation_rules.md für Min/Max-Regeln pro Szenario
+2. **Type Details:** Siehe references/core/reference_validation_rules.md für Single/Multi/Required/Hierarchical-Regeln
+3. **Constraints:** Siehe references/core/reference_validation_rules.md für Hard-Constraints (insbesondere CC09→CC10, CC06↔CC07)
+4. **Query Patterns:** Siehe SKILL.md (Navigationslogik) für Suchmuster und Beispiele
+5. **Scenario Binding:** Siehe references/core/reference_validation_rules.md für szenario-spezifische Label-Aktivierung
 
 ### Quick Reference: Label-Suche
 
@@ -884,3 +880,5 @@ High-Level (CC08)
 **Release-Datum:** 2026-02-25
 **Status:** Finalisiert ✅
 **Änderungen v6.0:** Hierarchie-Mapping korrigiert (CL115/CL116/CL118/CL120 CC10-Beispiele), Cross-References auf v6.0-Dateien aktualisiert.
+
+<!-- VERIFICATION_TOKEN: DARA-LABEL-5G4D-v630 -->

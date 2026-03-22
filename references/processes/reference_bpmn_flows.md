@@ -1,3 +1,15 @@
+---
+version: 6.0
+---
+
+<!-- PRE-ANSWER CHECKLIST (PAC) — BPMN Flows Reference
+Before answering ANY question about BPMN flows:
+[ ] I have read this file COMPLETELY using the Read tool
+[ ] I have read phase4_bpmn_validation.md §2 for the CC09→CC10 mapping
+[ ] I have extracted the VERIFICATION_TOKEN from the end of this file
+[ ] I am citing specific Figure references (A2-A7)
+-->
+
 # BPMN Detailed Process Flows — Figures A2–A7
 
 **Version:** 6.0 (2026-02-25)
@@ -227,3 +239,5 @@ End Finalizing Order
 
 - **CL144 (Sorting):** In Packing = Outbound-Sortierung; in Unpacking = Inbound-Sortierung
 - **CL129 (Transporting):** In Packing = von Picking-Station; in Unpacking = von Wareneingang
+
+<!-- VERIFICATION_TOKEN: DARA-BFLOW-1F7A-v630 -->
